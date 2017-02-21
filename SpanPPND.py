@@ -44,6 +44,18 @@ for word in children_words:
         #print(newkey)
         #print(children_PS[newkey])
         
+adults_PS = {}
+    
+for word in adults_words:
+    word_index = adults_words.index(word)
+    logfreq = adults_logfreq[word_index]
+    for i, c in enumerate(word):
+        newkey = c+str(i+1)
+        if newkey in adults_PS:
+            adults_PS[newkey] += float(logfreq)
+        else:
+            adults_PS[newkey] = float(logfreq)
+        
 # Biphone calculation
 # Note: biphone positions are indexed by their first element
 
@@ -64,6 +76,60 @@ for word in children_words:
             #print(newkey)
             #print(children_B[newkey])
 
+adults_B = {}
+
+for word in adults_words:
+    word_index = adults_words.index(word)
+    logfreq = adults_logfreq[word_index]
+    for i, c in enumerate(word):
+        if len(word) != 1:
+            if len(word) != i+1:
+                newkey = c+word[i+1]+str(i+1)
+                if newkey in adults_B:
+                    adults_B[newkey] += float(logfreq)
+                else:
+                    adults_B[newkey] = float(logfreq)
+
+# ***** To do: Collect databse of logfreqs with positions 1-n and biphone positions 1-n
+
+# PS / B return
+
+# ***** To do: make these numbers correct, == logfreq(words having target biphone) / logfreq(words having target position)
+
+input_word = input("Enter one word: ")
+
+print("Positional segment frequency")
+
+PS_avg = 0
+
+for i, c in enumerate(input_word):
+    newkey = c+str(i+1)
+    print(newkey)
+    if newkey in children_PS:
+        # Not yet correct
+        print(children_PS[newkey])
+        PS_avg += children_PS[newkey]
+    else:
+        print("N/A")
+    
+print("Positional segment frequency average")
+
+# Not yet correct:       
+print(PS_avg/len(input_word))
+
+#print("Biphone frequency")
+
+#for i, c in enumerate(input_word):
+    #if len(word) != 1:
+        #if len(word) != i+1:
+            #newkey = c+word[i+1]+str(i+1)
+            #print(newkey)
+            #if newkey in children_B:
+                #print(children_B[newkey])
+            #else:
+                #print("N/A"
+    #else:
+        #print("No biphone frequency")
 
 #### NOTES/TESTING BELOW:
     
