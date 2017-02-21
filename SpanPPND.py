@@ -1,6 +1,6 @@
 # Note: to open this in python shell: exec(open('SpanPPND.py').read())
 
-# Loading corpus words
+# Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
 
 import csv
 f = open('children_forimport_022117.csv')
@@ -26,6 +26,14 @@ for row in csv_adults:
     adults_w = row[1]
     adults_logfreq.append(adults_lf)
     adults_words.append(adults_w)
+    
+# Testing: looking up logfreq based on a word "zumo"
+
+word_index = children_words.index('zumo')
+logfreq = children_logfreq[word_index]
+print(logfreq)
+
+
 
 ######
 
