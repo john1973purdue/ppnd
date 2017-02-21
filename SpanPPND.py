@@ -13,7 +13,17 @@ for row in csv_children:
     children_logfreq.append(children_lf)
     children_words.append(children_w)
 
+f = open('adults_forimport_022117.csv')
+csv_adults = csv.reader(f, delimiter=',')
 
+adult_words = []
+adult_logfreq = []
+
+for row in csv_adults:
+    adults_lf = row[0]
+    adults_w = row[1]
+    adults_logfreq.append(adults_lf)
+    adults_words.append(adults_w)
 
 ######
 
