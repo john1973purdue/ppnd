@@ -53,6 +53,18 @@ print(logfreq)
 #print(children_PS[1,0])
 #print(children_PS[1,1])
 
+# Testing: looking up test logfreq 1 based on test phoneme 1 value: http://stackoverflow.com/questions/6518291/using-index-on-multidimensional-lists, ** http://stackoverflow.com/questions/2205985/searching-a-2-dimensional-tuple-list-in-python
+
+#temp_index = children_PS.index('test phoneme 1')
+#temp = children_PS[temp_index,1]
+
+#i = None
+#for index, item in enumerate(children_PS):
+#    if item[0] == 'test logfreq 1':
+#         i = index
+#         break
+#print(i)
+
 # Testing: dictionaries instead: http://openbookproject.net/thinkcs/python/english3e/dictionaries.html, http://stackoverflow.com/questions/960733/python-creating-a-dictionary-of-lists
 
 children_PS = {}
@@ -77,19 +89,12 @@ newkey = 'n'+str(3)
 children_PS[newkey] = 5.32
 print(children_PS['n3'])
 
-# Testing: looking up test logfreq 1 based on test phoneme 1 value: http://stackoverflow.com/questions/6518291/using-index-on-multidimensional-lists, ** http://stackoverflow.com/questions/2205985/searching-a-2-dimensional-tuple-list-in-python
+# Testing: I have a test word 'test' and I want to add its logfreq (1.23) to the dictionary with the appropriate keys: http://stackoverflow.com/questions/538346/iterating-over-a-string
 
-#temp_index = children_PS.index('test phoneme 1')
-#temp = children_PS[temp_index,1]
-
-#i = None
-#for index, item in enumerate(children_PS):
-#    if item[0] == 'test logfreq 1':
-#         i = index
-#         break
-#print(i)
-
-
+for i, c in enumerate('test'):
+    newkey = c+str(i)
+    children_PS[newkey] = 1.23
+    print(children_PS[newkey])
 
 # Input corpus words
 
