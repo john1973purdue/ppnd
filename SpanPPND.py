@@ -1,3 +1,22 @@
+# Loading corpus words
+
+import csv
+f = open('children_forimport_022117.csv')
+csv_children = csv.reader(f, delimiter=',')
+
+children_words = []
+children_logfreq = []
+
+for row in csv_children:
+    children_lf = row[0]
+    children_w = row[1]
+    children_logfreq.append(children_lf)
+    children_words.append(children_w)
+
+
+
+######
+
 ## Positional segment frequency initial calculation
 
 # Set up 2xn array [A] for position :: phoneme --> contents: logfreq(word)
