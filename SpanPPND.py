@@ -42,17 +42,46 @@ print(logfreq)
 
 # Testing: creating a two dimensional array: http://stackoverflow.com/questions/6667201/how-to-define-two-dimensional-array-in-python
 
-children_PS = {}
-children_PS[0,0] = 'test phoneme 1'
-children_PS[0,1] = 'test logfreq 1'
-children_PS[1,0] = 'test phoneme 2'
-children_PS[1,1] = 'test logfreq 2'
-print(children_PS[0,0])
-print(children_PS[0,1])
-print(children_PS[1,0])
-print(children_PS[1,1])
 
-# Testing: lookig up 
+#children_PS = {}
+#children_PS[0,0] = 'phon1'
+#children_PS[0,1] = 'freq1'
+#children_PS[1,0] = 'phon2'
+#children_PS[1,1] = 'freq2'
+#print(children_PS[0,0])
+#print(children_PS[0,1])
+#print(children_PS[1,0])
+#print(children_PS[1,1])
+
+# Testing: dictionaries instead: http://openbookproject.net/thinkcs/python/english3e/dictionaries.html, http://stackoverflow.com/questions/960733/python-creating-a-dictionary-of-lists
+
+children_PS = {}
+children_PS['phon1'] = 100
+children_PS['phon2'] = 20
+print(children_PS['phon1'])
+print(children_PS['phon2'])
+
+# Testing: I have a phoneme 'n' in position 1 and it has logfreq 3.45
+
+children_PS['n'] = (1, 3.45)
+
+# Testing: I have another phoneme 'n' in position 1 and it has logfreq 2.35. I must add 2.35 to 3.45.
+
+
+
+# Testing: looking up test logfreq 1 based on test phoneme 1 value: http://stackoverflow.com/questions/6518291/using-index-on-multidimensional-lists, ** http://stackoverflow.com/questions/2205985/searching-a-2-dimensional-tuple-list-in-python
+
+#temp_index = children_PS.index('test phoneme 1')
+#temp = children_PS[temp_index,1]
+
+#i = None
+#for index, item in enumerate(children_PS):
+#    if item[0] == 'test logfreq 1':
+#         i = index
+#         break
+#print(i)
+
+
 
 # Input corpus words
 
