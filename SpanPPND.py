@@ -40,11 +40,19 @@ print(logfreq)
 
 # Set up 2xn array [A] for position :: phoneme --> contents: logfreq(word)
 
-# Testing: creating a two dimensional array
+# Testing: creating a two dimensional array: http://stackoverflow.com/questions/6667201/how-to-define-two-dimensional-array-in-python
 
 children_PS = {}
-children_PS[0,0] = 'test'
+children_PS[0,0] = 'test phoneme 1'
+children_PS[0,1] = 'test logfreq 1'
+children_PS[1,0] = 'test phoneme 2'
+children_PS[1,1] = 'test logfreq 2'
 print(children_PS[0,0])
+print(children_PS[0,1])
+print(children_PS[1,0])
+print(children_PS[1,1])
+
+# Testing: lookig up 
 
 # Input corpus words
 
