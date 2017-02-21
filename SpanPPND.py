@@ -34,12 +34,17 @@ logfreq = children_logfreq[word_index]
 print(logfreq)
 
 
-
 ######
 
 ## Positional segment frequency initial calculation
 
 # Set up 2xn array [A] for position :: phoneme --> contents: logfreq(word)
+
+# Testing: creating a two dimensional array
+
+children_PS = {}
+children_PS[0,0] = 'test'
+print(children_PS[0,0])
 
 # Input corpus words
 
