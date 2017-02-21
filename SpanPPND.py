@@ -1,3 +1,5 @@
+# Note: to open this in python shell: exec(open('SpanPPND.py').read())
+
 # Loading corpus words
 
 import csv
@@ -16,8 +18,8 @@ for row in csv_children:
 f = open('adults_forimport_022117.csv')
 csv_adults = csv.reader(f, delimiter=',')
 
-adult_words = []
-adult_logfreq = []
+adults_words = []
+adults_logfreq = []
 
 for row in csv_adults:
     adults_lf = row[0]
