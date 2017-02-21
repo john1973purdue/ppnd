@@ -90,7 +90,58 @@ for word in adults_words:
                 else:
                     adults_B[newkey] = float(logfreq)
 
-# ***** To do: Collect databse of logfreqs with positions 1-n and biphone positions 1-n
+# ***** To do: Collect database of logfreqs with positions 1-n and biphone positions 1-n for later PS/B final calculations
+
+# Single position logfreqs
+children_P1 = {}
+
+for word in children_words:
+    word_index = children_words.index(word)
+    logfreq = children_logfreq[word_index]
+    for i, c in enumerate(word):
+        if i in children_P1:
+            children_P1[i] += float(logfreq)
+        else:
+            children_P1[i] = float(logfreq)
+            
+adults_P1 = {}
+
+for word in adults_words:
+    word_index = adults_words.index(word)
+    logfreq = adults_logfreq[word_index]
+    for i, c in enumerate(word):
+        if i in adults_P1:
+            adults_P1[i] += float(logfreq)
+        else:
+            adults_P1[i] = float(logfreq)
+            
+# Biphone position logfreqs
+
+children_P2 = {}
+
+for word in children_words:
+    word_index = children_words.index(word)
+    logfreq = children_logfreq[word_index]
+    for i, c in enumerate(word):
+        if len(word) != 1:
+            if len(word) != i+1:
+                if i in children_P2:
+                    children_P2[i] += float(logfreq)
+                else:
+                    children_P2[i] = float(logfreq)
+
+adults_P2 = {}
+
+for word in adults_words:
+    word_index = adults_words.index(word)
+    logfreq = adults_logfreq[word_index]
+    for i, c in enumerate(word):
+        if len(word) != 1:
+            if len(word) != i+1:
+                if i in adults_P2:
+                    adults_P2[i] += float(logfreq)
+                else:
+                    adults_P2[i] = float(logfreq)
 
 # PS / B return
 
@@ -107,8 +158,8 @@ for i, c in enumerate(input_word):
     print(newkey)
     if newkey in children_PS:
         # Not yet correct
-        print(children_PS[newkey])
-        PS_avg += children_PS[newkey]
+        print(children_PS[newkey]/children_P1[i])
+        PS_avg += children_PS[newkey]/children_P1[i]
     else:
         print("N/A")
     
