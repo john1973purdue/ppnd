@@ -108,18 +108,33 @@ children_PS = {}
     
 # Testing: I have a list of words and associated logfreqs. I want to add them to the dictionary
 
-testing_words = ['hat', 'hit', 'cat', 'bag']
-testing_logfreq = [2, 3.1, 1.5, 10]
+#testing_words = ['hat', 'hit', 'cat', 'bag']
+#testing_logfreq = [2, 3.1, 1.5, 10]
 
-for word in testing_words:
-    word_index = testing_words.index(word)
-    logfreq = testing_logfreq[word_index]
+#for word in testing_words:
+    #word_index = testing_words.index(word)
+    #logfreq = testing_logfreq[word_index]
+    #for i, c in enumerate(word):
+        #newkey = c+str(i+1)
+        #if newkey in children_PS:
+            #children_PS[newkey] += logfreq
+        #else:
+            #children_PS[newkey] = logfreq
+        #print(word)
+        #print(newkey)
+        #print(children_PS[newkey])
+        
+# Testing: now with our corpus
+
+for word in children_words:
+    word_index = children_words.index(word)
+    logfreq = children_logfreq[word_index]
     for i, c in enumerate(word):
         newkey = c+str(i+1)
         if newkey in children_PS:
-            children_PS[newkey] += logfreq
+            children_PS[newkey] += float(logfreq)
         else:
-            children_PS[newkey] = logfreq
+            children_PS[newkey] = float(logfreq)
         print(word)
         print(newkey)
         print(children_PS[newkey])
