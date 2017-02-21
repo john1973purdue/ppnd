@@ -90,8 +90,6 @@ for word in adults_words:
                 else:
                     adults_B[newkey] = float(logfreq)
 
-# ***** To do: Collect database of logfreqs with positions 1-n and biphone positions 1-n for later PS/B final calculations
-
 # Single position logfreqs
 children_P1 = {}
 
@@ -145,8 +143,6 @@ for word in adults_words:
 
 # PS / B return
 
-# ***** To do: make these numbers correct, == logfreq(words having target biphone) / logfreq(words having target position)
-
 input_word = input("Enter one word: ")
 
 print("Positional segment frequency")
@@ -157,15 +153,13 @@ for i, c in enumerate(input_word):
     newkey = c+str(i+1)
     print(newkey)
     if newkey in children_PS:
-        # Not yet correct
         print(children_PS[newkey]/children_P1[i])
         PS_avg += children_PS[newkey]/children_P1[i]
     else:
         print("N/A")
     
 print("Positional segment frequency average")
-
-# Not yet correct:       
+ 
 print(PS_avg/len(input_word))
 
 #print("Biphone frequency")
