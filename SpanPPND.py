@@ -92,8 +92,18 @@ print(children_PS['n3'])
 # Testing: I have a test word 'test' and I want to add its logfreq (1.23) to the dictionary with the appropriate keys: http://stackoverflow.com/questions/538346/iterating-over-a-string
 
 for i, c in enumerate('test'):
-    newkey = c+str(i)
+    newkey = c+str(i+1)
     children_PS[newkey] = 1.23
+    print(children_PS[newkey])
+
+# Testing: I have a word 'tease' and I want to add its logfreq (2.00) to the dictionary, making sure to add to values when appropriate
+
+for i, c in enumerate('tease'):
+    newkey = c+str(i+1)
+    if newkey in children_PS:
+        children_PS[newkey] += 2.00
+    else:
+        children_PS[newkey] = 2.00
     print(children_PS[newkey])
 
 # Input corpus words
