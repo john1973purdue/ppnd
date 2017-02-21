@@ -91,6 +91,7 @@ for word in adults_words:
                     adults_B[newkey] = float(logfreq)
 
 # Single position logfreqs
+
 children_P1 = {}
 
 for word in children_words:
@@ -162,19 +163,26 @@ print("Positional segment frequency average")
  
 print(PS_avg/len(input_word))
 
-#print("Biphone frequency")
+print("Biphone frequency")
 
-#for i, c in enumerate(input_word):
-    #if len(word) != 1:
-        #if len(word) != i+1:
-            #newkey = c+word[i+1]+str(i+1)
-            #print(newkey)
-            #if newkey in children_B:
-                #print(children_B[newkey])
-            #else:
-                #print("N/A"
-    #else:
-        #print("No biphone frequency")
+B_avg = 0
+
+for i, c in enumerate(input_word):
+    if len(input_word) != 1:
+        if len(input_word) != i+1:
+            newkey = c+input_word[i+1]+str(i+1)
+            print(newkey)
+            if newkey in children_B:
+                print(children_B[newkey]/children_P2[i])
+                B_avg += children_B[newkey]/children_P2[i]
+            else:
+                print("N/A")
+    else:
+        print("No biphone frequency")
+        
+print("Biphone frequency average")
+ 
+print(B_avg/len(input_word))
 
 #### NOTES/TESTING BELOW:
     
