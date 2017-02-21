@@ -29,9 +29,9 @@ for row in csv_adults:
     
 # Testing: looking up logfreq based on a word "zumo"
 
-word_index = children_words.index('zumo')
-logfreq = children_logfreq[word_index]
-print(logfreq)
+#word_index = children_words.index('zumo')
+#logfreq = children_logfreq[word_index]
+#print(logfreq)
 
 
 ######
@@ -75,36 +75,54 @@ children_PS = {}
 
 # Testing: or, we name the keys of our dictionary like this --> children_PS[phonene_positionnumber] = logfreq
 
-children_PS['n1'] = 3.45
-print(children_PS['n1'])
+#children_PS['n1'] = 3.45
+#print(children_PS['n1'])
 
 # Testing: I have another phoneme 'n' in position 1 and it has logfreq 2.35. I must add 2.35 to 3.45.
 
-children_PS['n1'] += 2.35
-print(children_PS['n1'])
+#children_PS['n1'] += 2.35
+#print(children_PS['n1'])
 
 # Testing: I have detected a phoneme 'n' in position 3 with logfreq 5.32 and I need to add it to the dictionary:
 
-newkey = 'n'+str(3)
-children_PS[newkey] = 5.32
-print(children_PS['n3'])
+#newkey = 'n'+str(3)
+#children_PS[newkey] = 5.32
+#print(children_PS['n3'])
 
 # Testing: I have a test word 'test' and I want to add its logfreq (1.23) to the dictionary with the appropriate keys: http://stackoverflow.com/questions/538346/iterating-over-a-string
 
-for i, c in enumerate('test'):
-    newkey = c+str(i+1)
-    children_PS[newkey] = 1.23
-    print(children_PS[newkey])
+#for i, c in enumerate('test'):
+#    newkey = c+str(i+1)
+#    children_PS[newkey] = 1.23
+#    print(children_PS[newkey])
 
-# Testing: I have a word 'tease' and I want to add its logfreq (2.00) to the dictionary, making sure to add to values when appropriate
+# Testing: I have a word 'tease' and I want to add its logfreq (2.00) to the dictionary, making sure to add to values when appropriate: http://stackoverflow.com/questions/1602934/check-if-a-given-key-already-exists-in-a-dictionary
 
-for i, c in enumerate('tease'):
-    newkey = c+str(i+1)
-    if newkey in children_PS:
-        children_PS[newkey] += 2.00
-    else:
-        children_PS[newkey] = 2.00
-    print(children_PS[newkey])
+#for i, c in enumerate('tease'):
+#    newkey = c+str(i+1)
+#    if newkey in children_PS:
+#        children_PS[newkey] += 2.00
+#    else:
+#        children_PS[newkey] = 2.00
+#        print(children_PS[newkey])
+    
+# Testing: I have a list of words and associated logfreqs. I want to add them to the dictionary
+
+testing_words = ['hat', 'hit', 'cat', 'bag']
+testing_logfreq = [2, 3.1, 1.5, 10]
+
+for word in testing_words:
+    word_index = testing_words.index(word)
+    logfreq = testing_logfreq[word_index]
+    for i, c in enumerate(word):
+        newkey = c+str(i+1)
+        if newkey in children_PS:
+            children_PS[newkey] += logfreq
+        else:
+            children_PS[newkey] = logfreq
+        print(word)
+        print(newkey)
+        print(children_PS[newkey])
 
 # Input corpus words
 
