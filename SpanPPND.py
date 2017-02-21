@@ -40,9 +40,6 @@ for word in children_words:
             children_PS[newkey] += float(logfreq)
         else:
             children_PS[newkey] = float(logfreq)
-        #print(word)
-        #print(newkey)
-        #print(children_PS[newkey])
         
 adults_PS = {}
     
@@ -72,9 +69,6 @@ for word in children_words:
                     children_B[newkey] += float(logfreq)
                 else:
                     children_B[newkey] = float(logfreq)
-            #print(word)
-            #print(newkey)
-            #print(children_B[newkey])
 
 adults_B = {}
 
@@ -183,6 +177,8 @@ for i, c in enumerate(input_word):
 print("Biphone frequency average")
  
 print(B_avg/len(input_word))
+
+
 
 #### NOTES/TESTING BELOW:
     
