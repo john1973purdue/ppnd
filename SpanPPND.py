@@ -27,6 +27,46 @@ for row in csv_adults:
     adults_logfreq.append(adults_lf)
     adults_words.append(adults_w)
     
+# Positional segment calculation
+
+children_PS = {}
+    
+for word in children_words:
+    word_index = children_words.index(word)
+    logfreq = children_logfreq[word_index]
+    for i, c in enumerate(word):
+        newkey = c+str(i+1)
+        if newkey in children_PS:
+            children_PS[newkey] += float(logfreq)
+        else:
+            children_PS[newkey] = float(logfreq)
+        #print(word)
+        #print(newkey)
+        #print(children_PS[newkey])
+        
+# Biphone calculation
+# Note: biphone positions are indexed by their first element
+
+children_B = {}
+
+for word in children_words:
+    word_index = children_words.index(word)
+    logfreq = children_logfreq[word_index]
+    for i, c in enumerate(word):
+        if len(word) != 1:
+            if len(word) != i+1:
+                newkey = c+word[i+1]+str(i+1)
+                if newkey in children_B:
+                    children_B[newkey] += float(logfreq)
+                else:
+                    children_B[newkey] = float(logfreq)
+            #print(word)
+            #print(newkey)
+            #print(children_B[newkey])
+
+
+#### NOTES/TESTING BELOW:
+    
 # Testing: looking up logfreq based on a word "zumo"
 
 #word_index = children_words.index('zumo')
@@ -67,7 +107,7 @@ for row in csv_adults:
 
 # Testing: dictionaries instead: http://openbookproject.net/thinkcs/python/english3e/dictionaries.html, http://stackoverflow.com/questions/960733/python-creating-a-dictionary-of-lists
 
-children_PS = {}
+#children_PS = {}
 
 # Testing: I have a phoneme 'n' in position 1 and it has logfreq 3.45
 
@@ -124,24 +164,31 @@ children_PS = {}
         #print(newkey)
         #print(children_PS[newkey])
         
-# Testing: now with our corpus
+# Testing: now with our corpus: float: http://stackoverflow.com/questions/1094717/convert-a-string-to-integer-with-decimal-in-python
 
-for word in children_words:
-    word_index = children_words.index(word)
-    logfreq = children_logfreq[word_index]
-    for i, c in enumerate(word):
-        newkey = c+str(i+1)
-        if newkey in children_PS:
-            children_PS[newkey] += float(logfreq)
-        else:
-            children_PS[newkey] = float(logfreq)
-        print(word)
-        print(newkey)
-        print(children_PS[newkey])
+#for word in children_words:
+    #word_index = children_words.index(word)
+    #logfreq = children_logfreq[word_index]
+    #for i, c in enumerate(word):
+        #newkey = c+str(i+1)
+        #if newkey in children_PS:
+            #children_PS[newkey] += float(logfreq)
+        #else:
+            #children_PS[newkey] = float(logfreq)
+        #print(word)
+        #print(newkey)
+        #print(children_PS[newkey])
+
+# For each word, cycle through each phoneme, add logfreq(word) to array at that position :: phoneme cell
+
+
+## Biphone frequency initial calculation
+
+# Set up 2xn array [C] for position :: biphone --> contents: logfreq(word)
 
 # Input corpus words
 
-# For each word, cycle through each phoneme, add logfreq(word) to array at that position :: phoneme cell
+# For each word, cycle through each biphone, add logfreq(word) to array at that position :: biphone cell
 
 
 ## Positional segment frequency return
@@ -160,15 +207,6 @@ for word in children_words:
 # Return a formatted PS frequency list, including sum/mean PS frequency
 
 ###
-
-## Biphone frequency initial calculation
-
-# Set up 2xn array [C] for position :: biphone --> contents: logfreq(word)
-
-# Input corpus words
-
-# For each word, cycle through each biphone, add logfreq(word) to array at that position :: biphone cell
-
 
 ## Biphone frequency return
 
