@@ -5,6 +5,7 @@
 ## To do: make the PP/ND return code loop over a list of words provided by the user
 ## To do: format the output in tables
 ## To do: make final decisions about how to treat different characters
+## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND...
 
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
 
