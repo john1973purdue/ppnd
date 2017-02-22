@@ -2,12 +2,15 @@
 
 ## To do: clean up the ND candidate return code so that it returns the candidate from the function in addition to 0 or 1, puts them into a list, and then outputs them later in a nice list
 ## To do: change some of the PP/ND code into functions, write something to run all of our child/adult words through, returning PP/ND values, export these values to CSV file for later analysis
-## To do: make the PP/ND return code loop over a list of words provided by the user
 ## To do: format the output in tables
 ## To do: make final decisions about how to treat different characters
 ## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
 ## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
 ## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500)
+
+
+## Partially complete:
+## To do: make the PP/ND return code loop over a list of words provided by the user
 
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
 
@@ -151,74 +154,6 @@ for word in adults_words:
 
 # PS / B / ND return
 
-input_word = input("Enter one word: ")
-
-print("Positional segment frequency")
-
-PS_sum = 0
-
-for i, c in enumerate(input_word):
-    newkey = c+str(i+1)
-    print(newkey)
-    if newkey in children_PS:
-        print(children_PS[newkey]/children_P1[i])
-        PS_sum += children_PS[newkey]/children_P1[i]
-    else:
-        print("N/A")
-        
-print("Positional segment frequency sum")
-
-print(PS_sum)
-    
-print("Positional segment frequency average")
- 
-print(PS_sum/len(input_word))
-
-print("Biphone frequency")
-
-B_sum = 0
-
-for i, c in enumerate(input_word):
-    if len(input_word) != 1:
-        if len(input_word) != i+1:
-            newkey = c+input_word[i+1]+str(i+1)
-            print(newkey)
-            if newkey in children_B:
-                print(children_B[newkey]/children_P2[i])
-                B_sum += children_B[newkey]/children_P2[i]
-            else:
-                print("N/A")
-    else:
-        print("No biphone frequency")
-        
-print("Biphone frequency sum")
-
-print(B_sum)
-        
-print("Biphone frequency average")
- 
-if len(input_word) > 1:
-    print(B_sum/(len(input_word)-1))
-else:
-    print("N/A")
-
-print("Neighborhood density")
-
-# ND
-
-# Possible phonemes
-
-phonemes = ('a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú', 'y', 'ñ', 'b', 'c', 'C', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'L', 'm', 'n', 'p', 'q', 'r', 'R', 's', 't', 'v', 'w', 'x', 'z')
-
-# For each word, cycle through each of the following processes, searching through the wordlists and adding up matches
-
-# 1. Addition: cycle through each position, adding each of the possible phonemes around that position (before and after for initial position, after only for all others)
-# 2. Deletion: cycle through each position, deleting a phoneme
-# 3. Substitution: cycle through each position, changing it to any dissimilar phoneme
-
-matches_children = 0
-matches_adults = 0
-
 def find_matches_children(candidate):
     matches = 0
     if candidate in children_words:
@@ -233,43 +168,118 @@ def find_matches_adults(candidate):
         print('Adults: '+candidate)
     return matches
 
-for j in phonemes:
+def return_values(input_word):
+    
+    print("****************************************")
+    
+    print("Word: "+input_word)
+    
+    print("Positional segment frequency")
+
+    PS_sum = 0
+
     for i, c in enumerate(input_word):
-        newword_addition = input_word[:i]+j+input_word[i:]
-        matches_children += find_matches_children(newword_addition)
-        matches_adults += find_matches_adults(newword_addition)
-        if i+1 == len(input_word):
-            newword_addition = input_word[:i+1]+j
+        newkey = c+str(i+1)
+        print(newkey)
+        if newkey in children_PS:
+            print(children_PS[newkey]/children_P1[i])
+            PS_sum += children_PS[newkey]/children_P1[i]
+        else:
+            print("N/A")
+            
+    print("Positional segment frequency sum")
+
+    print(PS_sum)
+        
+    print("Positional segment frequency average")
+    
+    print(PS_sum/len(input_word))
+
+    print("Biphone frequency")
+
+    B_sum = 0
+
+    for i, c in enumerate(input_word):
+        if len(input_word) != 1:
+            if len(input_word) != i+1:
+                newkey = c+input_word[i+1]+str(i+1)
+                print(newkey)
+                if newkey in children_B:
+                    print(children_B[newkey]/children_P2[i])
+                    B_sum += children_B[newkey]/children_P2[i]
+                else:
+                    print("N/A")
+        else:
+            print("No biphone frequency")
+            
+    print("Biphone frequency sum")
+
+    print(B_sum)
+            
+    print("Biphone frequency average")
+    
+    if len(input_word) > 1:
+        print(B_sum/(len(input_word)-1))
+    else:
+        print("N/A")
+
+    print("Neighborhood density")
+
+    # ND
+
+    # Possible phonemes
+
+    phonemes = ('a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú', 'y', 'ñ', 'b', 'c', 'C', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'L', 'm', 'n', 'p', 'q', 'r', 'R', 's', 't', 'v', 'w', 'x', 'z')
+
+    # For each word, cycle through each of the following processes, searching through the wordlists and adding up matches
+
+    # 1. Addition: cycle through each position, adding each of the possible phonemes around that position (before and after for initial position, after only for all others)
+    # 2. Deletion: cycle through each position, deleting a phoneme
+    # 3. Substitution: cycle through each position, changing it to any dissimilar phoneme
+
+    matches_children = 0
+    matches_adults = 0
+
+    for j in phonemes:
+        for i, c in enumerate(input_word):
+            newword_addition = input_word[:i]+j+input_word[i:]
             matches_children += find_matches_children(newword_addition)
             matches_adults += find_matches_adults(newword_addition)
-        if j != input_word[i]:
-            if i == 0:
-                newword_substitution = j+input_word[i+1:]
-                matches_children += find_matches_children(newword_substitution)
-                matches_adults += find_matches_adults(newword_substitution)
-            else:
-                newword_substitution = input_word[:i]+j+input_word[i+1:]
-                matches_children += find_matches_children(newword_substitution)
-                matches_adults += find_matches_adults(newword_substitution)
+            if i+1 == len(input_word):
+                newword_addition = input_word[:i+1]+j
+                matches_children += find_matches_children(newword_addition)
+                matches_adults += find_matches_adults(newword_addition)
+            if j != input_word[i]:
+                if i == 0:
+                    newword_substitution = j+input_word[i+1:]
+                    matches_children += find_matches_children(newword_substitution)
+                    matches_adults += find_matches_adults(newword_substitution)
+                else:
+                    newword_substitution = input_word[:i]+j+input_word[i+1:]
+                    matches_children += find_matches_children(newword_substitution)
+                    matches_adults += find_matches_adults(newword_substitution)
 
-for i, c in enumerate(input_word):
-    if i == 0:
-        newword_deletion = input_word[i+1:]
-        matches_children += find_matches_children(newword_deletion)
-        matches_adults += find_matches_adults(newword_deletion)
-    else:
-        newword_deletion = input_word[:i]+input_word[i+1:]
-        matches_children += find_matches_children(newword_deletion)
-        matches_adults += find_matches_adults(newword_deletion)
+    for i, c in enumerate(input_word):
+        if i == 0:
+            newword_deletion = input_word[i+1:]
+            matches_children += find_matches_children(newword_deletion)
+            matches_adults += find_matches_adults(newword_deletion)
+        else:
+            newword_deletion = input_word[:i]+input_word[i+1:]
+            matches_children += find_matches_children(newword_deletion)
+            matches_adults += find_matches_adults(newword_deletion)
 
-print('# of neighbors (children): '+str(matches_children))
+    print('# of neighbors (children): '+str(matches_children))
 
-print('# of neighbors (adults): '+str(matches_adults))
+    print('# of neighbors (adults): '+str(matches_adults))
 
+    return
 
+user_input = input("Enter comma-separated list of words: ")
+user_input_list = user_input.split(',')
 
-
-
+for word in user_input_list:
+    return_values(word)
 
 #### NOTES/TESTING BELOW:
 
