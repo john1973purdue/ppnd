@@ -7,6 +7,7 @@
 ## To do: make final decisions about how to treat different characters
 ## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
 ## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
+## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500)
 
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
 
@@ -154,24 +155,28 @@ input_word = input("Enter one word: ")
 
 print("Positional segment frequency")
 
-PS_avg = 0
+PS_sum = 0
 
 for i, c in enumerate(input_word):
     newkey = c+str(i+1)
     print(newkey)
     if newkey in children_PS:
         print(children_PS[newkey]/children_P1[i])
-        PS_avg += children_PS[newkey]/children_P1[i]
+        PS_sum += children_PS[newkey]/children_P1[i]
     else:
         print("N/A")
+        
+print("Positional segment frequency sum")
+
+print(PS_sum)
     
 print("Positional segment frequency average")
  
-print(PS_avg/len(input_word))
+print(PS_sum/len(input_word))
 
 print("Biphone frequency")
 
-B_avg = 0
+B_sum = 0
 
 for i, c in enumerate(input_word):
     if len(input_word) != 1:
@@ -180,16 +185,20 @@ for i, c in enumerate(input_word):
             print(newkey)
             if newkey in children_B:
                 print(children_B[newkey]/children_P2[i])
-                B_avg += children_B[newkey]/children_P2[i]
+                B_sum += children_B[newkey]/children_P2[i]
             else:
                 print("N/A")
     else:
         print("No biphone frequency")
         
+print("Biphone frequency sum")
+
+print(B_sum)
+        
 print("Biphone frequency average")
  
 if len(input_word) > 1:
-    print(B_avg/(len(input_word)-1))
+    print(B_sum/(len(input_word)-1))
 else:
     print("N/A")
 
