@@ -2,6 +2,9 @@
 
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
 
+# Special spelling cases: double letters (ll, rr), ü vs u (gue, que vs. güe, qüe), ch, ??
+# These need to be coded differently, or we need to handle them internally
+
 import csv
 f = open('children_forimport_022117.csv')
 csv_children = csv.reader(f, delimiter=',')
@@ -135,8 +138,9 @@ for word in adults_words:
                     adults_P2[i] += float(logfreq)
                 else:
                     adults_P2[i] = float(logfreq)
+                    
 
-# PS / B return
+# PS / B / ND return
 
 input_word = input("Enter one word: ")
 
@@ -178,7 +182,51 @@ print("Biphone frequency average")
  
 print(B_avg/len(input_word))
 
+print("Neighborhood density")
 
+# ND candidate generation
+
+# Possible phonemes
+
+phonemes = ('a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú', 'y', 'ñ', 'b', 'c', 'C', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'L', 'm', 'n', 'p', 'q', 'r', 'R', 's', 't', 'v', 'w', 'x', 'z')
+
+# For each word, cycle through each of the following processes, searching through the wordlists and adding up matches
+
+# 1. Addition: cycle through each position, adding each of the possible phonemes around that position (before and after for initial position, after only for all others)
+# 2. Deletion: cycle through each position, deleting a phoneme
+# 3. Substitution: cycle through each position, changing it to any dissimilar phoneme
+
+matches = 0
+
+for j in phonemes:
+    #print(j)
+    for i, c in enumerate(input_word):
+        #print(i)
+        newword_addition = input_word[:i]+j+input_word[i:]
+        #print(newword_addition)
+        if i+1 == len(input_word):
+            newword_addition = input_word[:i+1]+j
+            #print(newword_addition)
+            ## look for matches
+        if j != input_word[i]:
+            if i == 0:
+                    newword_substitution = j+input_word[i+1:]
+                    # look for matches
+            else:
+                newword_substitution = input_word[:i]+j+input_word[i+1:]
+                # look for matches
+            #print(newword_substitution)
+       
+
+for i, c in enumerate(input_word):
+    #print(i)
+    if i == 0:
+        newword_deletion = input_word[i+1:]
+        # look for matches
+    else:
+        newword_deletion = input_word[:i]+input_word[i+1:]
+        # look for matches
+    #print(newword_deletion)
 
 #### NOTES/TESTING BELOW:
     
