@@ -6,6 +6,7 @@
 ## To do: format the output in tables
 ## To do: make final decisions about how to treat different characters
 ## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND...
+## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
 
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
 
@@ -187,7 +188,10 @@ for i, c in enumerate(input_word):
         
 print("Biphone frequency average")
  
-print(B_avg/len(input_word))
+if len(input_word) > 1:
+    print(B_avg/(len(input_word)-1))
+else:
+    print("N/A")
 
 print("Neighborhood density")
 
