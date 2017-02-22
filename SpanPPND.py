@@ -184,7 +184,7 @@ print(B_avg/len(input_word))
 
 print("Neighborhood density")
 
-# ND candidate generation
+# ND
 
 # Possible phonemes
 
@@ -196,25 +196,45 @@ phonemes = ('a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú', 'y', 'ñ', 'b
 # 2. Deletion: cycle through each position, deleting a phoneme
 # 3. Substitution: cycle through each position, changing it to any dissimilar phoneme
 
-matches = 0
+matches_children = 0
+matches_adults = 0
+
+def find_matches_children(candidate):
+    matches = 0
+    if candidate in children_words:
+        matches = 1
+        print(candidate)
+    return matches
+
+def find_matches_adults(candidate):
+    matches = 0
+    if candidate in adults_words:
+        matches = 1
+        print(candidate)
+    return matches
 
 for j in phonemes:
     #print(j)
     for i, c in enumerate(input_word):
         #print(i)
         newword_addition = input_word[:i]+j+input_word[i:]
+        matches_children += find_matches_children(newword_addition)
+        matches_adults += find_matches_children(newword_addition)
         #print(newword_addition)
         if i+1 == len(input_word):
             newword_addition = input_word[:i+1]+j
+            matches_children += find_matches_children(newword_addition)
+            matches_adults += find_matches_children(newword_addition)
             #print(newword_addition)
-            ## look for matches
         if j != input_word[i]:
             if i == 0:
-                    newword_substitution = j+input_word[i+1:]
-                    # look for matches
+                newword_substitution = j+input_word[i+1:]
+                matches_children += find_matches_children(newword_substitution)
+                matches_adults += find_matches_children(newword_substitution)
             else:
                 newword_substitution = input_word[:i]+j+input_word[i+1:]
-                # look for matches
+                matches_children += find_matches_children(newword_substitution)
+                matches_adults += find_matches_children(newword_substitution)
             #print(newword_substitution)
        
 
@@ -222,11 +242,19 @@ for i, c in enumerate(input_word):
     #print(i)
     if i == 0:
         newword_deletion = input_word[i+1:]
-        # look for matches
+        matches_children += find_matches_children(newword_deletion)
+        matches_adults += find_matches_children(newword_deletion)
     else:
         newword_deletion = input_word[:i]+input_word[i+1:]
-        # look for matches
+        matches_children += find_matches_children(newword_deletion)
+        matches_adults += find_matches_children(newword_deletion)
     #print(newword_deletion)
+
+print("# of neighbors (children):")
+print(matches_children)
+
+print("# of neighbors (adults):")
+print(matches_adults)
 
 #### NOTES/TESTING BELOW:
     
