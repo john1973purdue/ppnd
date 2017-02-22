@@ -248,11 +248,9 @@ for i, c in enumerate(input_word):
         matches_children += find_matches_children(newword_deletion)
         matches_adults += find_matches_adults(newword_deletion)
 
-print("# of neighbors (children):")
-print(matches_children)
+print('# of neighbors (children): '+str(matches_children))
 
-print("# of neighbors (adults):")
-print(matches_adults)
+print('# of neighbors (adults): '+str(matches_adults))
 
 
 
