@@ -1,5 +1,6 @@
 # Note: to open this in python shell: exec(open('SpanPPND.py').read())
 
+## To do: clean up the ND candidate return code so that it returns the candidate from the function in addition to 0 or 1, puts them into a list, and then outputs them later in a nice list
 ## To do: change some of the PP/ND code into functions, write something to run all of our child/adult words through, returning PP/ND values, export these values to CSV file for later analysis
 ## To do: make the PP/ND return code loop over a list of words provided by the user
 ## To do: format the output in tables
@@ -219,18 +220,14 @@ def find_matches_adults(candidate):
     return matches
 
 for j in phonemes:
-    #print(j)
     for i, c in enumerate(input_word):
-        #print(i)
         newword_addition = input_word[:i]+j+input_word[i:]
         matches_children += find_matches_children(newword_addition)
-        matches_adults += find_matches_children(newword_addition)
-        #print(newword_addition)
+        matches_adults += find_matches_children(newword_addition))
         if i+1 == len(input_word):
             newword_addition = input_word[:i+1]+j
             matches_children += find_matches_children(newword_addition)
             matches_adults += find_matches_children(newword_addition)
-            #print(newword_addition)
         if j != input_word[i]:
             if i == 0:
                 newword_substitution = j+input_word[i+1:]
@@ -240,11 +237,8 @@ for j in phonemes:
                 newword_substitution = input_word[:i]+j+input_word[i+1:]
                 matches_children += find_matches_children(newword_substitution)
                 matches_adults += find_matches_children(newword_substitution)
-            #print(newword_substitution)
-       
 
 for i, c in enumerate(input_word):
-    #print(i)
     if i == 0:
         newword_deletion = input_word[i+1:]
         matches_children += find_matches_children(newword_deletion)
@@ -253,7 +247,6 @@ for i, c in enumerate(input_word):
         newword_deletion = input_word[:i]+input_word[i+1:]
         matches_children += find_matches_children(newword_deletion)
         matches_adults += find_matches_children(newword_deletion)
-    #print(newword_deletion)
 
 print("# of neighbors (children):")
 print(matches_children)
