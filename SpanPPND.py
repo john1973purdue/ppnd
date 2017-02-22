@@ -1,5 +1,10 @@
 # Note: to open this in python shell: exec(open('SpanPPND.py').read())
 
+## To do: change some of the PP/ND code into functions, write something to run all of our child/adult words through, returning PP/ND values, export these values to CSV file for later analysis
+## To do: make the PP/ND return code loop over a list of words provided by the user
+## To do: format the output in tables
+## To do: make final decisions about how to treat different characters
+
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
 
 # Special spelling cases: double letters (ll, rr), ü vs u (gue, que vs. güe, qüe), ch, ??
@@ -255,6 +260,11 @@ print(matches_children)
 
 print("# of neighbors (adults):")
 print(matches_adults)
+
+
+
+
+
 
 #### NOTES/TESTING BELOW:
 
