@@ -257,6 +257,12 @@ print("# of neighbors (adults):")
 print(matches_adults)
 
 #### NOTES/TESTING BELOW:
+
+# Functions: https://www.tutorialspoint.com/python/python_functions.htm
+
+# Checking if something is in list: http://stackoverflow.com/questions/11251709/check-if-item-is-in-an-array
+
+# Cutting/slicing strings: http://pythoncentral.io/cutting-and-slicing-strings-in-python/
     
 # Testing: looking up logfreq based on a word "zumo"
 
