@@ -2,13 +2,13 @@
 
 ## To do: clean up the ND candidate return code so that it returns the candidate from the function in addition to 0 or 1, puts them into a list, and then outputs them later in a nice list
 ## To do: change some of the PP/ND code into functions, write something to run all of our child/adult words through, returning PP/ND values, export these values to CSV file for later analysis
-
 ## To do: make final decisions about how to treat different characters
 ## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
 ## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
 ## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500)
 
 ## In process:
+## To do: reformat the PP/ND return code so that it returns a standardized dictionary format that can later be used to create tables [see section below for details]
 ## To do: format the output in tables
         # Trying to use tabulate to format the tables, but they're coming out looking terrible and weird:
         
@@ -224,6 +224,8 @@ def find_matches_adults(candidate):
 # PS / B / ND return
 
 # Ideally, this function will not print anything out here but instead will return the information necessary to produce pretty tables and summary information, so that after we loop through all the user's input words, we can simply throw all the information together into one table (instead of separate sections for each word as it is now)
+
+# Goal: have this function return a dictionary formatted like this: {[wordname]: [input_word], [PS_phonemes]: [PS_phoneme1,PS_phoneme2,etc.], [PS]: [PS1,PS2,etc.], [Biphones]: [Biphone1,Biphone2,etc.], [B]: [B1,B2,B3,etc.], [ND_children]: [number of neighbors,neighbor1,neighbor2,etc.], [ND_adults]: [number of neighbors,neighbor1,neighbor2,etc.]}
 
 def return_values(input_word):
     
