@@ -190,7 +190,7 @@ def return_values(input_word):
     for i, c in enumerate(input_word):
         newkey = c+str(i+1)
         if newkey in children_PS:
-            print(newkey+": "+str(round(children_PS[newkey]/children_P1[i],4)))
+            print(newkey+": "+str(round(children_PS[newkey]/children_P1[i],6)))
             #PS_table.append(str(children_PS[newkey]/children_P1[i]))
             #PS_dict[i+1] = str(children_PS[newkey]/children_P1[i])
             PS_sum += children_PS[newkey]/children_P1[i]
@@ -201,11 +201,11 @@ def return_values(input_word):
             
     #print(tabulate(PS_dict,headers="keys",tablefmt="fancy_grid"))
             
-    print("Positional segment frequency sum: "+str(round(PS_sum,4)))
+    print("Positional segment frequency sum: "+str(round(PS_sum,6)))
 
     #print(PS_sum)
         
-    print("Positional segment frequency average: "+str(round(PS_sum/len(input_word),4)))
+    print("Positional segment frequency average: "+str(round(PS_sum/len(input_word),6)))
     
     #print(PS_sum/len(input_word))
 
@@ -220,7 +220,7 @@ def return_values(input_word):
             if len(input_word) != i+1:
                 newkey = c+input_word[i+1]+str(i+1)
                 if newkey in children_B:
-                    print(newkey+": "+str(round(children_B[newkey]/children_P2[i],4)))
+                    print(newkey+": "+str(round(children_B[newkey]/children_P2[i],6)))
                     #B_table.append(children_B[newkey]/children_P2[i])
                     B_sum += children_B[newkey]/children_P2[i]
                 else:
@@ -232,12 +232,12 @@ def return_values(input_word):
             
     #print(tabulate(B_table,headers=["Word","B1","B2","B3","B4","B5","B6","B7","B8","B9"],tablefmt="fancy_grid",floatfmt=".4f"))
     
-    print("Biphone frequency sum: "+str(round(B_sum,4)))
+    print("Biphone frequency sum: "+str(round(B_sum,6)))
 
     #print(B_sum)
             
     if len(input_word) > 1:
-        print("Biphone frequency average: "+str(round(B_sum/(len(input_word)-1),4)))
+        print("Biphone frequency average: "+str(round(B_sum/(len(input_word)-1),6)))
     else:
         print("Biphone frequency average: N/A")
 
