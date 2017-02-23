@@ -1,8 +1,13 @@
 # Note: to open this in python shell: exec(open('SpanPPND.py').read())
 
 ## To do: clean up the ND candidate return code so that it returns the candidate from the function in addition to 0 or 1, puts them into a list, and then outputs them later in a nice list
-## To do: change some of the PP/ND code into functions, write something to run all of our child/adult words through, returning PP/ND values, export these values to CSV file for later analysis
 ## To do: make final decisions about how to treat different characters
+    ### For c and g, look ahead one position and then categorize as theta, k, x, or g
+    ### For ll and rr, look ahead one position and then categorize as L or R
+    ### For ch, look ahead.... categorize as C
+    ### For h, delete it
+    ### For ü, this should be taken care of in g code
+    ### For x, change to ks
 ## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
 ## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
 ## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500)
@@ -55,6 +60,10 @@
             #╘═════╧═════╧═════╧═════╛
             
         # PrettyTable is also promising, and allows us to build up tables one row at a time: https://code.google.com/archive/p/prettytable/wikis/Tutorial.wiki
+        
+## Elizabeth: ## To do: change some of the PP/ND code into functions, write something to run all of our child/adult words through, returning PP/ND values, export these values to CSV file for later analysis
+## Make a function that can expect a dictionary as input in the following form:
+## input_dictionary = {'Word': ['word'], 'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], '[ND_adults_num': [3]}.
 
 ## Complete:
 ## To do: make the PP/ND return code loop over a list of words provided by the user
@@ -331,6 +340,8 @@ def return_values(input_word):
 
     matches_children = 0
     matches_adults = 0
+    
+    # A change here to add candidates to the dictionary by testing on value of the find_matches functions is necessary to implement the overall change to the return_values function
 
     for j in phonemes:
         for i, c in enumerate(input_word):
