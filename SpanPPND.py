@@ -20,7 +20,7 @@
 import csv
 
 # Table output: https://pypi.python.org/pypi/tabulate
-from tabulate import tabulate
+#from tabulate import tabulate
 
 f = open('children_forimport_022117.csv')
 csv_children = csv.reader(f, delimiter=',')
@@ -182,51 +182,64 @@ def return_values(input_word):
     print("Positional segment frequency")
 
     PS_sum = 0
+    
+    PS_dict = {}
+    
+    # Desired structure of dictionary: {[positionkey]: [PS1 etc.]}
 
     for i, c in enumerate(input_word):
         newkey = c+str(i+1)
-        print(newkey)
         if newkey in children_PS:
-            print(children_PS[newkey]/children_P1[i])
+            print(newkey+": "+str(round(children_PS[newkey]/children_P1[i],4)))
+            #PS_table.append(str(children_PS[newkey]/children_P1[i]))
+            #PS_dict[i+1] = str(children_PS[newkey]/children_P1[i])
             PS_sum += children_PS[newkey]/children_P1[i]
         else:
-            print("N/A")
+            print(newkey+": N/A")
+            #PS_table.append("N/A")
+            #PS_dict[i+1] = "N/A"
             
-    print("Positional segment frequency sum")
+    #print(tabulate(PS_dict,headers="keys",tablefmt="fancy_grid"))
+            
+    print("Positional segment frequency sum: "+str(round(PS_sum,4)))
 
-    print(PS_sum)
+    #print(PS_sum)
         
-    print("Positional segment frequency average")
+    print("Positional segment frequency average: "+str(round(PS_sum/len(input_word),4)))
     
-    print(PS_sum/len(input_word))
+    #print(PS_sum/len(input_word))
 
     print("Biphone frequency")
 
     B_sum = 0
+    
+    B_table = [input_word]
 
     for i, c in enumerate(input_word):
         if len(input_word) != 1:
             if len(input_word) != i+1:
                 newkey = c+input_word[i+1]+str(i+1)
-                print(newkey)
                 if newkey in children_B:
-                    print(children_B[newkey]/children_P2[i])
+                    print(newkey+": "+str(round(children_B[newkey]/children_P2[i],4)))
+                    #B_table.append(children_B[newkey]/children_P2[i])
                     B_sum += children_B[newkey]/children_P2[i]
                 else:
-                    print("N/A")
+                    print(newkey+": N/A")
+                    #B_table.append("N/A")
         else:
             print("No biphone frequency")
+            #B_table.append("N/A")
             
-    print("Biphone frequency sum")
-
-    print(B_sum)
-            
-    print("Biphone frequency average")
+    #print(tabulate(B_table,headers=["Word","B1","B2","B3","B4","B5","B6","B7","B8","B9"],tablefmt="fancy_grid",floatfmt=".4f"))
     
+    print("Biphone frequency sum: "+str(round(B_sum,4)))
+
+    #print(B_sum)
+            
     if len(input_word) > 1:
-        print(B_sum/(len(input_word)-1))
+        print("Biphone frequency average: "+str(round(B_sum/(len(input_word)-1),4)))
     else:
-        print("N/A")
+        print("Biphone frequency average: N/A")
 
     print("Neighborhood density")
 
@@ -306,6 +319,8 @@ for word in user_input_list:
 #------  -----  -----  -----
 #Word1   PS1    PS2    PS3
 #Word2   PS1
+
+# Rounding ouput: http://stackoverflow.com/questions/20457038/python-how-to-round-down-to-2-decimals
 
     
 # Testing: looking up logfreq based on a word "zumo"
