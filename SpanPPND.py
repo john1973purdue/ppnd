@@ -18,6 +18,10 @@
 # These need to be coded differently, or we need to handle them internally
 
 import csv
+
+# Table output: https://pypi.python.org/pypi/tabulate
+from tabulate import tabulate
+
 f = open('children_forimport_022117.csv')
 csv_children = csv.reader(f, delimiter=',')
 
@@ -151,8 +155,7 @@ for word in adults_words:
                 else:
                     adults_P2[i] = float(logfreq)
                     
-
-# PS / B / ND return
+# ND finding matches
 
 def find_matches_children(candidate):
     matches = 0
@@ -167,6 +170,8 @@ def find_matches_adults(candidate):
         matches = 1
         print('Adults: '+candidate)
     return matches
+
+# PS / B / ND return
 
 def return_values(input_word):
     
@@ -275,8 +280,10 @@ def return_values(input_word):
 
     return
 
-user_input = input("Enter comma-separated list of words: ")
-user_input_list = user_input.split(',')
+# User input
+
+user_input = input("Enter space-separated list of words: ")
+user_input_list = user_input.split(' ')
 
 for word in user_input_list:
     return_values(word)
@@ -288,6 +295,18 @@ for word in user_input_list:
 # Checking if something is in list: http://stackoverflow.com/questions/11251709/check-if-item-is-in-an-array
 
 # Cutting/slicing strings: http://pythoncentral.io/cutting-and-slicing-strings-in-python/
+
+# User input: http://stackoverflow.com/questions/8162021/analyzing-string-input-until-it-reaches-a-certain-letter-on-python
+
+# Table output: https://pypi.python.org/pypi/tabulate
+
+#table = [["Word1","PS1","PS2","PS3"],["Word2","PS1"]]
+#print(tabulate(table,headers=["Word","PS1","PS2","PS3","PS4"],tablefmt="fancy_grid"))
+#Word    PS1    PS2    PS3
+#------  -----  -----  -----
+#Word1   PS1    PS2    PS3
+#Word2   PS1
+
     
 # Testing: looking up logfreq based on a word "zumo"
 
