@@ -225,7 +225,7 @@ def find_matches_adults(candidate):
 
 # Ideally, this function will not print anything out here but instead will return the information necessary to produce pretty tables and summary information, so that after we loop through all the user's input words, we can simply throw all the information together into one table (instead of separate sections for each word as it is now)
 
-# Goal: have this function return a dictionary formatted like this: {[wordname]: [input_word], [PS_phonemes]: [PS_phoneme1,PS_phoneme2,etc.], [PS]: [PS1,PS2,etc.], [Biphones]: [Biphone1,Biphone2,etc.], [B]: [B1,B2,B3,etc.], [ND_children]: [neighbor1,neighbor2,etc.], [ND_children_num]: [# of neighbors], [ND_adults]: [neighbor1,neighbor2,etc.], [ND_adults_num]: [# of neighbors]}
+# Goal: have this function return a dictionary formatted like this (**note, see below for change): {[wordname]: [input_word], [PS_phonemes]: [PS_phoneme1,PS_phoneme2,etc.], [PS]: [PS1,PS2,etc.], [Biphones]: [Biphone1,Biphone2,etc.], [B]: [B1,B2,B3,etc.], [ND_children]: [neighbor1,neighbor2,etc.], [ND_children_num]: [# of neighbors], [ND_adults]: [neighbor1,neighbor2,etc.], [ND_adults_num]: [# of neighbors]}
 
 # Example: test = {'wordname': ['mama'], 'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], '[ND_adults_num': [3]}
 
@@ -241,7 +241,7 @@ def find_matches_adults(candidate):
 
 # Therefore, let's change our output dictionary format to this: test = {'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], '[ND_adults_num': [3]}. Note that the word no longer appears.
 
-# This allows us to add other entries as needed with the key being the word. We will need to check for collisions in keys. If there is a collision, rather than dropping, just have the dictionary refer to the identical entry and then use that entry to later populate the lines in the output table.
+# This allows us to add other entries as needed with the key being the word. We will need to check for collisions in keys. If there is a collision, rather than dropping, just have the dictionary refer to the identical entry and then use that entry to later populate the lines in the output table. Use some sort of code dummy variable to indicate to the table function that it needs to copy from another entry.
 
 # After our function returns the dictionary of dictionaries, we must add it to a global dictionary that collects all the output for each word, using the input_word as the key: collated_output[input_word] = //returned dictionary//. This will be done outside the function.
 
