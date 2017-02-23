@@ -61,9 +61,10 @@
             
         # PrettyTable is also promising, and allows us to build up tables one row at a time: https://code.google.com/archive/p/prettytable/wikis/Tutorial.wiki
         
-## Elizabeth: ## To do: change some of the PP/ND code into functions, write something to run all of our child/adult words through, returning PP/ND values, export these values to CSV file for later analysis
+## Elizabeth: ## To do: write something to export PP/ND values to CSV file for later analysis
 ## Make a function that can expect a dictionary as input in the following form:
 ## input_dictionary = {'Word': ['word'], 'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], '[ND_adults_num': [3]}.
+## And from this information export a csv file 
 
 ## Complete:
 ## To do: make the PP/ND return code loop over a list of words provided by the user
