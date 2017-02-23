@@ -1,14 +1,14 @@
 # Note: to open this in python shell: exec(open('SpanPPND.py').read())
 
 ## To do: clean up the ND candidate return code so that it returns the candidate from the function in addition to 0 or 1, puts them into a list, and then outputs them later in a nice list
-## To do: make final decisions about how to treat different characters
+## To do: make final decisions about how to treat different characters, code this in our calculator:
     ### For c and g, look ahead one position and then categorize as theta, k, x, or g
     ### For ll and rr, look ahead one position and then categorize as L or R
     ### For ch, look ahead.... categorize as C
     ### For h, delete it
     ### For ü, this should be taken care of in g code
     ### For x, change to ks or x or h...
-    ### We need a list of x-words
+        ### We need a list of x-words
 ## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
 ## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
 ## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500)
@@ -64,19 +64,14 @@
         
 ## Elizabeth: ## To do: write something to export PP/ND values to CSV file for later analysis
 ## Make a function that can expect a dictionary as input in the following form:
-## input_dictionary = {'Word': ['word'], 'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], '[ND_adults_num': [3]}.
+## input_dictionary = {'Word': ['word'], 'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], 'ND_adults_num': [3]}.
 ## And from this information export a csv file 
 
 ## Complete:
 ## To do: make the PP/ND return code loop over a list of words provided by the user
 
 
-
-
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
-
-# Special spelling cases: double letters (ll, rr), ü vs u (gue, que vs. güe, qüe), ch, ??
-# These need to be coded differently, or we need to handle them internally
 
 import csv
 
@@ -238,10 +233,10 @@ def find_matches_adults(candidate):
 
 # Goal: have this function return a dictionary formatted like this (**note, see below for change): {[wordname]: [input_word], [PS_phonemes]: [PS_phoneme1,PS_phoneme2,etc.], [PS]: [PS1,PS2,etc.], [Biphones]: [Biphone1,Biphone2,etc.], [B]: [B1,B2,B3,etc.], [ND_children]: [neighbor1,neighbor2,etc.], [ND_children_num]: [# of neighbors], [ND_adults]: [neighbor1,neighbor2,etc.], [ND_adults_num]: [# of neighbors]}
 
-# Example: test = {'wordname': ['mama'], 'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], '[ND_adults_num': [3]}
+# Example: test = {'wordname': ['mama'], 'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], 'ND_adults_num': [3]}
 
 #>>> print(tabulate(test,headers="keys"))
-#wordname    PS_phonemes      PS  Biphones      B  ND_children      ND_children_num  ND_adults      [ND_adults_num
+#wordname    PS_phonemes      PS  Biphones      B  ND_children      ND_children_num  ND_adults      ND_adults_num
 #----------  -------------  ----  ----------  ---  -------------  -----------------  -----------  ----------------
 #mama        m               1.2  ma          1.5  mami                           2  mami                        3
             #a               2.2  am          2.5  nama                              nama
@@ -250,7 +245,7 @@ def find_matches_adults(candidate):
 
 # It might be best to then take this output and add it to a dictionary of dictionaries to collate the output for all the user's words: https://www.quora.com/In-Python-can-we-add-a-dictionary-inside-a-dictionary-If-yes-how-can-we-access-the-inner-dictionary-using-the-key-in-the-primary-dictionary
 
-# Therefore, let's change our output dictionary format to this: test = {'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], '[ND_adults_num': [3]}. Note that the word no longer appears.
+# Therefore, let's change our output dictionary format to this: test = {'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], 'ND_adults_num': [3]}. Note that the word no longer appears.
 
 # This allows us to add other entries as needed with the key being the word. We will need to check for collisions in keys. If there is a collision, rather than dropping, just have the dictionary refer to the identical entry and then use that entry to later populate the lines in the output table. Use some sort of code dummy variable to indicate to the table function that it needs to copy from another entry.
 
@@ -260,6 +255,8 @@ def find_matches_adults(candidate):
 
 def return_values(input_word):
     
+    return_dict = {}
+    
     print("****************************************")
     
     print("Word: "+input_word)
@@ -268,7 +265,7 @@ def return_values(input_word):
 
     PS_sum = 0
     
-    PS_dict = {}
+    #PS_dict = {}
     
     # Desired structure of dictionary: {[positionkey]: [PS1 etc.]}
 
