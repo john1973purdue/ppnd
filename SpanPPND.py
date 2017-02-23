@@ -53,6 +53,8 @@
             #├─────┼─────┼─────┼─────┤
             #│     │ 2   │ 4   │ 4   │
             #╘═════╧═════╧═════╧═════╛
+            
+        # PrettyTable is also promising, and allows us to build up tables one row at a time: https://code.google.com/archive/p/prettytable/wikis/Tutorial.wiki
 
 ## Complete:
 ## To do: make the PP/ND return code loop over a list of words provided by the user
@@ -220,6 +222,8 @@ def find_matches_adults(candidate):
     return matches
 
 # PS / B / ND return
+
+# Ideally, this function will not print anything out here but instead will return the information necessary to produce pretty tables and summary information, so that after we loop through all the user's input words, we can simply throw all the information together into one table (instead of separate sections for each word as it is now)
 
 def return_values(input_word):
     
