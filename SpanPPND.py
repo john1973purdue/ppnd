@@ -225,7 +225,27 @@ def find_matches_adults(candidate):
 
 # Ideally, this function will not print anything out here but instead will return the information necessary to produce pretty tables and summary information, so that after we loop through all the user's input words, we can simply throw all the information together into one table (instead of separate sections for each word as it is now)
 
-# Goal: have this function return a dictionary formatted like this: {[wordname]: [input_word], [PS_phonemes]: [PS_phoneme1,PS_phoneme2,etc.], [PS]: [PS1,PS2,etc.], [Biphones]: [Biphone1,Biphone2,etc.], [B]: [B1,B2,B3,etc.], [ND_children]: [number of neighbors,neighbor1,neighbor2,etc.], [ND_adults]: [number of neighbors,neighbor1,neighbor2,etc.]}
+# Goal: have this function return a dictionary formatted like this: {[wordname]: [input_word], [PS_phonemes]: [PS_phoneme1,PS_phoneme2,etc.], [PS]: [PS1,PS2,etc.], [Biphones]: [Biphone1,Biphone2,etc.], [B]: [B1,B2,B3,etc.], [ND_children]: [neighbor1,neighbor2,etc.], [ND_children_num]: [# of neighbors], [ND_adults]: [neighbor1,neighbor2,etc.], [ND_adults_num]: [# of neighbors]}
+
+# Example: test = {'wordname': ['mama'], 'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], '[ND_adults_num': [3]}
+
+#>>> print(tabulate(test,headers="keys"))
+#wordname    PS_phonemes      PS  Biphones      B  ND_children      ND_children_num  ND_adults      [ND_adults_num
+#----------  -------------  ----  ----------  ---  -------------  -----------------  -----------  ----------------
+#mama        m               1.2  ma          1.5  mami                           2  mami                        3
+            #a               2.2  am          2.5  nama                              nama
+            #m               3.3  ma          3.5                                    mapa
+            #a               3.4
+
+# It might be best to then take this output and add it to a dictionary of dictionaries to collate the output for all the user's words: https://www.quora.com/In-Python-can-we-add-a-dictionary-inside-a-dictionary-If-yes-how-can-we-access-the-inner-dictionary-using-the-key-in-the-primary-dictionary
+
+# Therefore, let's change our output dictionary format to this: test = {'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], '[ND_adults_num': [3]}. Note that the word no longer appears.
+
+# This allows us to add other entries as needed with the key being the word. We will need to check for collisions in keys. If there is a collision, rather than dropping, just have the dictionary refer to the identical entry and then use that entry to later populate the lines in the output table.
+
+# After our function returns the dictionary of dictionaries, we must add it to a global dictionary that collects all the output for each word, using the input_word as the key: collated_output[input_word] = //returned dictionary//. This will be done outside the function.
+
+# Then, we will use the dictionary of dictionaries to create a table that lays out all of the information for all the words in a consistent manner amenable to copying and pasting.
 
 def return_values(input_word):
     
@@ -353,6 +373,8 @@ user_input = input("Enter space-separated list of words: ")
 user_input_list = user_input.split(' ')
 
 for word in user_input_list:
+
+#This is where we will add up our collated_output dictionary of dictionaries
     return_values(word)
 
 #### NOTES/TESTING BELOW:
