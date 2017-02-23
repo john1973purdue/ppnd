@@ -2,15 +2,63 @@
 
 ## To do: clean up the ND candidate return code so that it returns the candidate from the function in addition to 0 or 1, puts them into a list, and then outputs them later in a nice list
 ## To do: change some of the PP/ND code into functions, write something to run all of our child/adult words through, returning PP/ND values, export these values to CSV file for later analysis
-## To do: format the output in tables
+
 ## To do: make final decisions about how to treat different characters
 ## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
 ## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
 ## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500)
 
+## In process:
+## To do: format the output in tables
+        # Trying to use tabulate to format the tables, but they're coming out looking terrible and weird:
+        
+            #╒═════╤═════╤═════╤═════╕
+            #│ 1   │ 2   │ 3   │ 4   │
+            #╞═════╪═════╪═════╪═════╡
+            #│ 0   │ 0   │ 0   │ 0   │
+            #├─────┼─────┼─────┼─────┤
+            #│ .   │ .   │ .   │ .   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 0   │ 2   │ 0   │ 1   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 7   │ 0   │ 4   │ 6   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 0   │ 9   │ 5   │ 7   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 3   │ 5   │ 8   │ 9   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 5   │ 0   │ 2   │ 0   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 3   │ 8   │ 5   │ 9   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 8   │ 0   │ 2   │ 0   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 9   │ 6   │ 6   │ 6   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 4   │ 7   │ 4   │ 7   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 0   │ 6   │ 3   │ 1   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 4   │ 5   │ 8   │ 5   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 8   │ 0   │ 8   │ 8   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 5   │ 7   │ 7   │ 5   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 7   │ 8   │ 1   │ 8   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 9   │ 7   │ 9   │ 7   │
+            #├─────┼─────┼─────┼─────┤
+            #│ 2   │ 4   │ 6   │ 1   │
+            #├─────┼─────┼─────┼─────┤
+            #│     │ 2   │ 4   │ 4   │
+            #╘═════╧═════╧═════╧═════╛
 
-## Partially complete:
+## Complete:
 ## To do: make the PP/ND return code loop over a list of words provided by the user
+
+
+
 
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
 
