@@ -243,7 +243,7 @@ def find_matches_adults(candidate):
 
 # This allows us to add other entries as needed with the key being the word. We will need to check for collisions in keys. If there is a collision, rather than dropping, just have the dictionary refer to the identical entry and then use that entry to later populate the lines in the output table. Use some sort of code dummy variable to indicate to the table function that it needs to copy from another entry.
 
-# After our function returns the dictionary of dictionaries, we must add it to a global dictionary that collects all the output for each word, using the input_word as the key: collated_output[input_word] = //returned dictionary//. This will be done outside the function.
+# After our function returns the dictionary, we must add it to a global dictionary of dictionaries that collects all the output for each word, using the input_word as the key: collated_output[input_word] = //returned dictionary//. This will be done outside the function.
 
 # Then, we will use the dictionary of dictionaries to create a table that lays out all of the information for all the words in a consistent manner amenable to copying and pasting.
 
