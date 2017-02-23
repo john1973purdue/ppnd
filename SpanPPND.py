@@ -7,7 +7,8 @@
     ### For ch, look ahead.... categorize as C
     ### For h, delete it
     ### For ü, this should be taken care of in g code
-    ### For x, change to ks
+    ### For x, change to ks or x or h...
+    ### We need a list of x-words
 ## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
 ## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
 ## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500)
