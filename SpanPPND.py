@@ -243,7 +243,7 @@ def find_matches_adults(candidate):
             #m               3.3  ma          3.5                                    mapa
             #a               3.4
 
-# It might be best to then take this output and add it to a dictionary of dictionaries to collate the output for all the user's words: https://www.quora.com/In-Python-can-we-add-a-dictionary-inside-a-dictionary-If-yes-how-can-we-access-the-inner-dictionary-using-the-key-in-the-primary-dictionary
+# It might be best to then take this output and add it to a dictionary of dictionaries to collate the output for all the user's words: https://www.quora.com/In-Python-can-we-add-a-dictionary-inside-a-dictionary-If-yes-how-can-we-access-the-inner-dictionary-using-the-key-in-the-primary-dictionary http://stackoverflow.com/questions/1024847/add-key-to-a-dictionary-in-python
 
 # Therefore, let's change our output dictionary format to this: test = {'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], 'ND_adults_num': [3]}. Note that the word no longer appears.
 
@@ -265,19 +265,23 @@ def return_values(input_word):
 
     PS_sum = 0
     
-    #PS_dict = {}
+    PS_phonemes_list = []
     
-    # Desired structure of dictionary: {[positionkey]: [PS1 etc.]}
+    PS_values_list = []
 
     for i, c in enumerate(input_word):
         newkey = c+str(i+1)
         if newkey in children_PS:
             print(newkey+": "+str(round(children_PS[newkey]/children_P1[i],6)))
+            PS_phonemes_list.append(str(newkey))
+            PS_values_list.append(str(round(children_PS[newkey]/children_P1[i],6)))
             #PS_table.append(str(children_PS[newkey]/children_P1[i]))
             #PS_dict[i+1] = str(children_PS[newkey]/children_P1[i])
             PS_sum += children_PS[newkey]/children_P1[i]
         else:
             print(newkey+": N/A")
+            PS_phonemes_list.append(str(newkey))
+            PS_values_list.append("N/A")
             #PS_table.append("N/A")
             #PS_dict[i+1] = "N/A"
             
@@ -290,6 +294,11 @@ def return_values(input_word):
     print("Positional segment frequency average: "+str(round(PS_sum/len(input_word),6)))
     
     #print(PS_sum/len(input_word))
+    
+    return_dict['PS_phonemes']=PS_phonemes_list
+    return_dict['PS']=PS_values_list
+    return_dict['PS_sum']=str(round(PS_sum,6))
+    return_dict['PS_avg']=str(round(PS_sum/len(input_word),6))
 
     print("Biphone frequency")
 
@@ -375,17 +384,20 @@ def return_values(input_word):
 
     print('# of neighbors (adults): '+str(matches_adults))
 
-    return
+    return return_dict
 
 # User input
 
 user_input = input("Enter space-separated list of words: ")
 user_input_list = user_input.split(' ')
 
+collated_output={}
+
 for word in user_input_list:
 
 #This is where we will add up our collated_output dictionary of dictionaries
-    return_values(word)
+    collated_output[word]=return_values(word)
+    print(collated_output)
 
 #### NOTES/TESTING BELOW:
 
