@@ -1,6 +1,5 @@
 # Note: to open this in python shell: exec(open('SpanPPND.py').read())
 
-## To do: clean up the ND candidate return code so that it returns the candidate from the function in addition to 0 or 1, puts them into a list, and then outputs them later in a nice list
 ## To do: make final decisions about how to treat different characters, code this in our calculator:
     ### For c and g, look ahead one position and then categorize as theta, k, x, or g
     ### For ll and rr, look ahead one position and then categorize as L or R
@@ -15,53 +14,11 @@
 
 ## In process:
 ## To do: format the output in tables
-        # Trying to use tabulate to format the tables, but they're coming out looking terrible and weird:
-        
-            #╒═════╤═════╤═════╤═════╕
-            #│ 1   │ 2   │ 3   │ 4   │
-            #╞═════╪═════╪═════╪═════╡
-            #│ 0   │ 0   │ 0   │ 0   │
-            #├─────┼─────┼─────┼─────┤
-            #│ .   │ .   │ .   │ .   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 0   │ 2   │ 0   │ 1   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 7   │ 0   │ 4   │ 6   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 0   │ 9   │ 5   │ 7   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 3   │ 5   │ 8   │ 9   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 5   │ 0   │ 2   │ 0   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 3   │ 8   │ 5   │ 9   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 8   │ 0   │ 2   │ 0   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 9   │ 6   │ 6   │ 6   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 4   │ 7   │ 4   │ 7   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 0   │ 6   │ 3   │ 1   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 4   │ 5   │ 8   │ 5   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 8   │ 0   │ 8   │ 8   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 5   │ 7   │ 7   │ 5   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 7   │ 8   │ 1   │ 8   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 9   │ 7   │ 9   │ 7   │
-            #├─────┼─────┼─────┼─────┤
-            #│ 2   │ 4   │ 6   │ 1   │
-            #├─────┼─────┼─────┼─────┤
-            #│     │ 2   │ 4   │ 4   │
-            #╘═════╧═════╧═════╧═════╛
-            
+        # Trying to use tabulate to format the tables, but they're coming out looking terrible and weird
         # PrettyTable is also promising, and allows us to build up tables one row at a time: https://code.google.com/archive/p/prettytable/wikis/Tutorial.wiki
         
-## Elizabeth: ## To do: write something to export PP/ND values to CSV file for later analysis
+## Elizabeth: 
+## To do: write something to export PP/ND values to CSV file for later analysis
 ## Make a function that can expect a dictionary as input in the following form:
 ## input_dictionary = {'Word': {'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'B_phonemes': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'Neighbors_children': ['mami', 'nama'], 'ND_children': [2], 'Neighbors_adults': ['mami', 'nama', 'mapa'], 'ND_adults': [3]}, 'Word2': {etc.}}.
 ## And from this information export a csv file 
@@ -69,6 +26,7 @@
 ## Complete:
 ## To do: make the PP/ND return code loop over a list of words provided by the user
 ## To do: reformat the PP/ND return code so that it returns a standardized dictionary format that can later be used to create tables [see section below for details]
+## To do: clean up the ND candidate return code so that it returns the candidate from the function in addition to 0 or 1, puts them into a list, and then outputs them later in a nice list [no longer relevant]
 
 
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
@@ -242,40 +200,67 @@ def return_values(input_word):
     
     #print("Positional segment frequency")
 
-    PS_sum = 0
+    PS_sum_children = 0
     
-    PS_phonemes_list = []
+    PS_phonemes_list_children = []
     
-    PS_values_list = []
+    PS_values_list_children = []
 
     for i, c in enumerate(input_word):
         newkey = c+str(i+1)
         if newkey in children_PS:
             #print(newkey+": "+str(round(children_PS[newkey]/children_P1[i],6)))
-            PS_phonemes_list.append(str(newkey))
-            PS_values_list.append(str(round(children_PS[newkey]/children_P1[i],6)))
-            PS_sum += children_PS[newkey]/children_P1[i]
+            PS_phonemes_list_children.append(str(newkey))
+            PS_values_list_children.append(str(round(children_PS[newkey]/children_P1[i],6)))
+            PS_sum_children += children_PS[newkey]/children_P1[i]
         else:
             #print(newkey+": N/A")
-            PS_phonemes_list.append(str(newkey))
-            PS_values_list.append("N/A")
+            PS_phonemes_list_children.append(str(newkey))
+            PS_values_list_children.append("N/A")
             
     #print("Positional segment frequency sum: "+str(round(PS_sum,6)))
         
     #print("Positional segment frequency average: "+str(round(PS_sum/len(input_word),6)))
     
-    return_dict['PS_phonemes']=PS_phonemes_list
-    return_dict['PS']=PS_values_list
-    return_dict['PS_sum']=str(round(PS_sum,6))
-    return_dict['PS_avg']=str(round(PS_sum/len(input_word),6))
+    return_dict['PS_phonemes_children']=PS_phonemes_list_children
+    return_dict['PS_children']=PS_values_list_children
+    return_dict['PS_sum_children']=str(round(PS_sum_children,6))
+    return_dict['PS_avg_children']=str(round(PS_sum_children/len(input_word),6))
+
+    PS_sum_adults = 0
+    
+    PS_phonemes_list_adults = []
+    
+    PS_values_list_adults = []
+
+    for i, c in enumerate(input_word):
+        newkey = c+str(i+1)
+        if newkey in adults_PS:
+            #print(newkey+": "+str(round(children_PS[newkey]/children_P1[i],6)))
+            PS_phonemes_list_adults.append(str(newkey))
+            PS_values_list_adults.append(str(round(adults_PS[newkey]/adults_P1[i],6)))
+            PS_sum_adults += adults_PS[newkey]/adults_P1[i]
+        else:
+            #print(newkey+": N/A")
+            PS_phonemes_list_adults.append(str(newkey))
+            PS_values_list_adults.append("N/A")
+            
+    #print("Positional segment frequency sum: "+str(round(PS_sum,6)))
+        
+    #print("Positional segment frequency average: "+str(round(PS_sum/len(input_word),6)))
+    
+    return_dict['PS_phonemes_adults']=PS_phonemes_list_adults
+    return_dict['PS_adults']=PS_values_list_adults
+    return_dict['PS_sum_adults']=str(round(PS_sum_adults,6))
+    return_dict['PS_avg_adults']=str(round(PS_sum_adults/len(input_word),6))
 
     #print("Biphone frequency")
 
-    B_sum = 0
+    B_sum_children = 0
     
-    B_phonemes_list = []
+    B_phonemes_list_children = []
     
-    B_values_list = []
+    B_values_list_children = []
 
     for i, c in enumerate(input_word):
         if len(input_word) != 1:
@@ -283,31 +268,69 @@ def return_values(input_word):
                 newkey = c+input_word[i+1]+str(i+1)
                 if newkey in children_B:
                     #print(newkey+": "+str(round(children_B[newkey]/children_P2[i],6)))
-                    B_sum += children_B[newkey]/children_P2[i]
-                    B_phonemes_list.append(str(newkey))
-                    B_values_list.append(str(round(children_B[newkey]/children_P2[i],6)))
+                    B_sum_children += children_B[newkey]/children_P2[i]
+                    B_phonemes_list_children.append(str(newkey))
+                    B_values_list_children.append(str(round(children_B[newkey]/children_P2[i],6)))
                 else:
                     #print(newkey+": N/A")
-                    B_phonemes_list.append(str(newkey))
-                    B_values_list.append("N/A")
+                    B_phonemes_list_children.append(str(newkey))
+                    B_values_list_children.append("N/A")
         else:
             #print("No biphone frequency")
-            B_phonemes_list.append("N/A")
-            B_values_list.append("N/A")
+            B_phonemes_list_children.append("N/A")
+            B_values_list_children.append("N/A")
     
     #print("Biphone frequency sum: "+str(round(B_sum,6)))
             
     if len(input_word) > 1:
         #print("Biphone frequency average: "+str(round(B_sum/(len(input_word)-1),6)))
-        return_dict['B_avg']=str(round(B_sum/(len(input_word)-1),6))
-        return_dict['B_sum']=str(round(B_sum,6))
+        return_dict['B_avg_children']=str(round(B_sum_children/(len(input_word)-1),6))
+        return_dict['B_sum_children']=str(round(B_sum_children,6))
     else:
         #print("Biphone frequency average: N/A")
-        return_dict['B_avg']="N/A"
-        return_dict['B_sum']="N/A"
+        return_dict['B_avg_children']="N/A"
+        return_dict['B_sum_children']="N/A"
         
-    return_dict['B_phonemes']=B_phonemes_list
-    return_dict['B']=B_values_list
+    return_dict['B_phonemes_children']=B_phonemes_list_children
+    return_dict['B_children']=B_values_list_children
+
+    B_sum_adults = 0
+    
+    B_phonemes_list_adults = []
+    
+    B_values_list_adults = []
+
+    for i, c in enumerate(input_word):
+        if len(input_word) != 1:
+            if len(input_word) != i+1:
+                newkey = c+input_word[i+1]+str(i+1)
+                if newkey in adults_B:
+                    #print(newkey+": "+str(round(children_B[newkey]/children_P2[i],6)))
+                    B_sum_adults += adults_B[newkey]/adults_P2[i]
+                    B_phonemes_list_adults.append(str(newkey))
+                    B_values_list_adults.append(str(round(adults_B[newkey]/adults_P2[i],6)))
+                else:
+                    #print(newkey+": N/A")
+                    B_phonemes_list_adults.append(str(newkey))
+                    B_values_list_adults.append("N/A")
+        else:
+            #print("No biphone frequency")
+            B_phonemes_list_adults.append("N/A")
+            B_values_list_adults.append("N/A")
+    
+    #print("Biphone frequency sum: "+str(round(B_sum,6)))
+            
+    if len(input_word) > 1:
+        #print("Biphone frequency average: "+str(round(B_sum/(len(input_word)-1),6)))
+        return_dict['B_avg_adults']=str(round(B_sum_adults/(len(input_word)-1),6))
+        return_dict['B_sum_adults']=str(round(B_sum_adults,6))
+    else:
+        #print("Biphone frequency average: N/A")
+        return_dict['B_avg_adults']="N/A"
+        return_dict['B_sum_adults']="N/A"
+        
+    return_dict['B_phonemes_adults']=B_phonemes_list_adults
+    return_dict['B_adults']=B_values_list_adults
 
     #print("Neighborhood density")
 
@@ -414,6 +437,11 @@ for key, val in collated_output.items():
     print(key)
     for key2, val2 in collated_output[key].items():
         print(str(key2)+": "+str(collated_output[key][key2]))
+        
+        # Go through each key, count up members of B and SP lists, use this information to have proper # of SP, B columns
+        # Need to have user-selected adult / children, then construct table with one set of values
+        # Construct table like so: Word SP1 SP2 SP# SP_sum SP_avg B1 B2 B# B_sum B_avg ND
+
 
 
 
