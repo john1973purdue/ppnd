@@ -64,7 +64,7 @@
         
 ## Elizabeth: ## To do: write something to export PP/ND values to CSV file for later analysis
 ## Make a function that can expect a dictionary as input in the following form:
-## input_dictionary = {'Word': ['word'], 'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], 'ND_adults_num': [3]}.
+## input_dictionary = {'Word': {'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], 'ND_adults_num': [3]}, 'Word2': {etc.}}.
 ## And from this information export a csv file 
 
 ## Complete:
