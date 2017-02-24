@@ -76,7 +76,10 @@
 import csv
 
 # Table output: https://pypi.python.org/pypi/tabulate
-from tabulate import tabulate
+#from tabulate import tabulate
+#from prettytable import PrettyTable
+
+#import itertools
 
 f = open('children_forimport_022117.csv')
 csv_children = csv.reader(f, delimiter=',')
@@ -296,14 +299,15 @@ def return_values(input_word):
             
     if len(input_word) > 1:
         #print("Biphone frequency average: "+str(round(B_sum/(len(input_word)-1),6)))
-        return_dict['B_avg']=str(round(B_sum/(len(input_word)-1),6))  
+        return_dict['B_avg']=str(round(B_sum/(len(input_word)-1),6))
+        return_dict['B_sum']=str(round(B_sum,6))
     else:
         #print("Biphone frequency average: N/A")
         return_dict['B_avg']="N/A"
+        return_dict['B_sum']="N/A"
         
     return_dict['B_phonemes']=B_phonemes_list
     return_dict['B']=B_values_list
-    return_dict['B_sum']=str(round(B_sum,6))
 
     #print("Neighborhood density")
 
@@ -401,9 +405,15 @@ collated_output={}
 for word in user_input_list:
     collated_output[word]=return_values(word)
 
-print(collated_output)
+#print(collated_output)
 
 # Table output here
+
+for key, val in collated_output.items():
+    print("*********************************")
+    print(key)
+    for key2, val2 in collated_output[key].items():
+        print(str(key2)+": "+str(collated_output[key][key2]))
 
 
 
