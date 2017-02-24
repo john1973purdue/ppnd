@@ -64,7 +64,7 @@
         
 ## Elizabeth: ## To do: write something to export PP/ND values to CSV file for later analysis
 ## Make a function that can expect a dictionary as input in the following form:
-## input_dictionary = {'Word': {'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], 'ND_adults_num': [3]}, 'Word2': {etc.}}.
+## input_dictionary = {'Word': {'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'B_phonemes': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'Neighbors_children': ['mami', 'nama'], 'ND_children': [2], 'Neighbors_adults': ['mami', 'nama', 'mapa'], 'ND_adults': [3]}, 'Word2': {etc.}}.
 ## And from this information export a csv file 
 
 ## Complete:
@@ -229,30 +229,6 @@ def find_matches_adults(candidate):
 
 # PS / B / ND return
 
-# Ideally, this function will not print anything out here but instead will return the information necessary to produce pretty tables and summary information, so that after we loop through all the user's input words, we can simply throw all the information together into one table (instead of separate sections for each word as it is now)
-
-# Goal: have this function return a dictionary formatted like this (**note, see below for change): {[wordname]: [input_word], [PS_phonemes]: [PS_phoneme1,PS_phoneme2,etc.], [PS]: [PS1,PS2,etc.], [Biphones]: [Biphone1,Biphone2,etc.], [B]: [B1,B2,B3,etc.], [ND_children]: [neighbor1,neighbor2,etc.], [ND_children_num]: [# of neighbors], [ND_adults]: [neighbor1,neighbor2,etc.], [ND_adults_num]: [# of neighbors]}
-
-# Example: test = {'wordname': ['mama'], 'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], 'ND_adults_num': [3]}
-
-#>>> print(tabulate(test,headers="keys"))
-#wordname    PS_phonemes      PS  Biphones      B  ND_children      ND_children_num  ND_adults      ND_adults_num
-#----------  -------------  ----  ----------  ---  -------------  -----------------  -----------  ----------------
-#mama        m               1.2  ma          1.5  mami                           2  mami                        3
-            #a               2.2  am          2.5  nama                              nama
-            #m               3.3  ma          3.5                                    mapa
-            #a               3.4
-
-# It might be best to then take this output and add it to a dictionary of dictionaries to collate the output for all the user's words: https://www.quora.com/In-Python-can-we-add-a-dictionary-inside-a-dictionary-If-yes-how-can-we-access-the-inner-dictionary-using-the-key-in-the-primary-dictionary http://stackoverflow.com/questions/1024847/add-key-to-a-dictionary-in-python
-
-# Therefore, let's change our output dictionary format to this: test = {'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], 'ND_adults_num': [3]}. Note that the word no longer appears.
-
-# This allows us to add other entries as needed with the key being the word. We will need to check for collisions in keys. If there is a collision, rather than dropping, just have the dictionary refer to the identical entry and then use that entry to later populate the lines in the output table. Use some sort of code dummy variable to indicate to the table function that it needs to copy from another entry.
-
-# After our function returns the dictionary, we must add it to a global dictionary of dictionaries that collects all the output for each word, using the input_word as the key: collated_output[input_word] = //returned dictionary//. This will be done outside the function.
-
-# Then, we will use the dictionary of dictionaries to create a table that lays out all of the information for all the words in a consistent manner amenable to copying and pasting.
-
 def return_values(input_word):
     
     return_dict = {}
@@ -304,7 +280,9 @@ def return_values(input_word):
 
     B_sum = 0
     
-    B_table = [input_word]
+    B_phonemes_list = []
+    
+    B_values_list = []
 
     for i, c in enumerate(input_word):
         if len(input_word) != 1:
@@ -314,11 +292,17 @@ def return_values(input_word):
                     print(newkey+": "+str(round(children_B[newkey]/children_P2[i],6)))
                     #B_table.append(children_B[newkey]/children_P2[i])
                     B_sum += children_B[newkey]/children_P2[i]
+                    B_phonemes_list.append(str(newkey))
+                    B_values_list.append(str(round(children_B[newkey]/children_P2[i],6)))
                 else:
                     print(newkey+": N/A")
+                    B_phonemes_list.append(str(newkey))
+                    B_values_list.append("N/A")
                     #B_table.append("N/A")
         else:
             print("No biphone frequency")
+            B_phonemes_list.append("N/A")
+            B_values_list.append("N/A")
             #B_table.append("N/A")
             
     #print(tabulate(B_table,headers=["Word","B1","B2","B3","B4","B5","B6","B7","B8","B9"],tablefmt="fancy_grid",floatfmt=".4f"))
@@ -329,8 +313,13 @@ def return_values(input_word):
             
     if len(input_word) > 1:
         print("Biphone frequency average: "+str(round(B_sum/(len(input_word)-1),6)))
+        return_dict['B_avg']=str(round(B_sum/(len(input_word)-1),6))  
     else:
         print("Biphone frequency average: N/A")
+        
+    return_dict['B_phonemes']=B_phonemes_list
+    return_dict['B']=B_values_list
+    return_dict['B_sum']=str(round(B_sum,6))
 
     print("Neighborhood density")
 
@@ -349,40 +338,86 @@ def return_values(input_word):
     matches_children = 0
     matches_adults = 0
     
+    N_children = []
+    N_adults = []
+    ND_children_num = []
+    ND_adults_num = []
+    
     # A change here to add candidates to the dictionary by testing on value of the find_matches functions is necessary to implement the overall change to the return_values function
 
     for j in phonemes:
         for i, c in enumerate(input_word):
             newword_addition = input_word[:i]+j+input_word[i:]
-            matches_children += find_matches_children(newword_addition)
-            matches_adults += find_matches_adults(newword_addition)
+            if find_matches_children(newword_addition) == 1:
+                matches_children += 1
+                N_children.append(newword_addition)
+            if find_matches_adults(newword_addition) == 1:
+                matches_adults += 1
+                N_adults.append(newword_addition)
+            #matches_children += find_matches_children(newword_addition)
+            #matches_adults += find_matches_adults(newword_addition)
             if i+1 == len(input_word):
                 newword_addition = input_word[:i+1]+j
-                matches_children += find_matches_children(newword_addition)
-                matches_adults += find_matches_adults(newword_addition)
+                if find_matches_children(newword_addition) == 1:
+                    matches_children += 1
+                    N_children.append(newword_addition)
+                if find_matches_adults(newword_addition) == 1:
+                    matches_adults += 1
+                    N_adults.append(newword_addition)
+                #matches_children += find_matches_children(newword_addition)
+                #matches_adults += find_matches_adults(newword_addition)
             if j != input_word[i]:
                 if i == 0:
                     newword_substitution = j+input_word[i+1:]
-                    matches_children += find_matches_children(newword_substitution)
-                    matches_adults += find_matches_adults(newword_substitution)
+                    if find_matches_children(newword_substitution) == 1:
+                        matches_children += 1
+                        N_children.append(newword_substitution)
+                    if find_matches_children(newword_substitution) == 1:
+                        matches_adults += 1
+                        N_adults.append(newword_substitution)
+                    #matches_children += find_matches_children(newword_substitution)
+                    #matches_adults += find_matches_adults(newword_substitution)
                 else:
                     newword_substitution = input_word[:i]+j+input_word[i+1:]
-                    matches_children += find_matches_children(newword_substitution)
-                    matches_adults += find_matches_adults(newword_substitution)
+                    if find_matches_children(newword_substitution) == 1:
+                        matches_children += 1
+                        N_children.append(newword_substitution)
+                    if find_matches_children(newword_substitution) == 1:
+                        matches_adults += 1
+                        N_adults.append(newword_substitution)
+                    #matches_children += find_matches_children(newword_substitution)
+                    #matches_adults += find_matches_adults(newword_substitution)
 
     for i, c in enumerate(input_word):
         if i == 0:
             newword_deletion = input_word[i+1:]
-            matches_children += find_matches_children(newword_deletion)
-            matches_adults += find_matches_adults(newword_deletion)
+            if find_matches_children(newword_deletion) == 1:
+                matches_children += 1
+                N_children.append(newword_deletion)
+            if find_matches_children(newword_deletion) == 1:
+                matches_adults += 1
+                N_adults.append(newword_deletion)
+            #matches_children += find_matches_children(newword_deletion)
+            #matches_adults += find_matches_adults(newword_deletion)
         else:
             newword_deletion = input_word[:i]+input_word[i+1:]
-            matches_children += find_matches_children(newword_deletion)
-            matches_adults += find_matches_adults(newword_deletion)
+            if find_matches_children(newword_deletion) == 1:
+                matches_children += 1
+                N_children.append(newword_deletion)
+            if find_matches_children(newword_deletion) == 1:
+                matches_adults += 1
+                N_adults.append(newword_deletion)
+            #matches_children += find_matches_children(newword_deletion)
+            #matches_adults += find_matches_adults(newword_deletion)
 
     print('# of neighbors (children): '+str(matches_children))
 
     print('# of neighbors (adults): '+str(matches_adults))
+    
+    return_dict['Neighbors_children']=N_children
+    return_dict['Neighbors_adults']=N_adults
+    return_dict['ND_children']=matches_children
+    return_dict['ND_adults']=matches_adults
 
     return return_dict
 
@@ -399,7 +434,32 @@ for word in user_input_list:
     collated_output[word]=return_values(word)
     print(collated_output)
 
+
 #### NOTES/TESTING BELOW:
+
+# Ideally, this function will not print anything out here but instead will return the information necessary to produce pretty tables and summary information, so that after we loop through all the user's input words, we can simply throw all the information together into one table (instead of separate sections for each word as it is now)
+
+# Goal: have this function return a dictionary formatted like this (**note, see below for change): {[wordname]: [input_word], [PS_phonemes]: [PS_phoneme1,PS_phoneme2,etc.], [PS]: [PS1,PS2,etc.], [Biphones]: [Biphone1,Biphone2,etc.], [B]: [B1,B2,B3,etc.], [ND_children]: [neighbor1,neighbor2,etc.], [ND_children_num]: [# of neighbors], [ND_adults]: [neighbor1,neighbor2,etc.], [ND_adults_num]: [# of neighbors]}
+
+# Example: test = {'wordname': ['mama'], 'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], 'ND_adults_num': [3]}
+
+#>>> print(tabulate(test,headers="keys"))
+#wordname    PS_phonemes      PS  Biphones      B  ND_children      ND_children_num  ND_adults      ND_adults_num
+#----------  -------------  ----  ----------  ---  -------------  -----------------  -----------  ----------------
+#mama        m               1.2  ma          1.5  mami                           2  mami                        3
+            #a               2.2  am          2.5  nama                              nama
+            #m               3.3  ma          3.5                                    mapa
+            #a               3.4
+
+# It might be best to then take this output and add it to a dictionary of dictionaries to collate the output for all the user's words: https://www.quora.com/In-Python-can-we-add-a-dictionary-inside-a-dictionary-If-yes-how-can-we-access-the-inner-dictionary-using-the-key-in-the-primary-dictionary http://stackoverflow.com/questions/1024847/add-key-to-a-dictionary-in-python
+
+# Therefore, let's change our output dictionary format to this: test = {'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'Biphones': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'ND_children': ['mami', 'nama'], 'ND_children_num': [2], 'ND_adults': ['mami', 'nama', 'mapa'], 'ND_adults_num': [3]}. Note that the word no longer appears.
+
+# This allows us to add other entries as needed with the key being the word. We will need to check for collisions in keys. If there is a collision, rather than dropping, just have the dictionary refer to the identical entry and then use that entry to later populate the lines in the output table. Use some sort of code dummy variable to indicate to the table function that it needs to copy from another entry.
+
+# After our function returns the dictionary, we must add it to a global dictionary of dictionaries that collects all the output for each word, using the input_word as the key: collated_output[input_word] = //returned dictionary//. This will be done outside the function.
+
+# Then, we will use the dictionary of dictionaries to create a table that lays out all of the information for all the words in a consistent manner amenable to copying and pasting.
 
 # Functions: https://www.tutorialspoint.com/python/python_functions.htm
 
