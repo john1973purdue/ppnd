@@ -14,7 +14,6 @@
 ## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500)
 
 ## In process:
-## To do: reformat the PP/ND return code so that it returns a standardized dictionary format that can later be used to create tables [see section below for details]
 ## To do: format the output in tables
         # Trying to use tabulate to format the tables, but they're coming out looking terrible and weird:
         
@@ -69,6 +68,7 @@
 
 ## Complete:
 ## To do: make the PP/ND return code loop over a list of words provided by the user
+## To do: reformat the PP/ND return code so that it returns a standardized dictionary format that can later be used to create tables [see section below for details]
 
 
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
@@ -76,7 +76,7 @@
 import csv
 
 # Table output: https://pypi.python.org/pypi/tabulate
-#from tabulate import tabulate
+from tabulate import tabulate
 
 f = open('children_forimport_022117.csv')
 csv_children = csv.reader(f, delimiter=',')
@@ -217,14 +217,14 @@ def find_matches_children(candidate):
     matches = 0
     if candidate in children_words:
         matches = 1
-        print('Children: '+candidate)
+        #print('Children: '+candidate)
     return matches
 
 def find_matches_adults(candidate):
     matches = 0
     if candidate in adults_words:
         matches = 1
-        print('Adults: '+candidate)
+        #print('Adults: '+candidate)
     return matches
 
 # PS / B / ND return
@@ -233,11 +233,11 @@ def return_values(input_word):
     
     return_dict = {}
     
-    print("****************************************")
+    #print("****************************************")
     
-    print("Word: "+input_word)
+    #print("Word: "+input_word)
     
-    print("Positional segment frequency")
+    #print("Positional segment frequency")
 
     PS_sum = 0
     
@@ -248,35 +248,25 @@ def return_values(input_word):
     for i, c in enumerate(input_word):
         newkey = c+str(i+1)
         if newkey in children_PS:
-            print(newkey+": "+str(round(children_PS[newkey]/children_P1[i],6)))
+            #print(newkey+": "+str(round(children_PS[newkey]/children_P1[i],6)))
             PS_phonemes_list.append(str(newkey))
             PS_values_list.append(str(round(children_PS[newkey]/children_P1[i],6)))
-            #PS_table.append(str(children_PS[newkey]/children_P1[i]))
-            #PS_dict[i+1] = str(children_PS[newkey]/children_P1[i])
             PS_sum += children_PS[newkey]/children_P1[i]
         else:
-            print(newkey+": N/A")
+            #print(newkey+": N/A")
             PS_phonemes_list.append(str(newkey))
             PS_values_list.append("N/A")
-            #PS_table.append("N/A")
-            #PS_dict[i+1] = "N/A"
             
-    #print(tabulate(PS_dict,headers="keys",tablefmt="fancy_grid"))
-            
-    print("Positional segment frequency sum: "+str(round(PS_sum,6)))
-
-    #print(PS_sum)
+    #print("Positional segment frequency sum: "+str(round(PS_sum,6)))
         
-    print("Positional segment frequency average: "+str(round(PS_sum/len(input_word),6)))
-    
-    #print(PS_sum/len(input_word))
+    #print("Positional segment frequency average: "+str(round(PS_sum/len(input_word),6)))
     
     return_dict['PS_phonemes']=PS_phonemes_list
     return_dict['PS']=PS_values_list
     return_dict['PS_sum']=str(round(PS_sum,6))
     return_dict['PS_avg']=str(round(PS_sum/len(input_word),6))
 
-    print("Biphone frequency")
+    #print("Biphone frequency")
 
     B_sum = 0
     
@@ -289,44 +279,38 @@ def return_values(input_word):
             if len(input_word) != i+1:
                 newkey = c+input_word[i+1]+str(i+1)
                 if newkey in children_B:
-                    print(newkey+": "+str(round(children_B[newkey]/children_P2[i],6)))
-                    #B_table.append(children_B[newkey]/children_P2[i])
+                    #print(newkey+": "+str(round(children_B[newkey]/children_P2[i],6)))
                     B_sum += children_B[newkey]/children_P2[i]
                     B_phonemes_list.append(str(newkey))
                     B_values_list.append(str(round(children_B[newkey]/children_P2[i],6)))
                 else:
-                    print(newkey+": N/A")
+                    #print(newkey+": N/A")
                     B_phonemes_list.append(str(newkey))
                     B_values_list.append("N/A")
-                    #B_table.append("N/A")
         else:
-            print("No biphone frequency")
+            #print("No biphone frequency")
             B_phonemes_list.append("N/A")
             B_values_list.append("N/A")
-            #B_table.append("N/A")
-            
-    #print(tabulate(B_table,headers=["Word","B1","B2","B3","B4","B5","B6","B7","B8","B9"],tablefmt="fancy_grid",floatfmt=".4f"))
     
-    print("Biphone frequency sum: "+str(round(B_sum,6)))
-
-    #print(B_sum)
+    #print("Biphone frequency sum: "+str(round(B_sum,6)))
             
     if len(input_word) > 1:
-        print("Biphone frequency average: "+str(round(B_sum/(len(input_word)-1),6)))
+        #print("Biphone frequency average: "+str(round(B_sum/(len(input_word)-1),6)))
         return_dict['B_avg']=str(round(B_sum/(len(input_word)-1),6))  
     else:
-        print("Biphone frequency average: N/A")
+        #print("Biphone frequency average: N/A")
+        return_dict['B_avg']="N/A"
         
     return_dict['B_phonemes']=B_phonemes_list
     return_dict['B']=B_values_list
     return_dict['B_sum']=str(round(B_sum,6))
 
-    print("Neighborhood density")
+    #print("Neighborhood density")
 
     # ND
 
-    # Possible phonemes
-
+    # Possible phonemes: need to update this
+    
     phonemes = ('a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú', 'y', 'ñ', 'b', 'c', 'C', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'L', 'm', 'n', 'p', 'q', 'r', 'R', 's', 't', 'v', 'w', 'x', 'z')
 
     # For each word, cycle through each of the following processes, searching through the wordlists and adding up matches
@@ -343,8 +327,6 @@ def return_values(input_word):
     ND_children_num = []
     ND_adults_num = []
     
-    # A change here to add candidates to the dictionary by testing on value of the find_matches functions is necessary to implement the overall change to the return_values function
-
     for j in phonemes:
         for i, c in enumerate(input_word):
             newword_addition = input_word[:i]+j+input_word[i:]
@@ -354,8 +336,6 @@ def return_values(input_word):
             if find_matches_adults(newword_addition) == 1:
                 matches_adults += 1
                 N_adults.append(newword_addition)
-            #matches_children += find_matches_children(newword_addition)
-            #matches_adults += find_matches_adults(newword_addition)
             if i+1 == len(input_word):
                 newword_addition = input_word[:i+1]+j
                 if find_matches_children(newword_addition) == 1:
@@ -364,8 +344,6 @@ def return_values(input_word):
                 if find_matches_adults(newword_addition) == 1:
                     matches_adults += 1
                     N_adults.append(newword_addition)
-                #matches_children += find_matches_children(newword_addition)
-                #matches_adults += find_matches_adults(newword_addition)
             if j != input_word[i]:
                 if i == 0:
                     newword_substitution = j+input_word[i+1:]
@@ -375,8 +353,6 @@ def return_values(input_word):
                     if find_matches_children(newword_substitution) == 1:
                         matches_adults += 1
                         N_adults.append(newword_substitution)
-                    #matches_children += find_matches_children(newword_substitution)
-                    #matches_adults += find_matches_adults(newword_substitution)
                 else:
                     newword_substitution = input_word[:i]+j+input_word[i+1:]
                     if find_matches_children(newword_substitution) == 1:
@@ -385,8 +361,6 @@ def return_values(input_word):
                     if find_matches_children(newword_substitution) == 1:
                         matches_adults += 1
                         N_adults.append(newword_substitution)
-                    #matches_children += find_matches_children(newword_substitution)
-                    #matches_adults += find_matches_adults(newword_substitution)
 
     for i, c in enumerate(input_word):
         if i == 0:
@@ -397,8 +371,6 @@ def return_values(input_word):
             if find_matches_children(newword_deletion) == 1:
                 matches_adults += 1
                 N_adults.append(newword_deletion)
-            #matches_children += find_matches_children(newword_deletion)
-            #matches_adults += find_matches_adults(newword_deletion)
         else:
             newword_deletion = input_word[:i]+input_word[i+1:]
             if find_matches_children(newword_deletion) == 1:
@@ -407,12 +379,10 @@ def return_values(input_word):
             if find_matches_children(newword_deletion) == 1:
                 matches_adults += 1
                 N_adults.append(newword_deletion)
-            #matches_children += find_matches_children(newword_deletion)
-            #matches_adults += find_matches_adults(newword_deletion)
 
-    print('# of neighbors (children): '+str(matches_children))
+    #print('# of neighbors (children): '+str(matches_children))
 
-    print('# of neighbors (adults): '+str(matches_adults))
+    #print('# of neighbors (adults): '+str(matches_adults))
     
     return_dict['Neighbors_children']=N_children
     return_dict['Neighbors_adults']=N_adults
@@ -429,10 +399,13 @@ user_input_list = user_input.split(' ')
 collated_output={}
 
 for word in user_input_list:
-
-#This is where we will add up our collated_output dictionary of dictionaries
     collated_output[word]=return_values(word)
-    print(collated_output)
+
+print(collated_output)
+
+# Table output here
+
+
 
 
 #### NOTES/TESTING BELOW:
