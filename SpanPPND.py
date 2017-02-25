@@ -1,5 +1,10 @@
 # Note: to open this in python shell: exec(open('SpanPPND.py').read())
 
+## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
+## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
+## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500)
+
+## In process:
 ## To do: make final decisions about how to treat different characters, code this in our calculator:
     ### For c and g, look ahead one position and then categorize as theta, k, x, or g
     ### For ll and rr, look ahead one position and then categorize as L or R
@@ -9,16 +14,8 @@
     ### For x, change to ks or x or h...
         ### We need a list of x-words
 
-    ### Or: have users input be phonemic, which would allow nonsense words/syllables to be input
+    ### **** Or: have users input be phonemic, which would allow nonsense words/syllables to be input
 
-## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
-## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
-## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500)
-
-## In process:
-## To do: format the output in tables
-        # Trying to use tabulate to format the tables, but they're coming out looking terrible and weird
-        # PrettyTable is also promising, and allows us to build up tables one row at a time: https://code.google.com/archive/p/prettytable/wikis/Tutorial.wiki
         
 ## Elizabeth: 
 ## To do: write something to export PP/ND values to CSV file for later analysis
@@ -30,18 +27,12 @@
 ## To do: make the PP/ND return code loop over a list of words provided by the user
 ## To do: reformat the PP/ND return code so that it returns a standardized dictionary format that can later be used to create tables [see section below for details]
 ## To do: clean up the ND candidate return code so that it returns the candidate from the function in addition to 0 or 1, puts them into a list, and then outputs them later in a nice list [no longer relevant]
+## To do: format the output in tables
 
 
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
 
 import csv
-#import textwrap
-
-# Table output: https://pypi.python.org/pypi/tabulate
-#from tabulate import tabulate
-#from prettytable import PrettyTable
-
-#import itertools
 
 f = open('children_forimport_022117.csv')
 csv_children = csv.reader(f, delimiter=',')
