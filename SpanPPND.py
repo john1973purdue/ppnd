@@ -26,7 +26,7 @@
 ## To do: make the PP/ND return code loop over a list of words provided by the user
 ## To do: reformat the PP/ND return code so that it returns a standardized dictionary format that can later be used to create tables [see section below for details]
 ## To do: clean up the ND candidate return code so that it returns the candidate from the function in addition to 0 or 1, puts them into a list, and then outputs them later in a nice list [no longer relevant]
-## To do: format the output in tables
+## To do: format the output in tables --> output.txt
 
 
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
@@ -375,7 +375,7 @@ def return_values(input_word):
                     if find_matches_children(newword_substitution) == 1:
                         matches_children += 1
                         N_children.append(newword_substitution)
-                    if find_matches_children(newword_substitution) == 1:
+                    if find_matches_adults(newword_substitution) == 1:
                         matches_adults += 1
                         N_adults.append(newword_substitution)
                 else:
@@ -383,7 +383,7 @@ def return_values(input_word):
                     if find_matches_children(newword_substitution) == 1:
                         matches_children += 1
                         N_children.append(newword_substitution)
-                    if find_matches_children(newword_substitution) == 1:
+                    if find_matches_adults(newword_substitution) == 1:
                         matches_adults += 1
                         N_adults.append(newword_substitution)
 
@@ -393,7 +393,7 @@ def return_values(input_word):
             if find_matches_children(newword_deletion) == 1:
                 matches_children += 1
                 N_children.append(newword_deletion)
-            if find_matches_children(newword_deletion) == 1:
+            if find_matches_adults(newword_deletion) == 1:
                 matches_adults += 1
                 N_adults.append(newword_deletion)
         else:
@@ -401,7 +401,7 @@ def return_values(input_word):
             if find_matches_children(newword_deletion) == 1:
                 matches_children += 1
                 N_children.append(newword_deletion)
-            if find_matches_children(newword_deletion) == 1:
+            if find_matches_adults(newword_deletion) == 1:
                 matches_adults += 1
                 N_adults.append(newword_deletion)
 
@@ -432,62 +432,131 @@ for word in user_input_list:
 
 # Table output here
 
-with open("output.txt", "w") as f:
+def children_table():
 
-    # Go through each key, count up members of B and PS lists, use this information to have proper # of PS, B columns
-
-    max_PS_length=0
-
-    for key, val in collated_output.items():
-        if len(collated_output[key]['PS_phonemes_children']) > max_PS_length:
-            max_PS_length = len(collated_output[key]['PS_phonemes_children'])
-
-    PS_columns=""
-
-    for i in range(max_PS_length+1,1,-1):
-        PS_columns = '{0: <10}'.format("PS"+str(i-1))+"\t"+PS_columns
+    with open("output.txt", "w") as f:
         
-    B_columns=""
+        f.write("Children\n")
 
-    for i in range(max_PS_length,1,-1):
-        B_columns = '{0: <10}'.format("B"+str(i-1))+"\t"+B_columns
+        # Go through each key, count up members of B and PS lists, use this information to have proper # of PS, B columns
 
-    f.write('{0: <10}'.format("Word")+"\t"+PS_columns+'{0: <10}'.format("PS sum")+"\t"+'{0: <10}'.format("PS avg")+"\t"+B_columns+'{0: <10}'.format("B sum")+"\t"+'{0: <10}'.format("B avg")+"\t"+'{0: <10}'.format("ND")+"\t"+'{0: <10}'.format("Neighbors")+"\n")
+        max_PS_length=0
 
-    for key, val in collated_output.items():
-        PS_output_line=""
-        
-        for i in range(max_PS_length,0,-1):
-            if len(collated_output[key]['PS_children']) < i:
-                PS_output_line='{0: <10}'.format('--')+"\t"+PS_output_line
-            else:
-                PS_output_line='{0: <10}'.format(collated_output[key]['PS_children'][i-1])+"\t"+PS_output_line
-                
-        B_output_line=""
-        
-        for i in range(max_PS_length-1,0,-1):
-            if len(collated_output[key]['B_children']) < i:
-                B_output_line='{0: <10}'.format('--')+"\t"+B_output_line
-            else:
-                B_output_line='{0: <10}'.format(collated_output[key]['B_children'][i-1])+"\t"+B_output_line
-                
-        neighbors_output_line=""
-        
-        for i, c in enumerate(collated_output[key]['Neighbors_children']):
-            neighbors_output_line=collated_output[key]['Neighbors_children'][i]+' '+neighbors_output_line
+        for key, val in collated_output.items():
+            if len(collated_output[key]['PS_phonemes_children']) > max_PS_length:
+                max_PS_length = len(collated_output[key]['PS_phonemes_children'])
+
+        PS_columns=""
+
+        for i in range(max_PS_length+1,1,-1):
+            PS_columns = '{0: <10}'.format("PS"+str(i-1))+"\t"+PS_columns
             
-        output_line=""
-        
-        # Ensuring consistent spacing: '{0: <16}'.format('Hi')
-        # https://docs.python.org/3.6/library/string.html#formatstrings
-        # http://stackoverflow.com/questions/2872512/python-truncate-a-long-string
-        
-        word = (key[:7] + '...') if len(key) > 10 else key
-        
-        output_line='{0: <10}'.format(word)+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_children'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_children'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_children'])+"\t"+neighbors_output_line
-        
-        f.write(output_line+"\n")
+        B_columns=""
 
+        for i in range(max_PS_length,1,-1):
+            B_columns = '{0: <10}'.format("B"+str(i-1))+"\t"+B_columns
+
+        f.write('{0: <10}'.format("Word")+"\t"+PS_columns+'{0: <10}'.format("PS sum")+"\t"+'{0: <10}'.format("PS avg")+"\t"+B_columns+'{0: <10}'.format("B sum")+"\t"+'{0: <10}'.format("B avg")+"\t"+'{0: <10}'.format("ND")+"\t"+'{0: <10}'.format("Neighbors")+"\n")
+
+        for key, val in collated_output.items():
+            PS_output_line=""
+            
+            for i in range(max_PS_length,0,-1):
+                if len(collated_output[key]['PS_children']) < i:
+                    PS_output_line='{0: <10}'.format('--')+"\t"+PS_output_line
+                else:
+                    PS_output_line='{0: <10}'.format(collated_output[key]['PS_children'][i-1])+"\t"+PS_output_line
+                    
+            B_output_line=""
+            
+            for i in range(max_PS_length-1,0,-1):
+                if len(collated_output[key]['B_children']) < i:
+                    B_output_line='{0: <10}'.format('--')+"\t"+B_output_line
+                else:
+                    B_output_line='{0: <10}'.format(collated_output[key]['B_children'][i-1])+"\t"+B_output_line
+                    
+            neighbors_output_line=""
+            
+            for i, c in enumerate(collated_output[key]['Neighbors_children']):
+                neighbors_output_line=collated_output[key]['Neighbors_children'][i]+' '+neighbors_output_line
+                
+            output_line=""
+            
+            # Ensuring consistent spacing: '{0: <16}'.format('Hi')
+            # https://docs.python.org/3.6/library/string.html#formatstrings
+            # http://stackoverflow.com/questions/2872512/python-truncate-a-long-string
+            
+            word = (key[:7] + '...') if len(key) > 10 else key
+            
+            output_line='{0: <10}'.format(word)+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_children'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_children'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_children'])+"\t"+neighbors_output_line
+            
+            f.write(output_line+"\n")
+    return
+
+children_table()
+
+def adults_table():
+
+    with open("output.txt", "a") as f:
+        
+        f.write("Adults\n")
+
+        # Go through each key, count up members of B and PS lists, use this information to have proper # of PS, B columns
+
+        max_PS_length=0
+
+        for key, val in collated_output.items():
+            if len(collated_output[key]['PS_phonemes_adults']) > max_PS_length:
+                max_PS_length = len(collated_output[key]['PS_phonemes_adults'])
+
+        PS_columns=""
+
+        for i in range(max_PS_length+1,1,-1):
+            PS_columns = '{0: <10}'.format("PS"+str(i-1))+"\t"+PS_columns
+            
+        B_columns=""
+
+        for i in range(max_PS_length,1,-1):
+            B_columns = '{0: <10}'.format("B"+str(i-1))+"\t"+B_columns
+
+        f.write('{0: <10}'.format("Word")+"\t"+PS_columns+'{0: <10}'.format("PS sum")+"\t"+'{0: <10}'.format("PS avg")+"\t"+B_columns+'{0: <10}'.format("B sum")+"\t"+'{0: <10}'.format("B avg")+"\t"+'{0: <10}'.format("ND")+"\t"+'{0: <10}'.format("Neighbors")+"\n")
+
+        for key, val in collated_output.items():
+            PS_output_line=""
+            
+            for i in range(max_PS_length,0,-1):
+                if len(collated_output[key]['PS_adults']) < i:
+                    PS_output_line='{0: <10}'.format('--')+"\t"+PS_output_line
+                else:
+                    PS_output_line='{0: <10}'.format(collated_output[key]['PS_adults'][i-1])+"\t"+PS_output_line
+                    
+            B_output_line=""
+            
+            for i in range(max_PS_length-1,0,-1):
+                if len(collated_output[key]['B_adults']) < i:
+                    B_output_line='{0: <10}'.format('--')+"\t"+B_output_line
+                else:
+                    B_output_line='{0: <10}'.format(collated_output[key]['B_adults'][i-1])+"\t"+B_output_line
+                    
+            neighbors_output_line=""
+            
+            for i, c in enumerate(collated_output[key]['Neighbors_adults']):
+                neighbors_output_line=collated_output[key]['Neighbors_adults'][i]+' '+neighbors_output_line
+                
+            output_line=""
+            
+            # Ensuring consistent spacing: '{0: <16}'.format('Hi')
+            # https://docs.python.org/3.6/library/string.html#formatstrings
+            # http://stackoverflow.com/questions/2872512/python-truncate-a-long-string
+            
+            word = (key[:7] + '...') if len(key) > 10 else key
+            
+            output_line='{0: <10}'.format(word)+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_adults'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_adults'])+"\t"+neighbors_output_line
+            
+            f.write(output_line+"\n")
+    return
+
+adults_table()
 
 #### NOTES/TESTING BELOW:
 
