@@ -14,7 +14,7 @@
     ### For x, change to ks or x or h...
         ### We need a list of x-words
 
-    ### **** Or: have users input be phonemic, which would allow nonsense words/syllables to be input
+    ### **** Or: have users' input be phonemic, which would allow nonsense words/syllables to be input
 
         
 ## Elizabeth: 
@@ -46,6 +46,8 @@ for row in csv_children:
     children_logfreq.append(children_lf)
     children_words.append(children_w)
 
+f.close()
+
 f = open('adults_forimport_022117.csv')
 csv_adults = csv.reader(f, delimiter=',')
 
@@ -57,6 +59,8 @@ for row in csv_adults:
     adults_w = row[1]
     adults_logfreq.append(adults_lf)
     adults_words.append(adults_w)
+    
+f.close()
     
 # Positional segment calculation
 
@@ -429,54 +433,56 @@ for word in user_input_list:
 
 # Table output here
 
-# Go through each key, count up members of B and PS lists, use this information to have proper # of PS, B columns
+with open("output.txt", "w") as f:
 
-max_PS_length=0
+    # Go through each key, count up members of B and PS lists, use this information to have proper # of PS, B columns
 
-for key, val in collated_output.items():
-    if len(collated_output[key]['PS_phonemes_children']) > max_PS_length:
-        max_PS_length = len(collated_output[key]['PS_phonemes_children'])
+    max_PS_length=0
 
-PS_columns=""
+    for key, val in collated_output.items():
+        if len(collated_output[key]['PS_phonemes_children']) > max_PS_length:
+            max_PS_length = len(collated_output[key]['PS_phonemes_children'])
 
-for i in range(max_PS_length+1,1,-1):
-    PS_columns = "PS"+str(i-1)+"\t\t"+PS_columns
-    
-B_columns=""
+    PS_columns=""
 
-for i in range(max_PS_length,1,-1):
-    B_columns = "B"+str(i-1)+"\t\t"+B_columns
-
-print('{0: <10}'.format("Word")+"\t"+PS_columns+'{0: <10}'.format("PS sum")+"\t"+'{0: <10}'.format("PS avg")+"\t"+B_columns+'{0: <10}'.format("B sum")+"\t"+'{0: <10}'.format("B avg")+"\tND")
-
-for key, val in collated_output.items():
-    PS_output_line=""
-    
-    for i in range(max_PS_length,0,-1):
-        if len(collated_output[key]['PS_children']) < i:
-            PS_output_line='{0: <10}'.format('--')+"\t"+PS_output_line
-        else:
-            PS_output_line='{0: <10}'.format(collated_output[key]['PS_children'][i-1])+"\t"+PS_output_line
-            
-    B_output_line=""
-    
-    for i in range(max_PS_length-1,0,-1):
-        if len(collated_output[key]['B_children']) < i:
-            B_output_line='{0: <10}'.format('--')+"\t"+B_output_line
-        else:
-            B_output_line='{0: <10}'.format(collated_output[key]['B_children'][i-1])+"\t"+B_output_line
+    for i in range(max_PS_length+1,1,-1):
+        PS_columns = '{0: <10}'.format("PS"+str(i-1))+"\t"+PS_columns
         
-    output_line=""
-    
-    # Ensuring consistent spacing: '{0: <16}'.format('Hi')
-    # https://docs.python.org/3.6/library/string.html#formatstrings
-    # http://stackoverflow.com/questions/2872512/python-truncate-a-long-string
-    
-    word = (key[:7] + '...') if len(key) > 10 else key
-    
-    output_line='{0: <10}'.format(word)+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_children'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_children'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_children'])
-    
-    print(output_line)
+    B_columns=""
+
+    for i in range(max_PS_length,1,-1):
+        B_columns = '{0: <10}'.format("B"+str(i-1))+"\t"+B_columns
+
+    f.write('{0: <10}'.format("Word")+"\t"+PS_columns+'{0: <10}'.format("PS sum")+"\t"+'{0: <10}'.format("PS avg")+"\t"+B_columns+'{0: <10}'.format("B sum")+"\t"+'{0: <10}'.format("B avg")+"\tND\n")
+
+    for key, val in collated_output.items():
+        PS_output_line=""
+        
+        for i in range(max_PS_length,0,-1):
+            if len(collated_output[key]['PS_children']) < i:
+                PS_output_line='{0: <10}'.format('--')+"\t"+PS_output_line
+            else:
+                PS_output_line='{0: <10}'.format(collated_output[key]['PS_children'][i-1])+"\t"+PS_output_line
+                
+        B_output_line=""
+        
+        for i in range(max_PS_length-1,0,-1):
+            if len(collated_output[key]['B_children']) < i:
+                B_output_line='{0: <10}'.format('--')+"\t"+B_output_line
+            else:
+                B_output_line='{0: <10}'.format(collated_output[key]['B_children'][i-1])+"\t"+B_output_line
+            
+        output_line=""
+        
+        # Ensuring consistent spacing: '{0: <16}'.format('Hi')
+        # https://docs.python.org/3.6/library/string.html#formatstrings
+        # http://stackoverflow.com/questions/2872512/python-truncate-a-long-string
+        
+        word = (key[:7] + '...') if len(key) > 10 else key
+        
+        output_line='{0: <10}'.format(word)+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_children'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_children'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_children'])
+        
+        f.write(output_line+"\n")
 
 
 #### NOTES/TESTING BELOW:
