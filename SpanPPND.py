@@ -5,18 +5,17 @@
 ## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500)
 
 ## In process:
-## To do: make final decisions about how to treat different characters, code this in our calculator:
-    ### For c and g, look ahead one position and then categorize as theta, k, x, or g
-    ### For ll and rr, look ahead one position and then categorize as L or R
-    ### For ch, look ahead.... categorize as C
-    ### For h, delete it
-    ### For ü, this should be taken care of in g code
-    ### For x, change to ks or x or h...
-        ### We need a list of x-words
+## To do: make final decisions about how to treat different characters:
+    ### Either code this in our calculator:
+        ### For c and g, look ahead one position and then categorize as theta, k, x, or g
+        ### For ll and rr, look ahead one position and then categorize as L or R
+        ### For ch, look ahead.... categorize as C
+        ### For h, delete it
+        ### For ü, this should be taken care of in g code
+        ### For x, change to ks or x or h...
+            ### We need a list of x-words
+    ### **** Or: have users' input be phonemic, which would allow nonsense words/syllables to be input. We would then need to code our input corpus phonemically. I'm thinking that this is the best of our options.
 
-    ### **** Or: have users' input be phonemic, which would allow nonsense words/syllables to be input
-
-        
 ## Elizabeth: 
 ## To do: write something to export PP/ND values to CSV file for later analysis
 ## Make a function that can expect a dictionary as input in the following form:
