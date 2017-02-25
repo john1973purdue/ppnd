@@ -8,6 +8,9 @@
     ### For ü, this should be taken care of in g code
     ### For x, change to ks or x or h...
         ### We need a list of x-words
+
+    ### Or: have users input be phonemic, which would allow nonsense words/syllables to be input
+
 ## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
 ## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
 ## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500)
@@ -32,6 +35,7 @@
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
 
 import csv
+#import textwrap
 
 # Table output: https://pypi.python.org/pypi/tabulate
 #from tabulate import tabulate
@@ -413,8 +417,8 @@ def return_values(input_word):
     
     return_dict['Neighbors_children']=N_children
     return_dict['Neighbors_adults']=N_adults
-    return_dict['ND_children']=matches_children
-    return_dict['ND_adults']=matches_adults
+    return_dict['ND_children']=str(matches_children)
+    return_dict['ND_adults']=str(matches_adults)
 
     return return_dict
 
@@ -428,22 +432,60 @@ collated_output={}
 for word in user_input_list:
     collated_output[word]=return_values(word)
 
-print(collated_output)
+#print(collated_output)
+
+## input_dictionary = {'mama': {'PS_phonemes_children': ['m1', 'a2', 'm3', 'a4'], 'PS_children': ['0.070354', '0.209508', '0.045825', '0.167909'], 'PS_sum_children': '0.493596', 'PS_avg_children': '0.123399', 'PS_phonemes_adults': ['m1', 'a2', 'm3', 'a4'], 'PS_adults': ['0.066131', '0.196646', '0.045695', '0.156658'], 'PS_sum_adults': '0.46513', 'PS_avg_adults': '0.116282', 'B_avg_children': '0.0131', 'B_sum_children': '0.0393', 'B_phonemes_children': ['ma1', 'am2', 'ma3'], 'B_children': ['0.019057', '0.013471', '0.006771'], 'B_avg_adults': '0.011943', 'B_sum_adults': '0.03583', 'B_phonemes_adults': ['ma1', 'am2', 'ma3'], 'B_adults': ['0.017061', '0.011384', '0.007385'], 'Neighbors_children': ['mami', 'mamá', 'cama', 'mala', 'rama', 'mata', 'ama'], 'Neighbors_adults': ['mami', 'mamá', 'cama', 'mala', 'rama', 'mamar', 'mata', 'ama'], 'ND_children': 7, 'ND_adults': 8}, 'Word2': {etc.}}.
 
 # Table output here
 
+# Go through each key, count up members of B and PS lists, use this information to have proper # of PS, B columns
+
+max_PS_length=0
+
 for key, val in collated_output.items():
-    print("*********************************")
-    print(key)
-    for key2, val2 in collated_output[key].items():
-        print(str(key2)+": "+str(collated_output[key][key2]))
+    if len(collated_output[key]['PS_phonemes_children']) > max_PS_length:
+        max_PS_length = len(collated_output[key]['PS_phonemes_children'])
+
+PS_columns=""
+
+for i in range(max_PS_length+1,1,-1):
+    PS_columns = "PS"+str(i-1)+"\t\t"+PS_columns
+    
+B_columns=""
+
+for i in range(max_PS_length,1,-1):
+    B_columns = "B"+str(i-1)+"\t\t"+B_columns
+
+print("Word\t\t"+PS_columns+"PS sum\t\tPS avg\t\t"+B_columns+"B sum\t\tB avg\t\tND")
+
+for key, val in collated_output.items():
+    PS_output_line=""
+    
+    for i in range(max_PS_length,0,-1):
+        if len(collated_output[key]['PS_children']) < i:
+            PS_output_line='{0: <10}'.format('--')+"\t"+PS_output_line
+        else:
+            PS_output_line='{0: <10}'.format(collated_output[key]['PS_children'][i-1])+"\t"+PS_output_line
+            
+    B_output_line=""
+    
+    for i in range(max_PS_length-1,0,-1):
+        if len(collated_output[key]['B_children']) < i:
+            B_output_line='{0: <10}'.format('--')+"\t"+B_output_line
+        else:
+            B_output_line='{0: <10}'.format(collated_output[key]['B_children'][i-1])+"\t"+B_output_line
         
-        # Go through each key, count up members of B and SP lists, use this information to have proper # of SP, B columns
-        # Need to have user-selected adult / children, then construct table with one set of values
-        # Construct table like so: Word SP1 SP2 SP# SP_sum SP_avg B1 B2 B# B_sum B_avg ND
-
-
-
+    output_line=""
+    
+    # Ensuring consistent spacing: '{0: <16}'.format('Hi')
+    # https://docs.python.org/3.6/library/string.html#formatstrings
+    # http://stackoverflow.com/questions/2872512/python-truncate-a-long-string
+    
+    word = (key[:7] + '...') if len(key) > 10 else key
+    
+    output_line='{0: <10}'.format(word)+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_children'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_children'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_children'])
+    
+    print(output_line)
 
 
 #### NOTES/TESTING BELOW:
@@ -497,6 +539,13 @@ for key, val in collated_output.items():
 #word_index = children_words.index('zumo')
 #logfreq = children_logfreq[word_index]
 #print(logfreq)
+
+    #for key2, val2 in collated_output[key].items():
+        #print(str(key2)+": "+str(collated_output[key][key2]))
+        
+
+        # Need to have user-selected adult / children, then construct table with one set of values
+        # Construct table like so: Word SP1 SP2 SP# SP_sum SP_avg B1 B2 B# B_sum B_avg ND
 
 
 ######
