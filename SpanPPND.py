@@ -273,7 +273,7 @@ def return_values(input_word):
                 else:
                     #print(newkey+": N/A")
                     B_phonemes_list_children.append(str(newkey))
-                    B_values_list_children.append("N/A")
+                    B_values_list_children.append("0")
         else:
             #print("No biphone frequency")
             B_phonemes_list_children.append("N/A")
@@ -311,7 +311,7 @@ def return_values(input_word):
                 else:
                     #print(newkey+": N/A")
                     B_phonemes_list_adults.append(str(newkey))
-                    B_values_list_adults.append("N/A")
+                    B_values_list_adults.append("0")
         else:
             #print("No biphone frequency")
             B_phonemes_list_adults.append("N/A")
