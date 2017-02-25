@@ -20,7 +20,7 @@
 ## Elizabeth: 
 ## To do: write something to export PP/ND values to CSV file for later analysis
 ## Make a function that can expect a dictionary as input in the following form:
-## input_dictionary = {'Word': {'PS_phonemes': ['m', 'a', 'm', 'a'], 'PS': [1.2, 2.2, 3.3, 3.4], 'B_phonemes': ['ma', 'am', 'ma'], 'B': [1.5, 2.5, 3.5], 'Neighbors_children': ['mami', 'nama'], 'ND_children': [2], 'Neighbors_adults': ['mami', 'nama', 'mapa'], 'ND_adults': [3]}, 'Word2': {etc.}}.
+## input_dictionary = {'mama': {'PS_phonemes_children': ['m1', 'a2', 'm3', 'a4'], 'PS_children': ['0.070354', '0.209508', '0.045825', '0.167909'], 'PS_sum_children': '0.493596', 'PS_avg_children': '0.123399', 'PS_phonemes_adults': ['m1', 'a2', 'm3', 'a4'], 'PS_adults': ['0.066131', '0.196646', '0.045695', '0.156658'], 'PS_sum_adults': '0.46513', 'PS_avg_adults': '0.116282', 'B_avg_children': '0.0131', 'B_sum_children': '0.0393', 'B_phonemes_children': ['ma1', 'am2', 'ma3'], 'B_children': ['0.019057', '0.013471', '0.006771'], 'B_avg_adults': '0.011943', 'B_sum_adults': '0.03583', 'B_phonemes_adults': ['ma1', 'am2', 'ma3'], 'B_adults': ['0.017061', '0.011384', '0.007385'], 'Neighbors_children': ['mami', 'mamá', 'cama', 'mala', 'rama', 'mata', 'ama'], 'Neighbors_adults': ['mami', 'mamá', 'cama', 'mala', 'rama', 'mamar', 'mata', 'ama'], 'ND_children': 7, 'ND_adults': 8}, 'Word2': {etc.}}.
 ## And from this information export a csv file 
 
 ## Complete:
@@ -428,7 +428,7 @@ collated_output={}
 for word in user_input_list:
     collated_output[word]=return_values(word)
 
-#print(collated_output)
+print(collated_output)
 
 # Table output here
 
