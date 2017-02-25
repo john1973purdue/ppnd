@@ -453,7 +453,7 @@ with open("output.txt", "w") as f:
     for i in range(max_PS_length,1,-1):
         B_columns = '{0: <10}'.format("B"+str(i-1))+"\t"+B_columns
 
-    f.write('{0: <10}'.format("Word")+"\t"+PS_columns+'{0: <10}'.format("PS sum")+"\t"+'{0: <10}'.format("PS avg")+"\t"+B_columns+'{0: <10}'.format("B sum")+"\t"+'{0: <10}'.format("B avg")+"\tND\n")
+    f.write('{0: <10}'.format("Word")+"\t"+PS_columns+'{0: <10}'.format("PS sum")+"\t"+'{0: <10}'.format("PS avg")+"\t"+B_columns+'{0: <10}'.format("B sum")+"\t"+'{0: <10}'.format("B avg")+"\t"+'{0: <10}'.format("ND")+"\t"+'{0: <10}'.format("Neighbors")+"\n")
 
     for key, val in collated_output.items():
         PS_output_line=""
@@ -471,6 +471,11 @@ with open("output.txt", "w") as f:
                 B_output_line='{0: <10}'.format('--')+"\t"+B_output_line
             else:
                 B_output_line='{0: <10}'.format(collated_output[key]['B_children'][i-1])+"\t"+B_output_line
+                
+        neighbors_output_line=""
+        
+        for i, c in enumerate(collated_output[key]['Neighbors_children']):
+            neighbors_output_line=collated_output[key]['Neighbors_children'][i]+' '+neighbors_output_line
             
         output_line=""
         
@@ -480,7 +485,7 @@ with open("output.txt", "w") as f:
         
         word = (key[:7] + '...') if len(key) > 10 else key
         
-        output_line='{0: <10}'.format(word)+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_children'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_children'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_children'])
+        output_line='{0: <10}'.format(word)+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_children'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_children'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_children'])+"\t"+neighbors_output_line
         
         f.write(output_line+"\n")
 
