@@ -456,7 +456,7 @@ B_columns=""
 for i in range(max_PS_length,1,-1):
     B_columns = "B"+str(i-1)+"\t\t"+B_columns
 
-print("Word\t\t"+PS_columns+"PS sum\t\tPS avg\t\t"+B_columns+"B sum\t\tB avg\t\tND")
+print('{0: <10}'.format("Word")+"\t"+PS_columns+'{0: <10}'.format("PS sum")+"\t"+'{0: <10}'.format("PS avg")+"\t"+B_columns+'{0: <10}'.format("B sum")+"\t"+'{0: <10}'.format("B avg")+"\tND")
 
 for key, val in collated_output.items():
     PS_output_line=""
