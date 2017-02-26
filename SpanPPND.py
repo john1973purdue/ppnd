@@ -6,7 +6,7 @@
 
 ## In process:
 ## To do: make final decisions about how to treat different characters:
-    ### Either code this in our calculator:
+    ### Either code this in our calculator or use this scheme to recode our corpus:
         ### For c and g, look ahead one position and then categorize as theta, k, x, or g
         ### For ll and rr, look ahead one position and then categorize as L or R
         ### For ch, look ahead.... categorize as C
