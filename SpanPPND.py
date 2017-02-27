@@ -3,6 +3,7 @@
 ## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
 ## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
 ## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500)
+## To do: determine interface to website
 
 ## In process:
 ## To do: make final decisions about how to treat different characters:
@@ -19,7 +20,7 @@
 ## Elizabeth: 
 ## To do: write something to export PP/ND values to CSV file for later analysis
 ## Make a function that can expect a dictionary as input in the following form:
-## input_dictionary = {'mama': {'PS_phonemes_children': ['m1', 'a2', 'm3', 'a4'], 'PS_children': ['0.070354', '0.209508', '0.045825', '0.167909'], 'PS_sum_children': '0.493596', 'PS_avg_children': '0.123399', 'PS_phonemes_adults': ['m1', 'a2', 'm3', 'a4'], 'PS_adults': ['0.066131', '0.196646', '0.045695', '0.156658'], 'PS_sum_adults': '0.46513', 'PS_avg_adults': '0.116282', 'B_avg_children': '0.0131', 'B_sum_children': '0.0393', 'B_phonemes_children': ['ma1', 'am2', 'ma3'], 'B_children': ['0.019057', '0.013471', '0.006771'], 'B_avg_adults': '0.011943', 'B_sum_adults': '0.03583', 'B_phonemes_adults': ['ma1', 'am2', 'ma3'], 'B_adults': ['0.017061', '0.011384', '0.007385'], 'Neighbors_children': ['mami', 'mamá', 'cama', 'mala', 'rama', 'mata', 'ama'], 'Neighbors_adults': ['mami', 'mamá', 'cama', 'mala', 'rama', 'mamar', 'mata', 'ama'], 'ND_children': 7, 'ND_adults': 8}, 'Word2': {etc.}}.
+## input_dictionary = {'mamá': {'PS_phonemes_children': ['m1', 'a2', 'm3', 'á4'], 'PS_children': ['0.070354', '0.209508', '0.045825', '0.00955'], 'PS_sum_children': '0.335237', 'PS_avg_children': '0.083809', 'PS_phonemes_adults': ['m1', 'a2', 'm3', 'á4'], 'PS_adults': ['0.066131', '0.196646', '0.045695', '0.009752'], 'PS_sum_adults': '0.318223', 'PS_avg_adults': '0.079556', 'B_avg_children': '0.01125', 'B_sum_children': '0.03375', 'B_phonemes_children': ['ma1', 'am2', 'má3'], 'B_children': ['0.019057', '0.013471', '0.001221'], 'B_avg_adults': '0.009823', 'B_sum_adults': '0.02947', 'B_phonemes_adults': ['ma1', 'am2', 'má3'], 'B_adults': ['0.017061', '0.011384', '0.001025'], 'Neighbors_children': ['mama', 'mami', 'mamás'], 'Neighbors_adults': ['mama', 'mami', 'mamás'], 'Neighbors_children_add': ['mamás'], 'Neighbors_children_sub': ['mama', 'mami'], 'Neighbors_children_del': [], 'Neighbors_adults_add': ['mamás'], 'Neighbors_adults_sub': ['mama', 'mami'], 'Neighbors_adults_del': [], 'ND_children': '3', 'ND_adults': '3'}, 'Word2': {etc.}}.
 ## And from this information export a csv file 
 
 ## Complete:
@@ -348,7 +349,13 @@ def return_values(input_word):
     matches_adults = 0
     
     N_children = []
+    N_children_add = []
+    N_children_sub = []
+    N_children_del = []
     N_adults = []
+    N_adults_add = []
+    N_adults_sub = []
+    N_adults_del = []
     ND_children_num = []
     ND_adults_num = []
     
@@ -358,34 +365,42 @@ def return_values(input_word):
             if find_matches_children(newword_addition) == 1:
                 matches_children += 1
                 N_children.append(newword_addition)
+                N_children_add.append(newword_addition)
             if find_matches_adults(newword_addition) == 1:
                 matches_adults += 1
                 N_adults.append(newword_addition)
+                N_adults_add.append(newword_addition)
             if i+1 == len(input_word):
                 newword_addition = input_word[:i+1]+j
                 if find_matches_children(newword_addition) == 1:
                     matches_children += 1
                     N_children.append(newword_addition)
+                    N_children_add.append(newword_addition)
                 if find_matches_adults(newword_addition) == 1:
                     matches_adults += 1
                     N_adults.append(newword_addition)
+                    N_adults_add.append(newword_addition)
             if j != input_word[i]:
                 if i == 0:
                     newword_substitution = j+input_word[i+1:]
                     if find_matches_children(newword_substitution) == 1:
                         matches_children += 1
                         N_children.append(newword_substitution)
+                        N_children_sub.append(newword_substitution)
                     if find_matches_adults(newword_substitution) == 1:
                         matches_adults += 1
                         N_adults.append(newword_substitution)
+                        N_adults_sub.append(newword_substitution)
                 else:
                     newword_substitution = input_word[:i]+j+input_word[i+1:]
                     if find_matches_children(newword_substitution) == 1:
                         matches_children += 1
                         N_children.append(newword_substitution)
+                        N_children_sub.append(newword_substitution)
                     if find_matches_adults(newword_substitution) == 1:
                         matches_adults += 1
                         N_adults.append(newword_substitution)
+                        N_adults_sub.append(newword_substitution)
 
     for i, c in enumerate(input_word):
         if i == 0:
@@ -393,17 +408,21 @@ def return_values(input_word):
             if find_matches_children(newword_deletion) == 1:
                 matches_children += 1
                 N_children.append(newword_deletion)
+                N_children_del.append(newword_deletion)
             if find_matches_adults(newword_deletion) == 1:
                 matches_adults += 1
                 N_adults.append(newword_deletion)
+                N_adults_del.append(newword_deletion)
         else:
             newword_deletion = input_word[:i]+input_word[i+1:]
             if find_matches_children(newword_deletion) == 1:
                 matches_children += 1
                 N_children.append(newword_deletion)
+                N_children_del.append(newword_deletion)
             if find_matches_adults(newword_deletion) == 1:
                 matches_adults += 1
                 N_adults.append(newword_deletion)
+                N_adults_del.append(newword_deletion)
 
     #print('# of neighbors (children): '+str(matches_children))
 
@@ -411,6 +430,12 @@ def return_values(input_word):
     
     return_dict['Neighbors_children']=N_children
     return_dict['Neighbors_adults']=N_adults
+    return_dict['Neighbors_children_add']=N_children_add
+    return_dict['Neighbors_children_sub']=N_children_sub
+    return_dict['Neighbors_children_del']=N_children_del
+    return_dict['Neighbors_adults_add']=N_adults_add
+    return_dict['Neighbors_adults_sub']=N_adults_sub
+    return_dict['Neighbors_adults_del']=N_adults_del
     return_dict['ND_children']=str(matches_children)
     return_dict['ND_adults']=str(matches_adults)
 
@@ -426,9 +451,9 @@ collated_output={}
 for word in user_input_list:
     collated_output[word]=return_values(word)
 
-#print(collated_output)
+print(collated_output)
 
-## input_dictionary = {'mama': {'PS_phonemes_children': ['m1', 'a2', 'm3', 'a4'], 'PS_children': ['0.070354', '0.209508', '0.045825', '0.167909'], 'PS_sum_children': '0.493596', 'PS_avg_children': '0.123399', 'PS_phonemes_adults': ['m1', 'a2', 'm3', 'a4'], 'PS_adults': ['0.066131', '0.196646', '0.045695', '0.156658'], 'PS_sum_adults': '0.46513', 'PS_avg_adults': '0.116282', 'B_avg_children': '0.0131', 'B_sum_children': '0.0393', 'B_phonemes_children': ['ma1', 'am2', 'ma3'], 'B_children': ['0.019057', '0.013471', '0.006771'], 'B_avg_adults': '0.011943', 'B_sum_adults': '0.03583', 'B_phonemes_adults': ['ma1', 'am2', 'ma3'], 'B_adults': ['0.017061', '0.011384', '0.007385'], 'Neighbors_children': ['mami', 'mamá', 'cama', 'mala', 'rama', 'mata', 'ama'], 'Neighbors_adults': ['mami', 'mamá', 'cama', 'mala', 'rama', 'mamar', 'mata', 'ama'], 'ND_children': 7, 'ND_adults': 8}, 'Word2': {etc.}}.
+#{'mamá': {'PS_phonemes_children': ['m1', 'a2', 'm3', 'á4'], 'PS_children': ['0.070354', '0.209508', '0.045825', '0.00955'], 'PS_sum_children': '0.335237', 'PS_avg_children': '0.083809', 'PS_phonemes_adults': ['m1', 'a2', 'm3', 'á4'], 'PS_adults': ['0.066131', '0.196646', '0.045695', '0.009752'], 'PS_sum_adults': '0.318223', 'PS_avg_adults': '0.079556', 'B_avg_children': '0.01125', 'B_sum_children': '0.03375', 'B_phonemes_children': ['ma1', 'am2', 'má3'], 'B_children': ['0.019057', '0.013471', '0.001221'], 'B_avg_adults': '0.009823', 'B_sum_adults': '0.02947', 'B_phonemes_adults': ['ma1', 'am2', 'má3'], 'B_adults': ['0.017061', '0.011384', '0.001025'], 'Neighbors_children': ['mama', 'mami', 'mamás'], 'Neighbors_adults': ['mama', 'mami', 'mamás'], 'Neighbors_children_add': ['mamás'], 'Neighbors_children_sub': ['mama', 'mami'], 'Neighbors_children_del': [], 'Neighbors_adults_add': ['mamás'], 'Neighbors_adults_sub': ['mama', 'mami'], 'Neighbors_adults_del': [], 'ND_children': '3', 'ND_adults': '3'}}
 
 # Table output here
 
@@ -544,10 +569,6 @@ def adults_table():
                 neighbors_output_line=collated_output[key]['Neighbors_adults'][i]+' '+neighbors_output_line
                 
             output_line=""
-            
-            # Ensuring consistent spacing: '{0: <16}'.format('Hi')
-            # https://docs.python.org/3.6/library/string.html#formatstrings
-            # http://stackoverflow.com/questions/2872512/python-truncate-a-long-string
             
             word = (key[:7] + '...') if len(key) > 10 else key
             
