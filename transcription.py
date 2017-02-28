@@ -33,7 +33,7 @@ with open("transcription_children.txt", "w") as f:
         for i in response['palabraSilabeada']:
             output_line=i+" "+output_line
         f.write(word+"\t"+output_line+"\n")
-        time.sleep(3.1) # We get 200000 or so requests for free, but only 20/minute
+        time.sleep(1.25) # We get 200000 or so requests for free, but only 1/second
 
 #f = open('adults_forimport_022117.csv')
 #csv_adults = csv.reader(f, delimiter=',')
@@ -56,4 +56,4 @@ with open("transcription_children.txt", "w") as f:
         #for i in response['palabraSilabeada']:
             #output_line=i+" "+output_line
         #f.write(word+"\t"+output_line+"\n")
-        #time.sleep(3.1) # We get 200000 or so requests for free, but only 20/minute
+        #time.sleep(1.25)
