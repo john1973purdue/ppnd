@@ -36,18 +36,18 @@ encoding="2"
         #f.write(word+"\t"+output_line+"\n")
         #time.sleep(1.3) # We get 200000 or so requests for free, but only 1/second
 
-f = open('adults_forimport_lemmatized_030117(2).csv')
+f = open('../wordbank/CDI_WGs_properties.csv')
 csv_adults = csv.reader(f, delimiter=',')
 
 adults_words = []
 
 for row in csv_adults:
-    adults_w = row[1]
+    adults_w = row[0]
     adults_words.append(adults_w)
     
 f.close()
 
-with open("transcription_adults_original_030117.txt", "w") as f:
+with open("transcription_CDI_030417.txt", "w") as f:
 
     for word in adults_words:
         url="http://store.apicultur.io/api/silabea/1.0.0/"+word+"/"+encoding

@@ -47,8 +47,6 @@ for row in csv_children:
     children_w = row[16]
     children_w = children_w.replace("'","")
     children_w = children_w.replace(".","")
-    
-    #children_rawfreq_temp.append(children_rf)
     children_words_temp.append(children_w)
     
 f.close()
@@ -70,19 +68,51 @@ for key, val in children_freq_temp.items():
     children_words.append(key)
     children_logfreq.append(math.log10(val)+1)
 
-f = open('adults_forimport_lemmatized_030117.csv')
+#f = open('adults_forimport_lemmatized_030117.csv')
+#csv_adults = csv.reader(f, delimiter=',')
+
+#adults_words = []
+#adults_logfreq = []
+
+#for row in csv_adults:
+    #adults_lf = row[0]
+    #adults_w = row[1]
+    #adults_logfreq.append(adults_lf)
+    #adults_words.append(adults_w)
+    
+#f.close()
+
+f = open('adults_forimport_030417.csv')
 csv_adults = csv.reader(f, delimiter=',')
 
-adults_words = []
-adults_logfreq = []
+adults_words_temp = []
+adults_rawfreq_temp = []
 
 for row in csv_adults:
-    adults_lf = row[0]
-    adults_w = row[1]
-    adults_logfreq.append(adults_lf)
-    adults_words.append(adults_w)
+    adults_rawfreq_temp.append(row[2])
+    adults_w = row[16]
+    adults_w = adults_w.replace("'","")
+    adults_w = adults_w.replace(".","")
+    adults_words_temp.append(adults_w)
     
 f.close()
+
+adults_freq_temp = {}    
+
+for word in adults_words_temp:
+    word_index = adults_words_temp.index(word)
+    rawfreq = adults_rawfreq_temp[word_index]
+    if word in adults_freq_temp:
+        adults_freq_temp[word] += int(rawfreq)
+    else:
+        adults_freq_temp[word] = int(rawfreq)
+        
+adults_words = []
+adults_logfreq = []
+        
+for key, val in adults_freq_temp.items():
+    adults_words.append(key)
+    adults_logfreq.append(math.log10(val)+1)
     
 # Positional segment calculation
 
