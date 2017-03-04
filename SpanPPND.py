@@ -533,7 +533,7 @@ def children_table():
         for i in range(max_PS_length,1,-1):
             B_columns = '{0: <10}'.format("B"+str(i-1))+"\t"+B_columns
 
-        f.write('{0: <10}'.format("Word")+"\t"+PS_columns+'{0: <10}'.format("PS sum")+"\t"+'{0: <10}'.format("PS avg")+"\t"+B_columns+'{0: <10}'.format("B sum")+"\t"+'{0: <10}'.format("B avg")+"\t"+'{0: <10}'.format("ND")+"\t"+'{0: <10}'.format("Neighbors")+"\n")
+        f.write('{0: <10}'.format("Word")+"\t"+'{0: <10}'.format("Length")+"\t"+PS_columns+'{0: <10}'.format("PS sum")+"\t"+'{0: <10}'.format("PS avg")+"\t"+B_columns+'{0: <10}'.format("B sum")+"\t"+'{0: <10}'.format("B avg")+"\t"+'{0: <10}'.format("ND")+"\t"+'{0: <10}'.format("Neighbors")+"\n")
 
         for key, val in collated_output.items():
             PS_output_line=""
@@ -565,7 +565,7 @@ def children_table():
             
             word = (key[:7] + '...') if len(key) > 10 else key
             
-            output_line='{0: <10}'.format(word)+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_children'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_children'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_children'])+"\t"+neighbors_output_line
+            output_line='{0: <10}'.format(word)+"\t"+'{0: <10}'.format(str(len(word)))+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_children'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_children'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_children'])+"\t"+neighbors_output_line
             
             f.write(output_line+"\n")
     return
@@ -596,7 +596,7 @@ def adults_table():
         for i in range(max_PS_length,1,-1):
             B_columns = '{0: <10}'.format("B"+str(i-1))+"\t"+B_columns
 
-        f.write('{0: <10}'.format("Word")+"\t"+PS_columns+'{0: <10}'.format("PS sum")+"\t"+'{0: <10}'.format("PS avg")+"\t"+B_columns+'{0: <10}'.format("B sum")+"\t"+'{0: <10}'.format("B avg")+"\t"+'{0: <10}'.format("ND")+"\t"+'{0: <10}'.format("Neighbors")+"\n")
+        f.write('{0: <10}'.format("Word")+"\t"+'{0: <10}'.format("Length")+"\t"+PS_columns+'{0: <10}'.format("PS sum")+"\t"+'{0: <10}'.format("PS avg")+"\t"+B_columns+'{0: <10}'.format("B sum")+"\t"+'{0: <10}'.format("B avg")+"\t"+'{0: <10}'.format("ND")+"\t"+'{0: <10}'.format("Neighbors")+"\n")
 
         for key, val in collated_output.items():
             PS_output_line=""
@@ -624,7 +624,7 @@ def adults_table():
             
             word = (key[:7] + '...') if len(key) > 10 else key
             
-            output_line='{0: <10}'.format(word)+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_adults'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_adults'])+"\t"+neighbors_output_line
+            output_line='{0: <10}'.format(word)+"\t"+'{0: <10}'.format(str(len(word)))+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_adults'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_adults'])+"\t"+neighbors_output_line
             
             f.write(output_line+"\n")
     return

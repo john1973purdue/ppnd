@@ -1,3 +1,7 @@
+## MB CDI: WGs
+
+# Note: no stress, alternates (/) on separate lines, phrases on same line, shh removed
+
 Children
 Word      	Length    	PS1       	PS2       	PS3       	PS4       	PS5       	PS6       	PS7       	PS8       	PS9       	PS10      	PS11      	PS12      	PS13      	PS14      	PS15      	PS16      	PS sum    	PS avg    	B1        	B2        	B3        	B4        	B5        	B6        	B7        	B8        	B9        	B10       	B11       	B12       	B13       	B14       	B15       	B sum     	B avg     	ND        	Neighbors 
 an        	2         	0.101366  	0.034769  	--        	--        	--        	--        	--        	--        	--        	--        	--        	--        	--        	--        	--        	--        	0.136135  	0.068067  	0.011869  	--        	--        	--        	--        	--        	--        	--        	--        	--        	--        	--        	--        	--        	--        	0.011869  	0.011869  	12        	a tan san pan aT au aun un ai ane en ana 
