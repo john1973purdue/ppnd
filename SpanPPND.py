@@ -1,54 +1,76 @@
 # Note: to open this in python shell: exec(open('SpanPPND.py').read())
 
-## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
 ## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
-## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500)
-## To do: determine interface to website
+## To do: two streams -- lemma vs word-as-shown
+## To do: matching transcriptions to the word for output in table
 
-## In process:
-## To do: make final decisions about how to treat different characters:
-    ### Either code this in our calculator or use this scheme to recode our corpus:
-        ### For c and g, look ahead one position and then categorize as theta, k, x, or g
-        ### For ll and rr, look ahead one position and then categorize as L or R
-        ### For ch, look ahead.... categorize as C
-        ### For h, delete it
-        ### For ü, this should be taken care of in g code
-        ### For x, change to ks or x or h...
-            ### We need a list of x-words
-    ### **** Or: have users' input be phonemic, which would allow nonsense words/syllables to be input. We would then need to code our input corpus phonemically. I'm thinking that this is the best of our options.
+## Justin:
+## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
+## To do: update the csv reading code:
+    ## 1. first pass: scan character by character, removing . and changing first vowel following ' to capitalized (=stressed) version
+    ## 2. second pass: logfreq calculation: for each word in children_words[], construct dictionary of {'word': 'rawfreq'} based on matching words and then transform back to list of words and list of calculated logfreqs so that we can continue to use the same code for PS/B as before
+## To do: update list of phonemes to match transcription
 
 ## Elizabeth: 
 ## To do: write something to export PP/ND values to CSV file for later analysis
 ## Make a function that can expect a dictionary as input in the following form:
 ## input_dictionary = {'mamá': {'PS_phonemes_children': ['m1', 'a2', 'm3', 'á4'], 'PS_children': ['0.070354', '0.209508', '0.045825', '0.00955'], 'PS_sum_children': '0.335237', 'PS_avg_children': '0.083809', 'PS_phonemes_adults': ['m1', 'a2', 'm3', 'á4'], 'PS_adults': ['0.066131', '0.196646', '0.045695', '0.009752'], 'PS_sum_adults': '0.318223', 'PS_avg_adults': '0.079556', 'B_avg_children': '0.01125', 'B_sum_children': '0.03375', 'B_phonemes_children': ['ma1', 'am2', 'má3'], 'B_children': ['0.019057', '0.013471', '0.001221'], 'B_avg_adults': '0.009823', 'B_sum_adults': '0.02947', 'B_phonemes_adults': ['ma1', 'am2', 'má3'], 'B_adults': ['0.017061', '0.011384', '0.001025'], 'Neighbors_children': ['mama', 'mami', 'mamás'], 'Neighbors_adults': ['mama', 'mami', 'mamás'], 'Neighbors_children_add': ['mamás'], 'Neighbors_children_sub': ['mama', 'mami'], 'Neighbors_children_del': [], 'Neighbors_adults_add': ['mamás'], 'Neighbors_adults_sub': ['mama', 'mami'], 'Neighbors_adults_del': [], 'ND_children': '3', 'ND_adults': '3'}, 'Word2': {etc.}}.
 ## And from this information export a csv file 
+## To do: interface to website
 
 ## Complete:
 ## To do: make the PP/ND return code loop over a list of words provided by the user
 ## To do: reformat the PP/ND return code so that it returns a standardized dictionary format that can later be used to create tables [see section below for details]
 ## To do: clean up the ND candidate return code so that it returns the candidate from the function in addition to 0 or 1, puts them into a list, and then outputs them later in a nice list [no longer relevant]
 ## To do: format the output in tables --> output.txt
+## To do: make final decisions about how to treat different characters: users' input will be broad transcriptions
+## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500) --> Spanish CDI
 
 
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
 
 import csv
+import math
 
-f = open('children_forimport_022117.csv')
+    ## 1. first pass: scan character by character, removing . and changing first vowel following ' to capitalized (=stressed) version
+        ## Do stress later
+    ## 2. second pass: logfreq calculation: for each word in children_words[], construct dictionary of {'word': 'rawfreq'} based on matching words and then transform back to list of words and list of calculated logfreqs so that we can continue to use the same code for PS/B as before
+
+f = open('children_forimport_030417.csv')
 csv_children = csv.reader(f, delimiter=',')
 
-children_words = []
-children_logfreq = []
+children_words_temp = []
+children_rawfreq_temp = []
 
 for row in csv_children:
-    children_lf = row[0]
-    children_w = row[1]
-    children_logfreq.append(children_lf)
-    children_words.append(children_w)
-
+    children_rawfreq_temp.append(row[2])
+    children_w = row[16]
+    children_w = children_w.replace("'","")
+    children_w = children_w.replace(".","")
+    
+    #children_rawfreq_temp.append(children_rf)
+    children_words_temp.append(children_w)
+    
 f.close()
 
-f = open('adults_forimport_022117.csv')
+children_freq_temp = {}    
+
+for word in children_words_temp:
+    word_index = children_words_temp.index(word)
+    rawfreq = children_rawfreq_temp[word_index]
+    if word in children_freq_temp:
+        children_freq_temp[word] += int(rawfreq)
+    else:
+        children_freq_temp[word] = int(rawfreq)
+        
+children_words = []
+children_logfreq = []
+        
+for key, val in children_freq_temp.items():
+    children_words.append(key)
+    children_logfreq.append(math.log10(val)+1)
+
+f = open('adults_forimport_lemmatized_030117.csv')
 csv_adults = csv.reader(f, delimiter=',')
 
 adults_words = []
@@ -337,7 +359,7 @@ def return_values(input_word):
 
     # Possible phonemes: need to update this
     
-    phonemes = ('a', 'e', 'i', 'o', 'u', 'á', 'é', 'í', 'ó', 'ú', 'y', 'ñ', 'b', 'c', 'C', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'L', 'm', 'n', 'p', 'q', 'r', 'R', 's', 't', 'v', 'w', 'x', 'z')
+    phonemes = ('a', 'e', 'i', 'o', 'u', 'j', 'L', 'Z', 'J', 'b', 'T', 'C', 'd', 'f', 'g', 'k', 'l', 'm', 'n', 'p', 'r', '4', 's', 't', 'v', 'w', 'x', 'z')
 
     # For each word, cycle through each of the following processes, searching through the wordlists and adding up matches
 

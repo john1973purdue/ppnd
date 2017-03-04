@@ -5,14 +5,15 @@ import json
 import time
 import csv
 
-access_token="uJh6uMp_KRu8PZYSQq7tDJBKvmYa"
+#access_token="uJh6uMp_KRu8PZYSQq7tDJBKvmYa"
+access_token="unLTgrPyQACwm9NXN2f9gLfPyi0a"
 headers = {'Authorization':'Bearer '+access_token}
 
 # 1 = IPA [but just the ASCII numeric codes that correspond to UTF-8 IPA symbols...]
 # 2 = XSAMPA
 encoding="2"
 
-#f = open('children_forimport_022117_trans.csv')
+#f = open('children_forimport_lemmatized_030117(2).csv')
 #csv_children = csv.reader(f, delimiter=',')
 
 #children_words = []
@@ -23,7 +24,7 @@ encoding="2"
 
 #f.close()
 
-#with open("transcription_children.txt", "w") as f:
+#with open("transcription_children_original_030117.txt", "w") as f:
 
     #for word in children_words:
         #url="http://store.apicultur.io/api/silabea/1.0.0/"+word+"/"+encoding
@@ -33,9 +34,9 @@ encoding="2"
         #for i in response['palabraSilabeada']:
             #output_line=i+" "+output_line
         #f.write(word+"\t"+output_line+"\n")
-        #time.sleep(1.25) # We get 200000 or so requests for free, but only 1/second
+        #time.sleep(1.3) # We get 200000 or so requests for free, but only 1/second
 
-f = open('adults_forimport_022117_trans.csv')
+f = open('adults_forimport_lemmatized_030117(2).csv')
 csv_adults = csv.reader(f, delimiter=',')
 
 adults_words = []
@@ -46,7 +47,7 @@ for row in csv_adults:
     
 f.close()
 
-with open("transcription_adults.txt", "w") as f:
+with open("transcription_adults_original_030117.txt", "w") as f:
 
     for word in adults_words:
         url="http://store.apicultur.io/api/silabea/1.0.0/"+word+"/"+encoding
@@ -56,4 +57,4 @@ with open("transcription_adults.txt", "w") as f:
         for i in response['palabraSilabeada']:
             output_line=i+" "+output_line
         f.write(word+"\t"+output_line+"\n")
-        time.sleep(1.25)
+        time.sleep(1.4)

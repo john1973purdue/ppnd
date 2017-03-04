@@ -2,19 +2,19 @@
 
 import json
 
-child_lemmas = {} 
+lemmas = {} 
 
-with open("lemmas_children.txt") as f:
+with open("lemmas_adults_030117_recoded.txt") as f:
     for line in f:
         lemma_temp = {}
         lemma_temp = json.loads(line)
-        child_lemmas[lemma_temp["form"]] = {}
-        child_lemmas[lemma_temp["form"]]["lemma"] = lemma_temp["lemma"]
-        child_lemmas[lemma_temp["form"]]["ctag"] = lemma_temp["ctag"]
-        print(child_lemmas[lemma_temp["form"]])
+        lemmas[lemma_temp["form"]] = {}
+        lemmas[lemma_temp["form"]]["lemma"] = lemma_temp["lemma"]
+        lemmas[lemma_temp["form"]]["ctag"] = lemma_temp["ctag"]
+        print(lemmas[lemma_temp["form"]])
 
-with open("lemmas_children_processed.txt", "w") as f:
-    for word in child_lemmas:
-        f.write(word+"\t"+child_lemmas[word]["lemma"]+"\t"+child_lemmas[word]["ctag"]+"\n")
+with open("lemmas_adults_030117_processed.txt", "w") as f:
+    for word in lemmas:
+        f.write(word+"\t"+lemmas[word]["lemma"]+"\t"+lemmas[word]["ctag"]+"\n")
 
 
