@@ -1,15 +1,12 @@
 # Note: to open this in python shell: exec(open('SpanPPND.py').read())
 
-## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
 ## To do: two streams -- lemma vs word-as-shown
 ## To do: matching transcriptions to the word for output in table
+## To do: prepare final transcription guidelines
 
 ## Justin:
-## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
-## To do: update the csv reading code:
-    ## 1. first pass: scan character by character, removing . and changing first vowel following ' to capitalized (=stressed) version
-    ## 2. second pass: logfreq calculation: for each word in children_words[], construct dictionary of {'word': 'rawfreq'} based on matching words and then transform back to list of words and list of calculated logfreqs so that we can continue to use the same code for PS/B as before
 ## To do: update list of phonemes to match transcription
+## In process: using Spanish-spoken-in-Spain adult oral language corpus from Alonso, M. a, Fernandez, A., & Diez, E. (2011). Oral frequency norms for 67,979 Spanish words. Behavior Research Methods, 43(2), 449–458, create adult corpus for comparison purposes. Don't use the CLEARPOND/BuscaPalabras calculators for adult vaues because they use different transcription scheme than ours (a problem if we're comparing words based on their transcriptions) and the Alonso et al. word lists are much better, being oral data from Spain only. 
 
 ## Elizabeth: 
 ## To do: write something to export PP/ND values to CSV file for later analysis
@@ -25,6 +22,20 @@
 ## To do: format the output in tables --> output.txt
 ## To do: make final decisions about how to treat different characters: users' input will be broad transcriptions
 ## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500) --> Spanish CDI
+## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
+    # Plan:
+    # Initial stage of calculator: accent (=CAPITALIZE) first vowel encountered after ', then discard '/.
+    # For PP: this is transparent -- just replace vowels with accented vowels in transcription
+    # For ND: (1) take each word, move stressed vowel around before any substitution/addition/replacement, then look for match; (2) for each candidate word, move stressed vowel around, then look for match
+    # e.g., completó: compléto, compléta, completé, compléte, compléten, complétos
+        # (1) yields: compléto
+        # (2) yields: ó --> a + stress search: compléta
+                    # ó --> e + stress search: completé, compléte
+                    # +s + stress search: complétos
+## To do: update the csv reading code:
+    ## 1. first pass: scan character by character, removing . and changing first vowel following ' to capitalized (=stressed) version
+    ## 2. second pass: logfreq calculation: for each word in children_words[], construct dictionary of {'word': 'rawfreq'} based on matching words and then transform back to list of words and list of calculated logfreqs so that we can continue to use the same code for PS/B as before
+## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
 
 
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
@@ -32,9 +43,12 @@
 import csv
 import math
 
-    ## 1. first pass: scan character by character, removing . and changing first vowel following ' to capitalized (=stressed) version
-        ## Do stress later
-    ## 2. second pass: logfreq calculation: for each word in children_words[], construct dictionary of {'word': 'rawfreq'} based on matching words and then transform back to list of words and list of calculated logfreqs so that we can continue to use the same code for PS/B as before
+vowels = ["a","e","i","o","u","A","E","I","O","U"]
+stress = False
+stressoutput = []
+
+# Note: row[2] / row[16] for lemmas; row[2] / row[18] for types
+# row[2] = rawfreq, row[16/18] = transcription
 
 f = open('children_forimport_030417.csv')
 csv_children = csv.reader(f, delimiter=',')
@@ -44,7 +58,24 @@ children_rawfreq_temp = []
 
 for row in csv_children:
     children_rawfreq_temp.append(row[2])
-    children_w = row[16]
+    children_w = row[18]
+    
+    # Encode stress
+    
+    for i, c in enumerate(list(children_w)):
+        if stress:
+            if c in vowels:
+                stressoutput.append(c.upper())
+                stress = False
+            else:
+                stressoutput.append(c)
+        else:
+            stressoutput.append(c)
+        if c == "'":
+            stress = True
+    children_w = "".join(stressoutput)
+    stressoutput = []
+    
     children_w = children_w.replace("'","")
     children_w = children_w.replace(".","")
     children_words_temp.append(children_w)
@@ -90,7 +121,24 @@ adults_rawfreq_temp = []
 
 for row in csv_adults:
     adults_rawfreq_temp.append(row[2])
-    adults_w = row[16]
+    adults_w = row[18]
+    
+    # Encode stress
+    
+    for i, c in enumerate(list(adults_w)):
+        if stress:
+            if c in vowels:
+                stressoutput.append(c.upper())
+                stress = False
+            else:
+                stressoutput.append(c)
+        else:
+            stressoutput.append(c)
+        if c == "'":
+            stress = True
+    adults_w = "".join(stressoutput)
+    stressoutput = []
+    
     adults_w = adults_w.replace("'","")
     adults_w = adults_w.replace(".","")
     adults_words_temp.append(adults_w)
@@ -223,21 +271,48 @@ for word in adults_words:
                 else:
                     adults_P2[i] = float(logfreq)
                     
-# ND finding matches
+# Moving stress around: returns [words]
+
+def move_accent(word):
+    
+    accentlist = []
+    stressoutput = []
+   
+    for i, c in enumerate(list(word)):
+        if c in vowels:
+            stressoutput.append(c.lower())
+        else:
+            stressoutput.append(c)
+    wordtemp = "".join(stressoutput)
+    
+    for i, c in enumerate(list(wordtemp)):
+        if c in vowels:
+            #if wordtemp[:i]+c.upper()+wordtemp[i+1:] != word:
+            accentlist.append(wordtemp[:i]+c.upper()+wordtemp[i+1:])
+    
+    return accentlist
+                    
+# ND finding matches: returns [# of matches, [words]]
 
 def find_matches_children(candidate):
+    wordlist = []
     matches = 0
-    if candidate in children_words:
-        matches = 1
-        #print('Children: '+candidate)
-    return matches
+    for c in move_accent(candidate):
+        if c in children_words:
+            matches += 1
+            wordlist.append(c)
+    matchlist = [matches,wordlist]
+    return matchlist
 
 def find_matches_adults(candidate):
+    wordlist = []
     matches = 0
-    if candidate in adults_words:
-        matches = 1
-        #print('Adults: '+candidate)
-    return matches
+    for c in move_accent(candidate):
+        if c in adults_words:
+            matches += 1
+            wordlist.append(c)
+    matchlist = [matches,wordlist]
+    return matchlist
 
 # PS / B / ND return
 
@@ -400,6 +475,7 @@ def return_values(input_word):
     matches_children = 0
     matches_adults = 0
     
+    matches = []
     N_children = []
     N_children_add = []
     N_children_sub = []
@@ -414,67 +490,91 @@ def return_values(input_word):
     for j in phonemes:
         for i, c in enumerate(input_word):
             newword_addition = input_word[:i]+j+input_word[i:]
-            if find_matches_children(newword_addition) == 1:
-                matches_children += 1
-                N_children.append(newword_addition)
-                N_children_add.append(newword_addition)
-            if find_matches_adults(newword_addition) == 1:
-                matches_adults += 1
-                N_adults.append(newword_addition)
-                N_adults_add.append(newword_addition)
+            matches = find_matches_children(newword_addition)
+            if matches[0] >= 1:
+                matches_children += matches[0]
+                for c in matches[1]:
+                    N_children.append(c)
+                    N_children_add.append(c)
+            matches = find_matches_adults(newword_addition)
+            if matches[0] >= 1:
+                matches_adults += matches[0]
+                for c in matches[1]:
+                    N_adults.append(c)
+                    N_adults_add.append(c)
             if i+1 == len(input_word):
                 newword_addition = input_word[:i+1]+j
-                if find_matches_children(newword_addition) == 1:
-                    matches_children += 1
-                    N_children.append(newword_addition)
-                    N_children_add.append(newword_addition)
-                if find_matches_adults(newword_addition) == 1:
-                    matches_adults += 1
-                    N_adults.append(newword_addition)
-                    N_adults_add.append(newword_addition)
+                matches = find_matches_children(newword_addition)
+                if matches[0] >= 1:
+                    matches_children += matches[0]
+                    for c in matches[1]:
+                        N_children.append(c)
+                        N_children_add.append(c)
+                matches = find_matches_adults(newword_addition)
+                if matches[0] >= 1:
+                    matches_adults += matches[0]
+                    for c in matches[1]:
+                        N_adults.append(c)
+                        N_adults_add.append(c)
             if j != input_word[i]:
                 if i == 0:
                     newword_substitution = j+input_word[i+1:]
-                    if find_matches_children(newword_substitution) == 1:
-                        matches_children += 1
-                        N_children.append(newword_substitution)
-                        N_children_sub.append(newword_substitution)
-                    if find_matches_adults(newword_substitution) == 1:
-                        matches_adults += 1
-                        N_adults.append(newword_substitution)
-                        N_adults_sub.append(newword_substitution)
+                    matches = find_matches_children(newword_substitution)
+                    if matches[0] >= 1:
+                        matches_children += matches[0]
+                        for c in matches[1]:
+                            N_children.append(c)
+                            N_children_sub.append(c)
+                    matches = find_matches_adults(newword_substitution)
+                    if matches[0] >= 1:
+                        matches_adults += matches[0]
+                        for c in matches[1]:
+                            N_adults.append(c)
+                            N_adults_sub.append(c)
                 else:
                     newword_substitution = input_word[:i]+j+input_word[i+1:]
-                    if find_matches_children(newword_substitution) == 1:
-                        matches_children += 1
-                        N_children.append(newword_substitution)
-                        N_children_sub.append(newword_substitution)
-                    if find_matches_adults(newword_substitution) == 1:
-                        matches_adults += 1
-                        N_adults.append(newword_substitution)
-                        N_adults_sub.append(newword_substitution)
+                    matches = find_matches_children(newword_substitution)
+                    if matches[0] >= 1:
+                        matches_children += matches[0]
+                        for c in matches[1]:
+                            N_children.append(c)
+                            N_children_sub.append(c)
+                    matches = find_matches_adults(newword_substitution)
+                    if matches[0] >= 1:
+                        matches_adults += matches[0]
+                        for c in matches[1]:
+                            N_adults.append(c)
+                            N_adults_sub.append(c)
 
     for i, c in enumerate(input_word):
         if i == 0:
             newword_deletion = input_word[i+1:]
-            if find_matches_children(newword_deletion) == 1:
-                matches_children += 1
-                N_children.append(newword_deletion)
-                N_children_del.append(newword_deletion)
-            if find_matches_adults(newword_deletion) == 1:
-                matches_adults += 1
-                N_adults.append(newword_deletion)
-                N_adults_del.append(newword_deletion)
+            matches = find_matches_children(newword_deletion)
+            if matches[0] >= 1:
+                matches_children += matches[0]
+                for c in matches[1]:
+                    N_children.append(c)
+                    N_children_del.append(c)
+            matches = find_matches_adults(newword_deletion)
+            if matches[0] >= 1:
+                matches_adults += matches[0]
+                for c in matches[1]:
+                    N_adults.append(c)
+                    N_adults_del.append(c)
         else:
             newword_deletion = input_word[:i]+input_word[i+1:]
-            if find_matches_children(newword_deletion) == 1:
-                matches_children += 1
-                N_children.append(newword_deletion)
-                N_children_del.append(newword_deletion)
-            if find_matches_adults(newword_deletion) == 1:
-                matches_adults += 1
-                N_adults.append(newword_deletion)
-                N_adults_del.append(newword_deletion)
+            matches = find_matches_children(newword_deletion)
+            if matches[0] >= 1:
+                matches_children += matches[0]
+                for c in matches[1]:
+                    N_children.append(c)
+                    N_children_del.append(c)
+            matches = find_matches_adults(newword_deletion)
+            if matches[0] >= 1:
+                matches_adults += matches[0]
+                for c in matches[1]:
+                    N_adults.append(c)
+                    N_adults_del.append(c)
 
     #print('# of neighbors (children): '+str(matches_children))
 
@@ -503,7 +603,7 @@ collated_output={}
 for word in user_input_list:
     collated_output[word]=return_values(word)
 
-print(collated_output)
+#print(collated_output)
 
 #{'mamá': {'PS_phonemes_children': ['m1', 'a2', 'm3', 'á4'], 'PS_children': ['0.070354', '0.209508', '0.045825', '0.00955'], 'PS_sum_children': '0.335237', 'PS_avg_children': '0.083809', 'PS_phonemes_adults': ['m1', 'a2', 'm3', 'á4'], 'PS_adults': ['0.066131', '0.196646', '0.045695', '0.009752'], 'PS_sum_adults': '0.318223', 'PS_avg_adults': '0.079556', 'B_avg_children': '0.01125', 'B_sum_children': '0.03375', 'B_phonemes_children': ['ma1', 'am2', 'má3'], 'B_children': ['0.019057', '0.013471', '0.001221'], 'B_avg_adults': '0.009823', 'B_sum_adults': '0.02947', 'B_phonemes_adults': ['ma1', 'am2', 'má3'], 'B_adults': ['0.017061', '0.011384', '0.001025'], 'Neighbors_children': ['mama', 'mami', 'mamás'], 'Neighbors_adults': ['mama', 'mami', 'mamás'], 'Neighbors_children_add': ['mamás'], 'Neighbors_children_sub': ['mama', 'mami'], 'Neighbors_children_del': [], 'Neighbors_adults_add': ['mamás'], 'Neighbors_adults_sub': ['mama', 'mami'], 'Neighbors_adults_del': [], 'ND_children': '3', 'ND_adults': '3'}}
 

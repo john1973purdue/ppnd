@@ -36,7 +36,7 @@ encoding="2"
         #f.write(word+"\t"+output_line+"\n")
         #time.sleep(1.3) # We get 200000 or so requests for free, but only 1/second
 
-f = open('../wordbank/CDI_WGs_properties.csv')
+f = open('../corpora/Alonso_et_al/alonso.csv')
 csv_adults = csv.reader(f, delimiter=',')
 
 adults_words = []
@@ -47,14 +47,32 @@ for row in csv_adults:
     
 f.close()
 
-with open("transcription_CDI_030417.txt", "w") as f:
+with open("../corpora/Alonso_et_al/alonso_transcription_031417.txt", "a") as f:
 
-    for word in adults_words:
-        url="http://store.apicultur.io/api/silabea/1.0.0/"+word+"/"+encoding
-        response=requests.get(url,headers=headers).json()
-        output_line=""
-        response['palabraSilabeada'].reverse()
-        for i in response['palabraSilabeada']:
-            output_line=i+" "+output_line
-        f.write(word+"\t"+output_line+"\n")
-        time.sleep(1.4)
+    for word in adults_words[11067:]:
+        #http://stackoverflow.com/questions/8381193/python-handle-json-decode-error-when-nothing-returned
+        try:
+            url="http://store.apicultur.io/api/silabea/1.0.0/"+word+"/"+encoding
+            response=requests.get(url,headers=headers).json()
+            output_line=""
+            response['palabraSilabeada'].reverse()
+            for i in response['palabraSilabeada']:
+                output_line=i+" "+output_line
+            f.write(word+"\t"+output_line+"\n")
+            time.sleep(1.15)
+        except ValueError:
+            print("Error: "+word)
+            time.sleep(10)
+            try:
+                url="http://store.apicultur.io/api/silabea/1.0.0/"+word+"/"+encoding
+                response=requests.get(url,headers=headers).json()
+                output_line=""
+                response['palabraSilabeada'].reverse()
+                for i in response['palabraSilabeada']:
+                    output_line=i+" "+output_line
+                f.write(word+"\t"+output_line+"\n")
+                time.sleep(1.15)
+            except ValueError:
+                print("Error again: "+word)
+                f.write(word+"\t"+"ERROR"+"\n")
+                time.sleep(1.15)
