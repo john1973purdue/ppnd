@@ -1,12 +1,12 @@
 # Note: to open this in python shell: exec(open('SpanPPND.py').read())
 
 ## To do: two streams -- lemma vs word-as-shown
-## To do: matching transcriptions to the word for output in table
-## To do: prepare final transcription guidelines
 
 ## Justin:
-## To do: update list of phonemes to match transcription
-## In process: using Spanish-spoken-in-Spain adult oral language corpus from Alonso, M. a, Fernandez, A., & Diez, E. (2011). Oral frequency norms for 67,979 Spanish words. Behavior Research Methods, 43(2), 449–458, create adult corpus for comparison purposes. Don't use the CLEARPOND/BuscaPalabras calculators for adult vaues because they use different transcription scheme than ours (a problem if we're comparing words based on their transcriptions) and the Alonso et al. word lists are much better, being oral data from Spain only. 
+## To do: update list of phonemes to match transcription: make decisions about L vs Z vs j
+## To do: matching transcriptions to the word for output in table, making sure duplicate words in user_input are duplicated in table (right now duplicates are simply dropped)
+## To do: prepare final transcription guidelines
+## To do: improve calculator speed if easy/possible with simple parallelism (http://chriskiehl.com/article/parallelism-in-one-line/) --> might be able to make the initial csv import code for adults/children run simultaneously, and then run the adults/children PP/ND logfreq code simultaneously, and then just do everything else sequentially
 
 ## Elizabeth: 
 ## To do: write something to export PP/ND values to CSV file for later analysis
@@ -36,6 +36,7 @@
     ## 1. first pass: scan character by character, removing . and changing first vowel following ' to capitalized (=stressed) version
     ## 2. second pass: logfreq calculation: for each word in children_words[], construct dictionary of {'word': 'rawfreq'} based on matching words and then transform back to list of words and list of calculated logfreqs so that we can continue to use the same code for PS/B as before
 ## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
+## To do: using Spanish-spoken-in-Spain adult oral language corpus from Alonso, M. a, Fernandez, A., & Diez, E. (2011). Oral frequency norms for 67,979 Spanish words. Behavior Research Methods, 43(2), 449–458, create adult corpus for comparison purposes. Don't use the CLEARPOND/BuscaPalabras calculators for adult vaues because they use different transcription scheme than ours (a problem if we're comparing words based on their transcriptions) and the Alonso et al. word lists are much better, being oral data from Spain only. 
 
 
 # Loading corpus words: https://pythonprogramming.net/reading-csv-files-python-3/
