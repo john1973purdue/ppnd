@@ -49,7 +49,7 @@ f.close()
 
 with open("../corpora/Alonso_et_al/alonso_transcription_031417.txt", "a") as f:
 
-    for word in adults_words[11067:]:
+    for word in adults_words[50733:]:
         #http://stackoverflow.com/questions/8381193/python-handle-json-decode-error-when-nothing-returned
         try:
             url="http://store.apicultur.io/api/silabea/1.0.0/"+word+"/"+encoding

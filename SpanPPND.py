@@ -47,7 +47,7 @@ vowels = ["a","e","i","o","u","A","E","I","O","U"]
 stress = False
 stressoutput = []
 
-# Note: row[2] / row[16] for lemmas; row[2] / row[18] for types
+# Note: row[2] / row[16] for lemmas; row[2] / row[18] for types (children; 1, 4 for alonso adults)
 # row[2] = rawfreq, row[16/18] = transcription
 
 f = open('children_forimport_030417.csv')
@@ -113,15 +113,15 @@ for key, val in children_freq_temp.items():
     
 #f.close()
 
-f = open('adults_forimport_030417.csv')
+f = open('../corpora/Alonso_et_al/alonso_031717.csv')
 csv_adults = csv.reader(f, delimiter=',')
 
 adults_words_temp = []
 adults_rawfreq_temp = []
 
 for row in csv_adults:
-    adults_rawfreq_temp.append(row[2])
-    adults_w = row[18]
+    adults_rawfreq_temp.append(row[1])
+    adults_w = row[4]
     
     # Encode stress
     
@@ -601,6 +601,28 @@ user_input_list = user_input.split(' ')
 collated_output={}
 
 for word in user_input_list:
+    
+    # Temporary accenting
+    
+    stress = False
+    
+    for i, c in enumerate(list(word)):
+        if stress:
+            if c in vowels:
+                stressoutput.append(c.upper())
+                stress = False
+            else:
+                stressoutput.append(c)
+        else:
+            stressoutput.append(c)
+        if c == "'":
+            stress = True
+    word = "".join(stressoutput)
+    stressoutput = []
+    
+    word = word.replace("'","")
+    word = word.replace(".","")
+    
     collated_output[word]=return_values(word)
 
 #print(collated_output)
@@ -662,10 +684,10 @@ def children_table():
             # Ensuring consistent spacing: '{0: <16}'.format('Hi')
             # https://docs.python.org/3.6/library/string.html#formatstrings
             # http://stackoverflow.com/questions/2872512/python-truncate-a-long-string
-            
+                        
             word = (key[:7] + '...') if len(key) > 10 else key
             
-            output_line='{0: <10}'.format(word)+"\t"+'{0: <10}'.format(str(len(word)))+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_children'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_children'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_children'])+"\t"+neighbors_output_line
+            output_line='{0: <10}'.format(word)+"\t"+'{0: <10}'.format(str(len(key)))+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_children'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_children'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_children'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_children'])+"\t"+neighbors_output_line
             
             f.write(output_line+"\n")
     return
@@ -721,10 +743,10 @@ def adults_table():
                 neighbors_output_line=collated_output[key]['Neighbors_adults'][i]+' '+neighbors_output_line
                 
             output_line=""
-            
+                        
             word = (key[:7] + '...') if len(key) > 10 else key
             
-            output_line='{0: <10}'.format(word)+"\t"+'{0: <10}'.format(str(len(word)))+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_adults'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_adults'])+"\t"+neighbors_output_line
+            output_line='{0: <10}'.format(word)+"\t"+'{0: <10}'.format(str(len(key)))+"\t"+PS_output_line+'{0: <10}'.format(collated_output[key]['PS_sum_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['PS_avg_adults'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[key]['B_sum_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['B_avg_adults'])+"\t"+'{0: <10}'.format(collated_output[key]['ND_adults'])+"\t"+neighbors_output_line
             
             f.write(output_line+"\n")
     return
