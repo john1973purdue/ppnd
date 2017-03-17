@@ -113,7 +113,7 @@ for key, val in children_freq_temp.items():
     
 #f.close()
 
-f = open('../corpora/Alonso_et_al/alonso_031717.csv')
+f = open('alonso_031717.csv')
 csv_adults = csv.reader(f, delimiter=',')
 
 adults_words_temp = []
