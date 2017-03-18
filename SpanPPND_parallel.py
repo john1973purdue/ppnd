@@ -3,7 +3,6 @@
 ## To do: two streams -- lemma vs word-as-shown
 
 ## Justin:
-## To do: update list of phonemes to match transcription: make decisions about L vs Z vs j
 ## To do: matching transcriptions to the word for output in table, making sure duplicate words in user_input are duplicated in table (right now duplicates are simply dropped)
 ## To do: prepare final transcription guidelines
 
@@ -38,6 +37,7 @@
 ## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
 ## To do: using Spanish-spoken-in-Spain adult oral language corpus from Alonso, M. a, Fernandez, A., & Diez, E. (2011). Oral frequency norms for 67,979 Spanish words. Behavior Research Methods, 43(2), 449–458, create adult corpus for comparison purposes. Don't use the CLEARPOND/BuscaPalabras calculators for adult vaues because they use different transcription scheme than ours (a problem if we're comparing words based on their transcriptions) and the Alonso et al. word lists are much better, being oral data from Spain only. 
 ## To do: improve calculator speed if easy/possible with simple parallelism (http://chriskiehl.com/article/parallelism-in-one-line/) --> might be able to make the initial csv import code for adults/children run simultaneously, and then run the adults/children PP/ND logfreq code simultaneously, and then just do everything else sequentially
+## To do: update list of phonemes to match transcription: make decisions about L vs Z vs j
 
 import csv
 import math
@@ -86,6 +86,7 @@ def init_calc(age):
             
             w = w.replace("'","")
             w = w.replace(".","")
+            w = w.replace("Z","L")
             words_temp.append(w)
 
         freq_temp = {}    
@@ -277,7 +278,7 @@ def return_values(input_word, age):
     return_dict['B_phonemes']=B_phonemes_list
     return_dict['B']=B_values_list
         
-    phonemes = ('a', 'e', 'i', 'o', 'u', 'j', 'L', 'Z', 'J', 'b', 'T', 'C', 'd', 'f', 'g', 'k', 'l', 'm', 'n', 'p', 'r', '4', 's', 't', 'v', 'w', 'x', 'z')
+    phonemes = ('a', 'e', 'i', 'o', 'u', 'j', 'L', 'J', 'b', 'T', 'C', 'd', 'f', 'g', 'k', 'l', 'm', 'n', 'p', 'r', '4', 's', 't', 'v', 'w', 'x', 'z')
 
     matches_count = 0
     
@@ -431,6 +432,7 @@ for word in user_input_list:
     
     word = word.replace("'","")
     word = word.replace(".","")
+    word = word.replace("Z","L")
     
     user_input_list_accented.append(word)
     
@@ -440,8 +442,6 @@ ages = ['Children','Adults']
 pool = ThreadPool()
 
 # Init calc
-
-print("Initial calculations")
 
 init_dict['Children'] = init_calc('Children')
 init_dict['Adults'] = init_calc('Adults')
