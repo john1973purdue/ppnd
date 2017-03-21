@@ -41,8 +41,9 @@
 
 import csv
 import math
-from multiprocessing.dummy import Pool as ThreadPool 
+from multiprocessing.dummy import Pool
 from multiprocessing import Process, Queue
+import random
 
 vowels = ["a","e","i","o","u","A","E","I","O","U"]
 stress = False
@@ -223,9 +224,29 @@ def find_matches(candidate, input_word, age):
 # PS / B / ND return
 
 def return_values(input_word, age):
-                
+    
     return_dict = {}
     
+    #if len(input_word) == 0:
+        #return_dict['PS_phonemes']="N/A"
+        #return_dict['PS']="N/A"
+        #return_dict['PS_sum']="N/A"
+        #return_dict['PS_avg']="N/A"
+        #return_dict['B_avg']="N/A"
+        #return_dict['B_sum']="N/A"
+        #return_dict['Neighbors']="N/A"
+        #return_dict['Neighbors_add']="N/A"
+        #return_dict['Neighbors_sub']="N/A"
+        #return_dict['Neighbors_del']="N/A"
+        #return_dict['ND']="N/A"
+        #return return_dict
+    
+    #final_dict = {}
+    
+    #for age in ['Children','Adults']:
+        
+        #final_dict[age] = {}
+                
     PS_sum = 0
     
     PS_phonemes_list = []
@@ -347,6 +368,8 @@ def return_values(input_word, age):
     return_dict['Neighbors_sub']=N_sub
     return_dict['Neighbors_del']=N_del
     return_dict['ND']=str(matches_count)
+    
+    #final_dict[age][word] = return_dict
 
     return return_dict
 
@@ -395,58 +418,55 @@ def table(age):
                 neighbors_output_line=collated_output[age][key]['Neighbors'][i]+' '+neighbors_output_line
                 
             output_line=""
-                                    
-            word = (key[:7] + '...') if len(key) > 10 else key
             
-            output_line='{0: <10}'.format(word)+"\t"+'{0: <10}'.format(str(len(key)))+"\t"+PS_output_line+'{0: <10}'.format(collated_output[age][key]['PS_sum'])+"\t"+'{0: <10}'.format(collated_output[age][key]['PS_avg'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[age][key]['B_sum'])+"\t"+'{0: <10}'.format(collated_output[age][key]['B_avg'])+"\t"+'{0: <10}'.format(collated_output[age][key]['ND'])+"\t"+neighbors_output_line
+            key_reform = key.split(';')[0]
+                                    
+            word = (key_reform[:7] + '...') if len(key_reform) > 10 else key_reform
+            
+            output_line='{0: <10}'.format(word)+"\t"+'{0: <10}'.format(str(len(key_reform)))+"\t"+PS_output_line+'{0: <10}'.format(collated_output[age][key]['PS_sum'])+"\t"+'{0: <10}'.format(collated_output[age][key]['PS_avg'])+"\t"+B_output_line+'{0: <10}'.format(collated_output[age][key]['B_sum'])+"\t"+'{0: <10}'.format(collated_output[age][key]['B_avg'])+"\t"+'{0: <10}'.format(collated_output[age][key]['ND'])+"\t"+neighbors_output_line
             
             f.write(output_line+"\n")
     return
 
-# User input
-
-user_input = input("Enter space-separated list of words: ")
-user_input_list = user_input.split(' ')
-
-user_input_list_accented = []
-
-for word in user_input_list:
-    
-    # Temporary accenting
-    
-    stress = False
-    
-    for i, c in enumerate(list(word)):
-        if stress:
-            if c in vowels:
-                stressoutput.append(c.upper())
-                stress = False
-            else:
-                stressoutput.append(c)
-        else:
-            stressoutput.append(c)
-        if c == "'":
-            stress = True
-    word = "".join(stressoutput)
-    stressoutput = []
-    
-    word = word.replace("'","")
-    word = word.replace(".","")
-    word = word.replace("Z","L")
-    
-    user_input_list_accented.append(word)
-    
-
-ages = ['Children','Adults']
-
-pool = ThreadPool()
-
-# Init calc
-
-init_dict['Children'] = init_calc('Children')
-init_dict['Adults'] = init_calc('Adults')
-
 if __name__=='__main__':
+    
+    # User input
+
+    #user_input = input("Enter space-separated list of words: ")
+    #user_input_list = user_input.split(' ')
+
+    #user_input_list_accented = []
+
+    #for word in user_input_list:
+        
+        ## Temporary accenting
+        
+        #stress = False
+        
+        #for i, c in enumerate(list(word)):
+            #if stress:
+                #if c in vowels:
+                    #stressoutput.append(c.upper())
+                    #stress = False
+                #else:
+                    #stressoutput.append(c)
+            #else:
+                #stressoutput.append(c)
+            #if c == "'":
+                #stress = True
+        #word = "".join(stressoutput)
+        #stressoutput = []
+        
+        #word = word.replace("'","")
+        #word = word.replace(".","")
+        #word = word.replace("Z","L")
+        
+        #user_input_list_accented.append(word)
+        
+    # Init calc
+
+    init_dict['Children'] = init_calc('Children')
+    init_dict['Adults'] = init_calc('Adults')
     
     q1 = Queue()
     q2 = Queue()
@@ -493,23 +513,48 @@ if __name__=='__main__':
     b2.join()
     b3.join()
     b4.join()
+        
+    collated_output = {}
+    collated_output['Children'] = {}
+    collated_output['Adults'] = {}
+    
+    # http://kmdouglass.github.io/posts/learning-pythons-multiprocessing-module.html
+    
+    #pool = Pool()
+        
+    #collated_output = pool.map(return_values, user_input_list_accented)
+    
+    #print(collated_output)
+    
+    print('Words...')
+    
 
-collated_output = {}
-collated_output['Children'] = {}
-collated_output['Adults'] = {}
+    for word in init_dict['Children']['words']:
+        
+        #print(word)
+        
+        if len(word) != 0:
+        
+            if word in collated_output['Children']:
+                collated_output['Children'][word+';'+str(random.random())] = collated_output['Children'][word]
+            else:
+                collated_output['Children'][word] = return_values(word, 'Children')
+            
+            if word in collated_output['Adults']:
+                collated_output['Adults'][word+';'+str(random.random())] = collated_output['Adults'][word]
+            else:
+                collated_output['Adults'][word] = return_values(word, 'Adults')
+        
+        #print '\x1b[2K\r'
+    
+    # Write table
 
-for word in user_input_list_accented:
-    collated_output['Children'][word] = return_values(word, 'Children')
-    collated_output['Adults'][word] = return_values(word, 'Adults')
+    with open("output.txt", "w") as f:
+        f.write("Children\n")
 
-# Write table
+    table('Children')
 
-with open("output.txt", "w") as f:
-    f.write("Children\n")
+    with open("output.txt", "a") as f:
+        f.write("Adults\n")
 
-table('Children')
-
-with open("output.txt", "a") as f:
-    f.write("Adults\n")
-
-table('Adults')
+    table('Adults')
