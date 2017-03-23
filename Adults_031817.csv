@@ -1,4 +1,4 @@
-a,71052,a,a ,a
+a,71052,a,a ,'a
 aarón,3,aarón,a . a ' 4 o n ,a.a'4on
 aba,1,aba,' a . B_o a ,'a.ba
 abad,27,abad,a ' B_o a D ,a'bad
@@ -2535,7 +2535,7 @@ ajusticiado,1,ajusticiado,a . x u s . t i ' T j a . D_o o ,a.xus.ti'Tja.do
 ajusticiados,1,ajusticiados,a . x u s . t i ' T j a . D_o o s ,a.xus.ti'Tja.dos
 ajusto,2,ajusto,a ' x u s . t o ,a'xus.to
 akihito,1,akihito,a ' k i i . t o ,a'kii.to
-al,12797,al,a l ,al
+al,12797,al,a l ,'al
 ala,35,ala,' a . l a ,'a.la
 alá,6,alá,a ' l a ,a'la
 alabadísimos,1,alabadísimos,a . l a . B_o a ' D_o i . s i . m o s ,a.la.ba'di.si.mos
@@ -4145,7 +4145,7 @@ antaños,1,antaños,~a n_d ' t a . J o s ,an'ta.Jos
 antártica,3,antártica,~a n_d ' t a 4 . t i . k a ,an'ta4.ti.ka
 antártico,2,antártico,~a n_d ' t a 4 . t i . k o ,an'ta4.ti.ko
 antártida,26,antártida,~a n_d ' t a 4 . t i . D_o a ,an'ta4.ti.da
-ante,851,ante,~a n_d . t e ,an.te
+ante,851,ante,~a n_d . t e ,'an.te
 anteanoche,1,anteanoche,~a n_d . t e . a ' n o . tS e ,an.te.a'no.Ce
 anteayer,7,anteayer,~a n_d . t e . a ' j\\ e 4 ,an.te.a'Le4
 antebrazo,2,antebrazo,~a n_d . t e ' B_o 4 a . T o ,an.te'b4a.To
@@ -7622,7 +7622,7 @@ bajita,16,bajita,b a ' x i . t a ,ba'xi.ta
 bajitas,3,bajitas,b a ' x i . t a s ,ba'xi.tas
 bajito,19,bajito,b a ' x i . t o ,ba'xi.to
 bajitos,5,bajitos,b a ' x i . t o s ,ba'xi.tos
-bajo,422,bajo,b a . x o ,ba.xo
+bajo,422,bajo,b a . x o ,'ba.xo
 bajó,23,bajó,b a ' x o ,ba'xo
 bajón,9,bajón,b a ' x o n ,ba'xon
 bajonazo,1,bajonazo,b a . x o ' n a . T o ,ba.xo'na.To
@@ -9685,7 +9685,7 @@ cabaret,3,cabaret,k a . B_o a ' 4 e d ,ka.ba'4ed
 cabaretera,1,cabaretera,k a . B_o a . 4 e ' t e . 4 a ,ka.ba.4e'te.4a
 cabaretes,2,cabaretes,k a . B_o a ' 4 e . t e s ,ka.ba'4e.tes
 cabarets,2,cabarets,k a . B_o a ' 4 e d s ,ka.ba'4eds
-cabe,184,cabe,k a . B_o e ,ka.be
+cabe,184,cabe,k a . B_o e ,'ka.be
 cabecera,44,cabecera,k a . B_o e ' T e . 4 a ,ka.be'Te.4a
 cabeceras,2,cabeceras,k a . B_o e ' T e . 4 a s ,ka.be'Te.4as
 cabecero,2,cabecero,k a . B_o e ' T e . 4 o ,ka.be'Te.4o
@@ -12914,8 +12914,8 @@ citoplanton,1,citoplanton,T i . t o ' p l a n_d . t o n ,Ti.to'plan.ton
 cítrico,2,cítrico,' T i . t 4 i . k o ,'Ti.t4i.ko
 cítricos,1,cítricos,' T i . t 4 i . k o s ,'Ti.t4i.kos
 citroen,1,citroen,T i ' t 4 o . e n ,Ti't4o.en
-citroën,7,citroën,T i ' t 4 o ë n ,Ti't4oën
-citröen,4,citröen,T i . t 4 ö e n ,Ti.t4öen
+citroën,7,citroën,T i ' t 4 o ë n ,Ti't4o.en
+citröen,4,citröen,T i . t 4 ö e n ,Ti't4o.en
 città,1,città,' T i D_o . à ,'Tid.à
 city,8,city,T i ' t i ,Ti'ti
 ciu,32,ciu,' T j u ,'Tju
@@ -14642,7 +14642,7 @@ comunitariza,1,comunitariza,k o . m ~u . n i . t a ' 4 i . T a ,ko.mu.ni.ta'4i.T
 comunitarización,1,comunitarización,k o . m ~u . n i . t a . 4 i . T a ' T j o n ,ko.mu.ni.ta.4i.Ta'Tjon
 comunitarizando,1,comunitarizando,k o . m ~u . n i . t a . 4 i ' T a n_d . d o ,ko.mu.ni.ta.4i'Tan.do
 comúnmente,7,comúnmente,k o ' m u m: e n_d . t e ,ko'mumen.te
-con,25252,con,k o n ,kon
+con,25252,con,k o n ,'kon
 conal,1,conal,k o ' n a l ,ko'nal
 conato,2,conato,k o ' n a . t o ,ko'na.to
 conatos,1,conatos,k o ' n a . t o s ,ko'na.tos
@@ -16068,7 +16068,7 @@ contó,45,contó,k o n_d ' t o ,kon'to
 contoneo,1,contoneo,k o n_d . t o ' n e . o ,kon.to'ne.o
 contorno,2,contorno,k o n_d ' t o 4 . n o ,kon'to4.no
 contornos,1,contornos,k o n_d ' t o 4 . n o s ,kon'to4.nos
-contra,1131,contra,k o n_d . t 4 a ,kon.t4a
+contra,1131,contra,k o n_d . t 4 a ,'kon.t4a
 contraatacando,1,contraatacando,k o n_d . t 4 a . a . t a ' k a n_d . d o ,kon.t4a.a.ta'kan.do
 contraataque,56,contraataque,k o n_d . t 4 a . a ' t a . k e ,kon.t4a.a'ta.ke
 contraataques,7,contraataques,k o n_d . t 4 a . a ' t a . k e s ,kon.t4a.a'ta.kes
@@ -18163,11 +18163,11 @@ cutreces,2,cutreces,k u ' t 4 e . T e s ,ku't4e.Tes
 cutrerío,2,cutrerío,k u . t 4 e ' 4 i o ,ku.t4e'4io
 cutres,3,cutres,' k u . t 4 e s ,'ku.t4es
 cutrez,1,cutrez,k u ' t 4 e T ,ku't4eT
-cuya,79,cuya,k u . j\\ a ,ku.La
-cuyas,30,cuyas,k u . j\\ a s ,ku.Las
+cuya,79,cuya,k u . j\\ a ,'ku.La
+cuyas,30,cuyas,k u . j\\ a s ,'ku.Las
 cuyás,2,cuyás,k u ' j\\ a s ,ku'Las
-cuyo,86,cuyo,k u . j\\ o ,ku.Lo
-cuyos,31,cuyos,k u . j\\ o s ,ku.Los
+cuyo,86,cuyo,k u . j\\ o ,'ku.Lo
+cuyos,31,cuyos,k u . j\\ o s ,'ku.Los
 cuzco,3,cuzco,' k u T . k o ,'kuT.ko
 d,25,d,' d e,'de
 d'alessandro,2,d'alessandro,d ' a . l e ' s a n_d . d 4 o ,d'a.le'san.d4o
@@ -18329,7 +18329,7 @@ daw,13,daw,' d a u_^ ,'dau
 dax,4,dax,' d a k s ,'daks
 day,1,day,' d a i_^ ,'dai
 dayton,3,dayton,' d a i_^ . t o n ,'dai.ton
-de,137580,de,d e ,de
+de,137580,de,d e ,'de
 dé,199,dé,' d e ,'de
 dea,4,dea,' d e . a ,'de.a
 deacuerdo,3,deacuerdo,d e . a ' k w e 4 . D_o o ,de.a'kwe4.do
@@ -18991,7 +18991,7 @@ déjese,6,déjese,' d e . x e . s e ,'de.xe.se
 dejo,145,dejo,' d e . x o ,'de.xo
 dejó,164,dejó,d e ' x o ,de'xo
 dejome,1,dejome,d e ' x o . m e ,de'xo.me
-del,20453,del,d e l ,del
+del,20453,del,d e l ,'del
 delación,2,delación,d e . l a ' T j o n ,de.la'Tjon
 delant,1,delant,d e ' l a n_d d ,de'land
 delantal,4,delantal,d e . l a n_d ' t a l ,de.lan'tal
@@ -20161,7 +20161,7 @@ descuidera,2,descuidera,d e s . k w i ' D_o e . 4 a ,des.kwi'de.4a
 descuides,1,descuides,d e s ' k w i . D_o e s ,des'kwi.des
 descuido,10,descuido,d e s ' k w i . D_o o ,des'kwi.do
 descuidos,2,descuidos,d e s ' k w i . D_o o s ,des'kwi.dos
-desde,4482,desde,d e z . D_o e ,dez.de
+desde,4482,desde,d e z . D_o e ,'dez.de
 desdeñable,2,desdeñable,d e z . D_o e ' J a . B_o l e ,dez.de'Ja.ble
 desdeñar,3,desdeñar,d e z . D_o e ' J a 4 ,dez.de'Ja4
 desdeñarse,1,desdeñarse,d e z . D_o e ' J a 4 . s e ,dez.de'Ja4.se
@@ -22874,7 +22874,7 @@ dominum,1,dominum,d o . m ~i ' n ~u n ,do.mi'nun
 domo,1,domo,' d o . m o ,'do.mo
 domund,3,domund,d o ' m ~u n D ,do'mund
 domus,1,domus,' d o . m u s ,'do.mus
-don,1019,don,d o n ,don
+don,1019,don,d o n ,'don
 dón,2,dón,' d o n ,'don
 dona,6,dona,' d o . n a ,'do.na
 donación,17,donación,d o . n a ' T j o n ,do.na'Tjon
@@ -22895,7 +22895,7 @@ donato,8,donato,d o ' n a . t o ,do'na.to
 doncella,5,doncella,d o n_d_+ ' T e . j\\ a ,don'Te.La
 doncellas,1,doncellas,d o n_d_+ ' T e . j\\ a s ,don'Te.Las
 doncellita,1,doncellita,d o n_d_+ . T e ' j\\ i . t a ,don.Te'Li.ta
-donde,2784,donde,d o n_d . d e ,don.de
+donde,2784,donde,d o n_d . d e ,'don.de
 dónde,1256,dónde,' d o n_d . d e ,'don.de
 done,3,done,' d o . n e ,'do.ne
 dones,2,dones,' d o . n e s ,'do.nes
@@ -23194,7 +23194,7 @@ duramente,15,duramente,d u . 4 a ' m ~e n_d . t e ,du.4a'men.te
 duran,13,duran,' d u . 4 a n ,'du.4an
 durán,28,durán,d u ' 4 a n ,du'4an
 durando,3,durando,d u ' 4 a n_d . d o ,du'4an.do
-durante,1074,durante,d u . 4 a n_d . t e ,du.4an.te
+durante,1074,durante,d u . 4 a n_d . t e ,'du.4an.te
 durar,30,durar,d u ' 4 a 4 ,du'4a4
 durara,3,durara,d u ' 4 a . 4 a ,du'4a.4a
 durará,6,durará,d u . 4 a ' 4 a ,du.4a'4a
@@ -23234,7 +23234,7 @@ duvalier,1,duvalier,d u . B_o a ' l j e 4 ,du.ba'lje4
 dyango,1,dyango,' d j a n_g . g o ,'djan.go
 dyc,10,dyc,' d i g ,'dig
 dylan,2,dylan,' d i . l a n ,'di.lan
-e,967,e,e ,e
+e,967,e,e ,'e
 eastwood,3,eastwood,e . a s . t w o ' o D ,e.as.two'od
 easy,2,easy,e . a ' s i ,e.a'si
 eau,1,eau,' e . a u_^ ,'e.au
@@ -23609,7 +23609,7 @@ ejerzan,5,ejerzan,e ' x e 4 . T a n ,e'xe4.Tan
 ejerzo,4,ejerzo,e ' x e 4 . T o ,e'xe4.To
 ejes,5,ejes,' e . x e s ,'e.xes
 ejido,1,ejido,e ' x i . D_o o ,e'xi.do
-el,72063,el,e l ,el
+el,72063,el,e l ,'el
 él,3434,él,' e l ,'el
 elabora,2,elabora,e . l a ' B_o o . 4 a ,e.la'bo.4a
 elaboración,17,elaboración,e . l a . B_o o . 4 a ' T j o n ,e.la.bo.4a'Tjon
@@ -24353,7 +24353,7 @@ emulatoria,1,emulatoria,~e . m u . l a ' t o . 4 j a ,e.mu.la'to.4ja
 emulgente,1,emulgente,~e . m u l ' x e n_d . t e ,e.mul'xen.te
 emulgentes,2,emulgentes,~e . m u l ' x e n_d . t e s ,e.mul'xen.tes
 émulo,1,émulo,' ~e . m u . l o ,'e.mu.lo
-en,71505,en,~e n ,en
+en,71505,en,~e n ,'en
 enaguas,3,enaguas,~e ' n a . G_o w a s ,e'na.gwas
 enajenación,8,enajenación,~e . n a . x e . n a ' T j o n ,e.na.xe.na'Tjon
 enajenado,1,enajenado,~e . n a . x e ' n a . D_o o ,e.na.xe'na.do
@@ -30002,7 +30002,7 @@ floto,1,floto,' f l o . t o ,'flo.to
 flowers,1,flowers,f l o ' w e 4 s ,flo'we4s
 floyd,2,floyd,' f l o i_^ D ,'floid
 fluctuantes,1,fluctuantes,f l u g ' t w a n_d . t e s ,flug'twan.tes
-flühli,3,flühli,f l u . l i ,flu.li
+flühli,3,flühli,f l u . l i ,'flu.li
 fluida,9,fluida,' f l w i . D_o a ,'flwi.da
 fluidamente,1,fluidamente,f l w i . D_o a ' m ~e n_d . t e ,flwi.da'men.te
 fluidas,3,fluidas,' f l w i . D_o a s ,'flwi.das
@@ -30486,7 +30486,7 @@ fraudulenta,1,fraudulenta,f 4 a u_^ . D_o u ' l e n_d . t a ,f4au.du'len.ta
 fraudulentamente,1,fraudulentamente,f 4 a u_^ . D_o u . l e n_d . t a ' m ~e n_d . t e ,f4au.du.len.ta'men.te
 fraudulentas,2,fraudulentas,f 4 a u_^ . D_o u ' l e n_d . t a s ,f4au.du'len.tas
 fraudulentos,1,fraudulentos,f 4 a u_^ . D_o u ' l e n_d . t o s ,f4au.du'len.tos
-fray,7,fray,f 4 a i_^ ,f4ai
+fray,7,fray,f 4 a i_^ ,'f4ai
 frears,1,frears,f 4 e ' a 4 s ,f4e'a4s
 frecuencia,126,frecuencia,f 4 e ' k w e n_d_+ . T j a ,f4e'kwen.Tja
 frecuencias,6,frecuencias,f 4 e ' k w e n_d_+ . T j a s ,f4e'kwen.Tjas
@@ -32789,7 +32789,7 @@ hache,64,hache,' a . tS e ,'a.Ce
 hachemita,4,hachemita,a . tS e ' m i . t a ,a.Ce'mi.ta
 haches,2,haches,' a . tS e s ,'a.Ces
 hachís,24,hachís,a ' tS i s ,a'Cis
-hacia,868,hacia,a . T j a ,a.Tja
+hacia,868,hacia,a . T j a ,'a.Tja
 haciá,1,haciá,a ' T j a ,a'Tja
 hacía,563,hacía,a ' T i a ,a'Tia
 hacíais,7,hacíais,a ' T i a i_^ s ,a'Tiais
@@ -32986,7 +32986,7 @@ hasan,1,hasan,' a . s a n ,'a.san
 hassam,2,hassam,a ' s a n ,a'san
 hassan,10,hassan,' a . s a n ,'a.san
 hasselhoff,2,hasselhoff,a . s e ' l o f ,a.se'lof
-hasta,3649,hasta,a s . t a ,as.ta
+hasta,3649,hasta,a s . t a ,'as.ta
 haste,1,haste,' a s . t e ,'as.te
 hastiada,1,hastiada,a s ' t j a . D_o a ,as'tja.da
 hastiados,1,hastiados,a s ' t j a . D_o o s ,as'tja.dos
@@ -37920,7 +37920,7 @@ jurásico,2,jurásico,x u ' 4 a . s i . k o ,xu'4a.si.ko
 juraste,1,juraste,x u ' 4 a s . t e ,xu'4as.te
 juré,3,juré,x u ' 4 e ,xu'4e
 jurel,1,jurel,x u ' 4 e l ,xu'4el
-jürgen,16,jürgen,x u 4 . x e n ,xu4.xen
+jürgen,16,jürgen,x u 4 . x e n ,'xu4.xen
 jurídica,49,jurídica,x u ' 4 i . D_o i . k a ,xu'4i.di.ka
 jurídicamente,12,jurídicamente,x u ' 4 i . D_o i . k a . m ~e n_d . t e ,xu'4i.di.ka.men.te
 jurídicas,12,jurídicas,x u ' 4 i . D_o i . k a s ,xu'4i.di.kas
@@ -38186,7 +38186,7 @@ kuwaitís,1,kuwaitís,k u . w a i_^ ' t i s ,ku.wai'tis
 kux,1,kux,' k u k s ,'kuks
 kyr,1,kyr,' k i 4 ,'ki4
 l,66,l,' e . l e,'e.le
-la,91708,la,l a ,la
+la,91708,la,l a ,'la
 laa,16,laa,' l a . a ,'la.a
 laaj,1,laaj,l a ' a ,la'a
 labarre,1,labarre,l a ' B_o a . r e ,la'ba.re
@@ -38518,7 +38518,7 @@ larry,1,larry,l a ' r i ,la'ri
 lars,2,lars,' l a 4 s ,'la4s
 larvada,2,larvada,l a 4 ' B_o a . D_o a ,la4'ba.da
 larvado,1,larvado,l a 4 ' B_o a . D_o o ,la4'ba.do
-las,23197,las,l a s ,las
+las,23197,las,l a s ,'las
 lasa,11,lasa,' l a . s a ,'la.sa
 lasalle,1,lasalle,l a ' s a . j\\ e ,la'sa.Le
 lasallistas,1,lasallistas,l a . s a ' j\\ i s . t a s ,la.sa'Lis.tas
@@ -38677,7 +38677,7 @@ lazarov,6,lazarov,l a . T a ' 4 o B ,la.Ta'4oB
 lazcano,2,lazcano,l a T ' k a . n o ,laT'ka.no
 lazo,11,lazo,' l a . T o ,'la.To
 lazos,18,lazos,' l a . T o s ,'la.Tos
-le,10831,le,l e ,le
+le,10831,le,l e ,'le
 lea,23,lea,' l e . a ,'le.a
 league,1,league,l e ' a . G_o e ,le'a.ge
 leáis,3,leáis,l e ' a i_^ s ,le'ais
@@ -38956,7 +38956,7 @@ lera,3,lera,' l e . 4 a ,'le.4a
 lérida,20,lérida,' l e . 4 i . D_o a ,'le.4i.da
 leridana,1,leridana,l e . 4 i ' D_o a . n a ,le.4i'da.na
 lerma,12,lerma,' l e 4 . m a ,'le4.ma
-les,2829,les,l e s ,les
+les,2829,les,l e s ,'les
 lesa,2,lesa,' l e . s a ,'le.sa
 lesaca,19,lesaca,l e ' s a . k a ,le'sa.ka
 lesbiana,2,lesbiana,l e z ' B_o j a . n a ,lez'bja.na
@@ -39896,7 +39896,7 @@ lluvia,78,lluvia,' dZ u . B_o j a ,'Zu.bja
 lluvias,45,lluvias,' dZ u . B_o j a s ,'Zu.bjas
 lluviosa,3,lluviosa,dZ u ' B_o j o . s a ,Zu'bjo.sa
 lluvioso,6,lluvioso,dZ u ' B_o j o . s o ,Zu'bjo.so
-lo,37028,lo,l o ,lo
+lo,37028,lo,l o ,'lo
 loa,4,loa,' l o . a ,'lo.a
 loable,1,loable,l o ' a . B_o l e ,lo'a.ble
 loapa,6,loapa,l o ' a . p a ,lo'a.pa
@@ -40092,7 +40092,7 @@ loroño,1,loroño,l o ' 4 o . J o ,lo'4o.Jo
 loros,1,loros,' l o . 4 o s ,'lo.4os
 lorraine,1,lorraine,l o ' r a i_^ . n e ,lo'rai.ne
 lorza,1,lorza,' l o 4 . T a ,'lo4.Ta
-los,36550,los,l o s ,los
+los,36550,los,l o s ,'los
 losa,17,losa,' l o . s a ,'lo.sa
 losada,1,losada,l o ' s a . D_o a ,lo'sa.da
 losantos,2,losantos,l o ' s a n_d . t o s ,lo'san.tos
@@ -41864,7 +41864,7 @@ mckinney,9,mckinney,m a . k i ' n: e i_^ ,ma.ki'nei
 mcklaud,1,mcklaud,m a ' k l a u_^ D ,ma'klaud
 mcluhan,1,mcluhan,m a ' k l w a n ,ma'klwan
 mcrae,25,mcrae,m a ' k 4 a . e ,ma'k4a.e
-me,22295,me,m e ,me
+me,22295,me,m e ,'me
 mea,13,mea,' m e . a ,'me.a
 meaba,1,meaba,m e ' a . B_o a ,me'a.ba
 mean,1,mean,' m e . a n ,'me.an
@@ -41941,7 +41941,7 @@ medianías,1,medianías,m e . D_o j a ' n i a s ,me.dja'nias
 mediano,4,mediano,m e ' D_o j a . n o ,me'dja.no
 medianoche,8,medianoche,m e . D_o j a ' n o . tS e ,me.dja'no.Ce
 medianos,9,medianos,m e ' D_o j a . n o s ,me'dja.nos
-mediante,83,mediante,m e . D_o j a n_d . t e ,me.djan.te
+mediante,83,mediante,m e . D_o j a n_d . t e ,me'djan.te
 mediar,4,mediar,m e ' D_o j a 4 ,me'dja4
 mediarás,1,mediarás,m e . D_o j a ' 4 a s ,me.dja'4as
 medias,74,medias,' m e . D_o j a s ,'me.djas
@@ -42614,7 +42614,7 @@ mezquino,1,mezquino,m e T ' k i . n o ,meT'ki.no
 mezquinos,1,mezquinos,m e T ' k i . n o s ,meT'ki.nos
 mezquita,1,mezquita,m e T ' k i . t a ,meT'ki.ta
 mezquitas,1,mezquitas,m e T ' k i . t a s ,meT'ki.tas
-mi,6226,mi,m i ,mi
+mi,6226,mi,m i ,'mi
 mí,4046,mí,' m i ,'mi
 mia,4,mia,' m j a ,'mja
 mía,622,mía,' m i a ,'mia
@@ -44129,8 +44129,8 @@ muletazos,2,muletazos,m u . l e ' t a . T o s ,mu.le'ta.Tos
 mulhacén,1,mulhacén,m u . l a ' T e n ,mu.la'Ten
 mulier,2,mulier,m u ' l j e 4 ,mu'lje4
 mulita,1,mulita,m u ' l i . t a ,mu'li.ta
-müllen,1,müllen,m u . j\\ e n ,mu.Len
-muller,3,muller,m u ' j\\ e 4 ,mu'Le4
+müllen,1,müllen,m u . j\\ e n ,'mu.Len
+muller,3,muller,m u ' j\\ e 4 ,'mu'Le4
 mullido,1,mullido,m u ' j\\ i . D_o o ,mu'Li.do
 mullidos,1,mullidos,m u ' j\\ i . D_o o s ,mu'Li.dos
 mulligan,19,mulligan,m u ' j\\ i . G_o a n ,mu'Li.gan
@@ -45007,7 +45007,7 @@ nodos,1,nodos,' n o . D_o o s ,'no.dos
 noe,4,noe,' n o . e ,'no.e
 noé,6,noé,n o ' e ,no'e
 noel,2,noel,n o ' e l ,no'el
-noël,1,noël,n o ë l ,noël
+noël,1,noël,n o ë l ,no'el
 noemi,6,noemi,n o ' e . m i ,no'e.mi
 noemí,6,noemí,n o . e ' m i ,no.e'mi
 noes,3,noes,' n o . e s ,'no.es
@@ -45123,7 +45123,7 @@ noruega,20,noruega,n o ' 4 w e . G_o a ,no'4we.ga
 noruego,8,noruego,n o ' 4 w e . G_o o ,no'4we.go
 noruegos,2,noruegos,n o ' 4 w e . G_o o s ,no'4we.gos
 norvietnamitas,2,norvietnamitas,n o 4 . B_o j e d . n ~a ' m i . t a s ,no4.bjed.na'mi.tas
-nos,7330,nos,n o s ,nos
+nos,7330,nos,n o s ,'nos
 nosa,3,nosa,' n o . s a ,'no.sa
 nose,2,nose,' n o . s e ,'no.se
 noso,12,noso,' n o . s o ,'no.so
@@ -45296,10 +45296,10 @@ nue,2,nue,' n w e ,'nwe
 nueces,10,nueces,' n w e . T e s ,'nwe.Tes
 nuera,8,nuera,' n w e . 4 a ,'nwe.4a
 nueras,2,nueras,' n w e . 4 a s ,'nwe.4as
-nuestra,1238,nuestra,n w e s . t 4 a ,nwes.t4a
-nuestras,315,nuestras,n w e s . t 4 a s ,nwes.t4as
-nuestro,1582,nuestro,n w e s . t 4 o ,nwes.t4o
-nuestros,649,nuestros,n w e s . t 4 o s ,nwes.t4os
+nuestra,1238,nuestra,n w e s . t 4 a ,'nwes.t4a
+nuestras,315,nuestras,n w e s . t 4 a s ,'nwes.t4as
+nuestro,1582,nuestro,n w e s . t 4 o ,'nwes.t4o
+nuestros,649,nuestros,n w e s . t 4 o s ,'nwes.t4os
 nueva,725,nueva,' n w e . B_o a ,'nwe.ba
 nuevamente,74,nuevamente,n w e . B_o a ' m ~e n_d . t e ,nwe.ba'men.te
 nuevas,247,nuevas,' n w e . B_o a s ,'nwe.bas
@@ -45379,7 +45379,7 @@ nutróloga,1,nutróloga,n u ' t 4 o . l o . G_o a ,nu't4o.lo.ga
 ño,2,ño,' J o ,'Jo
 ñoño,1,ñoño,' J ~o . J o ,'Jo.Jo
 ñu,1,ñu,' J u ,'Ju
-o,18686,o,o ,o
+o,18686,o,o ,'o
 o'connor,2,o'connor,o ' . k o ' n: o 4 ,o'.ko'no4
 o'donell,8,o'donell,o ' . D_o o ' n e l ,o'.do'nel
 o'donnell,5,o'donnell,o ' . D_o o ' n: e l ,o'.do'nel
@@ -46575,7 +46575,7 @@ orugas,3,orugas,o ' 4 u . G_o a s ,o'4u.gas
 orujo,2,orujo,o ' 4 u . x o ,o'4u.xo
 orwell,15,orwell,o ' 4 w e l ,o'4wel
 orza,1,orza,' o 4 . T a ,'o4.Ta
-os,1058,os,o s ,os
+os,1058,os,o s ,'os
 osa,21,osa,' o . s a ,'o.sa
 osada,2,osada,o ' s a . D_o a ,o'sa.da
 osadas,1,osadas,o ' s a . D_o a s ,o'sa.das
@@ -47247,7 +47247,7 @@ paquistanís,1,paquistanís,p a . k i s . t a ' n i s ,pa.kis.ta'nis
 paquita,11,paquita,p a ' k i . t a ,pa'ki.ta
 paquito,12,paquito,p a ' k i . t o ,pa'ki.to
 par,228,par,' p a 4 ,'pa4
-para,18964,para,p a . 4 a ,pa.4a
+para,18964,para,p a . 4 a ,'pa.4a
 paraba,12,paraba,p a ' 4 a . B_o a ,pa'4a.ba
 parábais,2,parábais,p a ' 4 a . B_o a i_^ s ,pa'4a.bais
 parábamos,5,parábamos,p a ' 4 a . B_o a . m o s ,pa'4a.ba.mos
@@ -50553,7 +50553,7 @@ poquitino,1,poquitino,p o . k i ' t i . n o ,po.ki'ti.no
 poquitito,7,poquitito,p o . k i ' t i . t o ,po.ki'ti.to
 poquito,920,poquito,p o ' k i . t o ,po'ki.to
 poquitos,20,poquitos,p o ' k i . t o s ,po'ki.tos
-por,30805,por,p o 4 ,po4
+por,30805,por,p o 4 ,'po4
 pora,3,pora,' p o . 4 a ,'po.4a
 porcar,1,porcar,p o 4 ' k a 4 ,po4'ka4
 porcelana,4,porcelana,p o 4 . T e ' l a . n a ,po4.Te'la.na
@@ -53120,7 +53120,7 @@ qua,2,qua,' k w a ,'kwa
 quadras,2,quadras,' k w a . D_o 4 a s ,'kwa.d4as
 quan,4,quan,' k w a n ,'kwan
 quattro,2,quattro,' k w a D_o . . t 4 o ,'kwad..t4o
-que,149996,que,k e ,ke
+que,149996,que,k e ,'ke
 qué,14297,qué,' k e ,'ke
 què,1,què,' k u è ,'kuè
 quebrada,2,quebrada,k e ' B_o 4 a . D_o a ,ke'b4a.da
@@ -53347,9 +53347,9 @@ quiebra,10,quiebra,' k j e . B_o 4 a ,'kje.b4a
 quiebran,2,quiebran,' k j e . B_o 4 a n ,'kje.b4an
 quiebras,2,quiebras,' k j e . B_o 4 a s ,'kje.b4as
 quiebro,2,quiebro,' k j e . B_o 4 o ,'kje.b4o
-quien,815,quien,k j e n ,kjen
+quien,815,quien,k j e n ,'kjen
 quién,1535,quién,' k j e n ,'kjen
-quienes,176,quienes,k j e . n e s ,kje.nes
+quienes,176,quienes,k j e . n e s ,'kje.nes
 quiénes,84,quiénes,' k j e . n e s ,'kje.nes
 quienquiera,1,quienquiera,k j e n_g ' k j e . 4 a ,kjen'kje.4a
 quier,2,quier,' k j e 4 ,'kje4
@@ -58446,7 +58446,7 @@ sampérez,2,sampérez,s a m ' p e . 4 e T ,sam'pe.4eT
 samperio,6,samperio,s a m ' p e . 4 j o ,sam'pe.4jo
 sampras,6,sampras,' s a m . p 4 a s ,'sam.p4as
 samuel,13,samuel,s a ' m w e l ,sa'mwel
-san,653,san,s a n ,san
+san,653,san,s a n ,'san
 sana,47,sana,' s a . n a ,'sa.na
 sanabria,1,sanabria,s a ' n a . B_o 4 j a ,sa'na.b4ja
 sanabrias,1,sanabrias,s a ' n a . B_o 4 j a s ,sa'na.b4jas
@@ -58764,7 +58764,7 @@ scratch,6,scratch,e s ' k 4 a d tS ,es'k4adC
 screen,1,screen,e s ' k 4 e . e n ,es'k4e.en
 scud,8,scud,e s ' k u D ,es'kud
 scully,1,scully,e s . k u ' l i ,es.ku'li
-se,36449,se,s e ,se
+se,36449,se,s e ,'se
 sé,5333,sé,' s e ,'se
 sea,7245,sea,' s e . a ,'se.a
 seade,1,seade,s e ' a . D_o e ,se'a.de
@@ -59979,7 +59979,7 @@ simultaneando,1,simultaneando,s i . m u l_d . t a . n e ' a n_d . d o ,si.mul.ta
 simultaneándolas,1,simultaneándolas,s i . m u l_d . t a . n e ' a n_d . d o . l a s ,si.mul.ta.ne'an.do.las
 simultáneas,1,simultáneas,s i . m u l_d ' t a . n e . a s ,si.mul'ta.ne.as
 simultáneo,1,simultáneo,s i . m u l_d ' t a . n e . o ,si.mul'ta.ne.o
-sin,3472,sin,s i n ,sin
+sin,3472,sin,s i n ,'sin
 sinaí,2,sinaí,s i ' n a i ,si'nai
 sinatra,2,sinatra,s i ' n a . t 4 a ,si'na.t4a
 sincera,22,sincera,s i n_d_+ ' T e . 4 a ,sin'Te.4a
@@ -60217,7 +60217,7 @@ smash,2,smash,e z ' m a S ,ez'maS
 smith,6,smith,e z ' m i T ,ez'miT
 smoking,5,smoking,e z . m o ' k i n_g G ,ez.mo'kinG
 snaker,6,snaker,e z . n a ' k e 4 ,ez.na'ke4
-so,48,so,s o ,so
+so,48,so,s o ,'so
 soares,1,soares,s o ' a . 4 e s ,so'a.4es
 sobaco,4,sobaco,s o ' B_o a . k o ,so'ba.ko
 sobacos,1,sobacos,s o ' B_o a . k o s ,so'ba.kos
@@ -60255,7 +60255,7 @@ sobrante,2,sobrante,s o ' B_o 4 a n_d . t e ,so'b4an.te
 sobrantes,1,sobrantes,s o ' B_o 4 a n_d . t e s ,so'b4an.tes
 sobrar,2,sobrar,s o ' B_o 4 a 4 ,so'b4a4
 sobraría,1,sobraría,s o . B_o 4 a ' 4 i a ,so.b4a'4ia
-sobre,3687,sobre,s o . B_o 4 e ,so.b4e
+sobre,3687,sobre,s o . B_o 4 e ,'so.b4e
 sobreactúe,1,sobreactúe,s o . B_o 4 e . a g ' t u e ,so.b4e.ag'tue
 sobrealimenta,2,sobrealimenta,s o . B_o 4 e . a . l i ' m ~e n_d . t a ,so.b4e.a.li'men.ta
 sobrealimentado,1,sobrealimentado,s o . B_o 4 e . a . l i . m ~e n_d ' t a . D_o o ,so.b4e.a.li.men'ta.do
@@ -60823,7 +60823,7 @@ soporte,14,soporte,s o ' p o 4 . t e ,so'po4.te
 soportes,2,soportes,s o ' p o 4 . t e s ,so'po4.tes
 soporto,10,soporto,s o ' p o 4 . t o ,so'po4.to
 soprano,1,soprano,s o ' p 4 a . n o ,so'p4a.no
-sor,24,sor,s o 4 ,so4
+sor,24,sor,s o 4 ,'so4
 soralla,2,soralla,s o ' 4 a . j\\ a ,so'4a.La
 sorben,1,sorben,' s o 4 . B_o e n ,'so4.ben
 sorbo,2,sorbo,' s o 4 . B_o o ,'so4.bo
@@ -61095,7 +61095,7 @@ strogonoff,1,strogonoff,e s . t 4 o . G_o o ' n o f ,es.t4o.go'nof
 studi,1,studi,e s ' t u . D_o i ,es'tu.di
 stuttgart,2,stuttgart,e s . t u D_o . ' G_o a 4 d ,es.tud.'ga4d
 styron,1,styron,e s ' d i . 4 o n ,es'di.4on
-su,9412,su,s u ,su
+su,9412,su,s u ,'su
 sua,8,sua,' s w a ,'swa
 suárez,65,suárez,' s w a . 4 e T ,'swa.4eT
 suave,48,suave,' s w a . B_o e ,'swa.be
@@ -62309,7 +62309,7 @@ tamiz,1,tamiz,t a ' m i T ,ta'miT
 tampa,1,tampa,' t a m . p a ,'tam.pa
 tampoco,1380,tampoco,t a m ' p o . k o ,tam'po.ko
 tampón,1,tampón,t a m ' p o n ,tam'pon
-tan,2497,tan,t a n ,tan
+tan,2497,tan,t a n ,'tan
 tana,1,tana,' t a . n a ,'ta.na
 tanatofobia,1,tanatofobia,t a . n a . t o ' f o . B_o j a ,ta.na.to'fo.bja
 tanatorio,9,tanatorio,t a . n a ' t o . 4 j o ,ta.na'to.4jo
@@ -62543,7 +62543,7 @@ taylor,10,taylor,t a i_^ ' l o 4 ,tai'lo4
 taza,13,taza,' t a . T a ,'ta.Ta
 tazas,5,tazas,' t a . T a s ,'ta.Tas
 tazón,1,tazón,t a ' T o n ,ta'Ton
-te,11902,te,t e ,te
+te,11902,te,t e ,'te
 té,28,té,' t e ,'te
 tea,11,tea,' t e . a ,'te.a
 team,1,team,t e ' a n ,te'an
@@ -64530,7 +64530,7 @@ trapos,6,trapos,' t 4 a . p o s ,'t4a.pos
 traquea,1,traquea,t 4 a ' k e . a ,t4a'ke.a
 tráquea,1,tráquea,' t 4 a . k e . a ,'t4a.ke.a
 traqueteo,2,traqueteo,t 4 a . k e ' t e . o ,t4a.ke'te.o
-tras,368,tras,t 4 a s ,t4as
+tras,368,tras,t 4 a s ,'t4as
 trasatlántica,1,trasatlántica,t 4 a . s a D_o ' l a n_d . t i . k a ,t4a.sad'lan.ti.ka
 trasatlánticos,1,trasatlánticos,t 4 a . s a D_o ' l a n_d . t i . k o s ,t4a.sad'lan.ti.kos
 trascendencia,28,trascendencia,t 4 a s . T e n_d ' d e n_d_+ . T j a ,t4as.Ten'den.Tja
@@ -65050,7 +65050,7 @@ truquillos,1,truquillos,t 4 u ' k i . j\\ o s ,t4u'ki.Los
 trust,4,trust,' t 4 u z d ,'t4uzd
 tse,2,tse,t ' s e ,t'se
 ttenemos,1,ttenemos,t e ' n ~e . m o s ,te'ne.mos
-tu,2061,tu,t u ,tu
+tu,2061,tu,t u ,'tu
 tú,5497,tú,' t u ,'tu
 tua,1,tua,' t w a ,'twa
 tuareg,3,tuareg,t w a ' 4 e G ,twa'4eG
@@ -65248,7 +65248,7 @@ twinnings,2,twinnings,t w i ' n: ~i n_g s ,twi'nins
 two,21,two,' t w o ,'two
 typex,1,typex,t i ' p e k s ,ti'peks
 tyrone,1,tyrone,t i ' 4 o . n e ,ti'4o.ne
-u,277,u,u ,u
+u,277,u,u ,'u
 uan,1,uan,' w a n ,'wan
 uba,1,uba,' u . B_o a ,'u.ba
 úbeda,3,úbeda,' u . B_o e . D_o a ,'u.be.da
@@ -67510,10 +67510,10 @@ vuelven,64,vuelven,' b w e l . B_o e n ,'bwel.ben
 vuelves,34,vuelves,' b w e l . B_o e s ,'bwel.bes
 vuélvete,1,vuélvete,' b w e l . B_o e . t e ,'bwel.be.te
 vuelvo,108,vuelvo,' b w e l . B_o o ,'bwel.bo
-vuestra,71,vuestra,b w e s . t 4 a ,bwes.t4a
-vuestras,22,vuestras,b w e s . t 4 a s ,bwes.t4as
-vuestro,55,vuestro,b w e s . t 4 o ,bwes.t4o
-vuestros,35,vuestros,b w e s . t 4 o s ,bwes.t4os
+vuestra,71,vuestra,b w e s . t 4 a ,'bwes.t4a
+vuestras,22,vuestras,b w e s . t 4 a s ,'bwes.t4as
+vuestro,55,vuestro,b w e s . t 4 o ,'bwes.t4o
+vuestros,35,vuestros,b w e s . t 4 o s ,'bwes.t4os
 vuk,3,vuk,' b u g ,'bug
 vulcanismo,5,vulcanismo,b u l . k a ' n i z . m o ,bul.ka'niz.mo
 vulcano,2,vulcano,b u l ' k a . n o ,bul'ka.no
@@ -67667,7 +67667,7 @@ xosé,7,xosé,s o ' s e ,so'se
 xugadores,1,xugadores,s u . G_o a ' D_o o . 4 e s ,su.ga'do.4es
 xunta,12,xunta,' s u n_d . t a ,'sun.ta
 xuxa,1,xuxa,' s u k . s a ,'suk.sa
-y,92436,y,i ,i
+y,92436,y,i ,'i
 ya,14654,ya,' dZ a ,'Za
 yace,3,yace,' dZ a . T e ,'Za.Te
 yacen,3,yacen,' dZ a . T e n ,'Za.Ten
@@ -67950,7 +67950,7 @@ zueco,2,zueco,' T w e . k o ,'Twe.ko
 zuecos,1,zuecos,' T w e . k o s ,'Twe.kos
 zulema,13,zulema,T u ' l e . m a ,Tu'le.ma
 zulfikar,1,zulfikar,T u l . f i ' k a 4 ,Tul.fi'ka4
-zülle,10,zülle,T u . j\\ e ,Tu.Le
+zülle,10,zülle,T u . j\\ e ,'Tu.Le
 zulo,1,zulo,' T u . l o ,'Tu.lo
 zuloaga,1,zuloaga,T u . l o ' a . G_o a ,Tu.lo'a.ga
 zulú,1,zulú,T u ' l u ,Tu'lu

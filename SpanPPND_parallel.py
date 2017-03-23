@@ -3,7 +3,6 @@
 ## To do: two streams -- lemma vs word-as-shown
 
 ## Justin:
-## To do: matching transcriptions to the word for output in table, making sure duplicate words in user_input are duplicated in table (right now duplicates are simply dropped)
 ## To do: prepare final transcription guidelines
 
 
@@ -38,10 +37,10 @@
 ## To do: using Spanish-spoken-in-Spain adult oral language corpus from Alonso, M. a, Fernandez, A., & Diez, E. (2011). Oral frequency norms for 67,979 Spanish words. Behavior Research Methods, 43(2), 449–458, create adult corpus for comparison purposes. Don't use the CLEARPOND/BuscaPalabras calculators for adult vaues because they use different transcription scheme than ours (a problem if we're comparing words based on their transcriptions) and the Alonso et al. word lists are much better, being oral data from Spain only. 
 ## To do: improve calculator speed if easy/possible with simple parallelism (http://chriskiehl.com/article/parallelism-in-one-line/) --> might be able to make the initial csv import code for adults/children run simultaneously, and then run the adults/children PP/ND logfreq code simultaneously, and then just do everything else sequentially
 ## To do: update list of phonemes to match transcription: make decisions about L vs Z vs j
+## To do: matching transcriptions to the word for output in table, making sure duplicate words in user_input are duplicated in table (right now duplicates are simply dropped)
 
 import csv
 import math
-from multiprocessing.dummy import Pool
 from multiprocessing import Process, Queue
 import random
 
@@ -523,36 +522,28 @@ if __name__=='__main__':
     #pool = Pool()
         
     #collated_output = pool.map(return_values, user_input_list_accented)
-    
-    #print(collated_output)
-    
-    print('Words...')
-    
 
-    for word in init_dict['Children']['words']:
+    for word in init_dict['Adults']['words']:
         
-        #print(word)
+        #if len(word) != 0:
         
-        if len(word) != 0:
-        
-            if word in collated_output['Children']:
-                collated_output['Children'][word+';'+str(random.random())] = collated_output['Children'][word]
-            else:
-                collated_output['Children'][word] = return_values(word, 'Children')
+            #if word in collated_output['Children']:
+                #collated_output['Children'][word+';'+str(random.random())] = collated_output['Children'][word]
+            #else:
+                #collated_output['Children'][word] = return_values(word, 'Children')
             
-            if word in collated_output['Adults']:
-                collated_output['Adults'][word+';'+str(random.random())] = collated_output['Adults'][word]
-            else:
-                collated_output['Adults'][word] = return_values(word, 'Adults')
-        
-        #print '\x1b[2K\r'
-    
+            #if word in collated_output['Adults']:
+                #collated_output['Adults'][word+';'+str(random.random())] = collated_output['Adults'][word]
+            #else:
+        print(word, end="\r", flush=True)
+        collated_output['Adults'][word] = return_values(word, 'Adults')
+            
     # Write table
 
     with open("output.txt", "w") as f:
         f.write("Children\n")
 
-    table('Children')
+    #table('Children')
 
     with open("output.txt", "a") as f:
         f.write("Adults\n")
