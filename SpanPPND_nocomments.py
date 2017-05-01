@@ -1,49 +1,9 @@
-# Note: to open this in python shell: exec(open('SpanPPND.py').read())
-
-## To do: two streams -- lemma vs word-as-shown
-
-## Justin:
-## To do: prepare final transcription guidelines
-
-
-## Elizabeth: 
-## To do: write something to export PP/ND values to CSV file for later analysis
-## Make a function that can expect a dictionary as input in the following form:
-## input_dictionary = {'mamá': {'PS_phonemes_children': ['m1', 'a2', 'm3', 'á4'], 'PS_children': ['0.070354', '0.209508', '0.045825', '0.00955'], 'PS_sum_children': '0.335237', 'PS_avg_children': '0.083809', 'PS_phonemes_adults': ['m1', 'a2', 'm3', 'á4'], 'PS_adults': ['0.066131', '0.196646', '0.045695', '0.009752'], 'PS_sum_adults': '0.318223', 'PS_avg_adults': '0.079556', 'B_avg_children': '0.01125', 'B_sum_children': '0.03375', 'B_phonemes_children': ['ma1', 'am2', 'má3'], 'B_children': ['0.019057', '0.013471', '0.001221'], 'B_avg_adults': '0.009823', 'B_sum_adults': '0.02947', 'B_phonemes_adults': ['ma1', 'am2', 'má3'], 'B_adults': ['0.017061', '0.011384', '0.001025'], 'Neighbors_children': ['mama', 'mami', 'mamás'], 'Neighbors_adults': ['mama', 'mami', 'mamás'], 'Neighbors_children_add': ['mamás'], 'Neighbors_children_sub': ['mama', 'mami'], 'Neighbors_children_del': [], 'Neighbors_adults_add': ['mamás'], 'Neighbors_adults_sub': ['mama', 'mami'], 'Neighbors_adults_del': [], 'ND_children': '3', 'ND_adults': '3'}, 'Word2': {etc.}}.
-## And from this information export a csv file 
-## To do: interface to website
-
-## Complete:
-## To do: make the PP/ND return code loop over a list of words provided by the user
-## To do: reformat the PP/ND return code so that it returns a standardized dictionary format that can later be used to create tables [see section below for details]
-## To do: clean up the ND candidate return code so that it returns the candidate from the function in addition to 0 or 1, puts them into a list, and then outputs them later in a nice list [no longer relevant]
-## To do: format the output in tables --> output.txt
-## To do: make final decisions about how to treat different characters: users' input will be broad transcriptions
-## To do: find a list of representative Spanish words that both children and adults would likely know for comparing PP/ND (similar to Storkel & Hoover, 2010, p. 500) --> Spanish CDI
-## To do: right now, the calculator is only partially aware of stress and that's when an accented vowel is in a word; otherwise, it does not take stress into account; is this good? Also, accented vowels might in some sense 'throw off' the calculations for PP/ND... Possibly we could disregard stress for PP but include it for ND?
-    # Plan:
-    # Initial stage of calculator: accent (=CAPITALIZE) first vowel encountered after ', then discard '/.
-    # For PP: this is transparent -- just replace vowels with accented vowels in transcription
-    # For ND: (1) take each word, move stressed vowel around before any substitution/addition/replacement, then look for match; (2) for each candidate word, move stressed vowel around, then look for match
-    # e.g., completó: compléto, compléta, completé, compléte, compléten, complétos
-        # (1) yields: compléto
-        # (2) yields: ó --> a + stress search: compléta
-                    # ó --> e + stress search: completé, compléte
-                    # +s + stress search: complétos
-## To do: update the csv reading code:
-    ## 1. first pass: scan character by character, removing . and changing first vowel following ' to capitalized (=stressed) version
-    ## 2. second pass: logfreq calculation: for each word in children_words[], construct dictionary of {'word': 'rawfreq'} based on matching words and then transform back to list of words and list of calculated logfreqs so that we can continue to use the same code for PS/B as before
-## To do: make sure that when searching for ND matches, the matches are case-sensitive [will matter when we change our corpus to our final encoding]
-## To do: using Spanish-spoken-in-Spain adult oral language corpus from Alonso, M. a, Fernandez, A., & Diez, E. (2011). Oral frequency norms for 67,979 Spanish words. Behavior Research Methods, 43(2), 449–458, create adult corpus for comparison purposes. Don't use the CLEARPOND/BuscaPalabras calculators for adult vaues because they use different transcription scheme than ours (a problem if we're comparing words based on their transcriptions) and the Alonso et al. word lists are much better, being oral data from Spain only. 
-## To do: improve calculator speed if easy/possible with simple parallelism (http://chriskiehl.com/article/parallelism-in-one-line/) --> might be able to make the initial csv import code for adults/children run simultaneously, and then run the adults/children PP/ND logfreq code simultaneously, and then just do everything else sequentially
-## To do: update list of phonemes to match transcription: make decisions about L vs Z vs j
-## To do: matching transcriptions to the word for output in table, making sure duplicate words in user_input are duplicated in table (right now duplicates are simply dropped)
+# Spanish PP/ND calculator (05/01/17)
 
 import csv
 import math
 from multiprocessing import Process, Queue
 import random
-#import fileinput
 
 vowels = ["a","e","i","o","u","A","E","I","O","U"]
 stress = False
@@ -226,26 +186,6 @@ def find_matches(candidate, input_word, age):
 def return_values(input_word, age):
     
     return_dict = {}
-    
-    #if len(input_word) == 0:
-        #return_dict['PS_phonemes']="N/A"
-        #return_dict['PS']="N/A"
-        #return_dict['PS_sum']="N/A"
-        #return_dict['PS_avg']="N/A"
-        #return_dict['B_avg']="N/A"
-        #return_dict['B_sum']="N/A"
-        #return_dict['Neighbors']="N/A"
-        #return_dict['Neighbors_add']="N/A"
-        #return_dict['Neighbors_sub']="N/A"
-        #return_dict['Neighbors_del']="N/A"
-        #return_dict['ND']="N/A"
-        #return return_dict
-    
-    #final_dict = {}
-    
-    #for age in ['Children','Adults']:
-        
-        #final_dict[age] = {}
                 
     PS_sum = 0
     
@@ -368,8 +308,6 @@ def return_values(input_word, age):
     return_dict['Neighbors_sub']=N_sub
     return_dict['Neighbors_del']=N_del
     return_dict['ND']=str(matches_count)
-    
-    #final_dict[age][word] = return_dict
 
     return return_dict
 
@@ -434,34 +372,6 @@ if __name__=='__main__':
 
     user_input = input("Enter space-separated list of words: ")
     user_input_list = user_input.split(' ')
-
-    #user_input_list_accented = []
-
-    #for word in user_input_list:
-        
-        ## Temporary accenting
-        
-        #stress = False
-        
-        #for i, c in enumerate(list(word)):
-            #if stress:
-                #if c in vowels:
-                    #stressoutput.append(c.upper())
-                    #stress = False
-                #else:
-                    #stressoutput.append(c)
-            #else:
-                #stressoutput.append(c)
-            #if c == "'":
-                #stress = True
-        #word = "".join(stressoutput)
-        #stressoutput = []
-        
-        #word = word.replace("'","")
-        #word = word.replace(".","")
-        #word = word.replace("Z","L")
-        
-        #user_input_list_accented.append(word)
         
     # Init calc
 
@@ -517,16 +427,8 @@ if __name__=='__main__':
     collated_output = {}
     collated_output['Children'] = {}
     collated_output['Adults'] = {}
-    
-    # http://kmdouglass.github.io/posts/learning-pythons-multiprocessing-module.html
-    
-    #pool = Pool()
-        
-    #collated_output = pool.map(return_values, user_input_list_accented)
 
     for word in user_input_list:
-        
-        #print(word, end="\r", flush=True)
         
         if len(word) != 0:
         

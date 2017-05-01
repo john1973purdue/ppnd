@@ -30,6 +30,8 @@ with open("../../data/WSs_final_withzscores_031817_noheader.csv") as f:
     PS_avg_med_children = []
     B_avg_med_children = []
     ND_med_children = []
+    freq = []
+    logfreq = []
 
     for row in csv_file:
         item_num.append(row[0])
@@ -41,6 +43,8 @@ with open("../../data/WSs_final_withzscores_031817_noheader.csv") as f:
         B_avg_children.append(row[26].replace(" " , ""))
         ND_children.append(row[27].replace(" " , ""))
         Neighbors_children.append(row[28])
+        freq.append(row[56])
+        logfreq.append(row[57])
 
         B_avg_z_children.append((float(row[26].replace(" " , "")) - float(csv_file2[int(row[22].replace(" ",""))][1])) / float(csv_file2[int(row[22].replace(" ",""))][4]))
         PS_avg_z_children.append((float(row[24].replace(" " , "")) - float(csv_file2[int(row[22].replace(" ",""))][2])) / float(csv_file2[int(row[22].replace(" ",""))][5]))
@@ -52,24 +56,26 @@ with open("../../data/WSs_final_withzscores_031817_noheader.csv") as f:
                 
 item_values = {}
 
-for i, c in enumerate(item_num[1:]):
+for i, c in enumerate(item_num):
     c = str(c)
     item_values[c] = {}
       
-    item_values[c]['transcription'] = transcription[i+1]
-    item_values[c]['length'] = length[i+1]
-    item_values[c]['PS_sum_children'] = PS_sum_children[i+1]
-    item_values[c]['PS_avg_children'] = PS_avg_children[i+1]
-    item_values[c]['B_sum_children'] = B_sum_children[i+1]
-    item_values[c]['B_avg_children'] = B_avg_children[i+1]
-    item_values[c]['ND_children'] = ND_children[i+1]
-    item_values[c]['Neighbors_children'] = Neighbors_children[i+1]
-    item_values[c]['PS_avg_z_children'] = PS_avg_z_children[i+1]
-    item_values[c]['B_avg_z_children'] = B_avg_z_children[i+1]
-    item_values[c]['ND_z_children'] = ND_z_children[i+1]
-    item_values[c]['PS_avg_med_children'] = PS_avg_med_children[i+1]
-    item_values[c]['B_avg_med_children'] = B_avg_med_children[i+1]
-    item_values[c]['ND_med_children'] = ND_med_children[i+1]
+    item_values[c]['transcription'] = transcription[i]
+    item_values[c]['length'] = length[i]
+    item_values[c]['PS_sum_children'] = PS_sum_children[i]
+    item_values[c]['PS_avg_children'] = PS_avg_children[i]
+    item_values[c]['B_sum_children'] = B_sum_children[i]
+    item_values[c]['B_avg_children'] = B_avg_children[i]
+    item_values[c]['ND_children'] = ND_children[i]
+    item_values[c]['Neighbors_children'] = Neighbors_children[i]
+    item_values[c]['PS_avg_z_children'] = PS_avg_z_children[i]
+    item_values[c]['B_avg_z_children'] = B_avg_z_children[i]
+    item_values[c]['ND_z_children'] = ND_z_children[i]
+    item_values[c]['PS_avg_med_children'] = PS_avg_med_children[i]
+    item_values[c]['B_avg_med_children'] = B_avg_med_children[i]
+    item_values[c]['ND_med_children'] = ND_med_children[i]
+    item_values[c]['freq'] = freq[i]
+    item_values[c]['logfreq'] = logfreq[i]
      
             
 with open('../../wordbank/instrument_data_child_by_word_wordsandsentences.csv') as f:
@@ -81,7 +87,7 @@ with open('../../wordbank/instrument_data_child_by_word_wordsandsentences.csv') 
     for row in csv_file:      
         
         if str(row[5][5:]) in item_values:
-            output.append([item_values[row[5][5:]]['transcription'],item_values[row[5][5:]]['length'],item_values[row[5][5:]]['PS_sum_children'],item_values[row[5][5:]]['PS_avg_children'],item_values[row[5][5:]]['B_sum_children'],item_values[row[5][5:]]['B_avg_children'],item_values[row[5][5:]]['ND_children'],item_values[row[5][5:]]['Neighbors_children'],item_values[row[5][5:]]['PS_avg_z_children'],item_values[row[5][5:]]['B_avg_z_children'],item_values[row[5][5:]]['ND_z_children'],item_values[row[5][5:]]['PS_avg_med_children'],item_values[row[5][5:]]['B_avg_med_children'],item_values[row[5][5:]]['ND_med_children']])
+            output.append([item_values[row[5][5:]]['transcription'],item_values[row[5][5:]]['length'],item_values[row[5][5:]]['PS_sum_children'],item_values[row[5][5:]]['PS_avg_children'],item_values[row[5][5:]]['B_sum_children'],item_values[row[5][5:]]['B_avg_children'],item_values[row[5][5:]]['ND_children'],item_values[row[5][5:]]['Neighbors_children'],item_values[row[5][5:]]['PS_avg_z_children'],item_values[row[5][5:]]['B_avg_z_children'],item_values[row[5][5:]]['ND_z_children'],item_values[row[5][5:]]['PS_avg_med_children'],item_values[row[5][5:]]['B_avg_med_children'],item_values[row[5][5:]]['ND_med_children'],item_values[row[5][5:]]['freq'],item_values[row[5][5:]]['logfreq']])
         else:
             output.append([])
                                  
